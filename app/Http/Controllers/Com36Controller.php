@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\Com36sImport;
 use App\Models\Com36;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Com36Controller extends Controller
 {
@@ -35,7 +37,16 @@ class Com36Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->arch_com36);
+        $archivo = $request->file('arch_com36');
+        Excel::import(new Com36sImport, $archivo);
+        //$archivo = $this->import($archivo);
+        return redirect()->route('dashboard');
+    }
+
+    public function import($archivo)
+    {
+        Excel::import(new Com36sImport, $archivo);
     }
 
     /**

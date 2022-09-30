@@ -15,23 +15,23 @@ class CreateCom37sTable extends Migration
     {
         Schema::create('com37s', function (Blueprint $table) {
             $table->id();
-            $table->string("FMOV")->nullable()->default("-");
-            $table->string("CCLI")->nullable()->default("-");
-            $table->string("QPREUNI")->nullable()->default("-");
-            $table->string("QIMP")->nullable()->default("-");
-            $table->string("CCODART")->nullable()->default("-");
-            $table->string("QCANPED")->nullable()->default("-");
-            $table->string("TDES")->nullable()->default("-");
-            $table->string("CITEM")->nullable()->default("-");
-            $table->string("CPROM")->nullable()->default("-");
-            $table->string("CLETD")->nullable()->default("-");
-            $table->string("CTIP")->nullable()->default("-");
-            $table->string("NFAC")->nullable()->default("-");
-            $table->string("NPED")->nullable()->default("-");
-            $table->string("CLISTPR")->nullable()->default("-");
-            $table->string("CUSER")->nullable()->default("-");
-            $table->string("FUPGR")->nullable()->default("-");
-            $table->string("TUPGR")->nullable()->default("-");
+            $table->string("fmov")->nullable()->default("-");
+            $table->string("ccli")->nullable()->default("-");
+            $table->string("qpreuni")->nullable()->default("-");
+            $table->string("qimp")->nullable()->default("-");
+            $table->string("ccodart")->nullable()->default("-");
+            $table->string("qcanped")->nullable()->default("-");
+            $table->string("tdes")->nullable()->default("-");
+            $table->string("citem")->nullable()->default("-");
+            $table->string("cprom")->nullable()->default("-");
+            $table->string("cletd")->nullable()->default("-");
+            $table->string("ctip")->nullable()->default("-");
+            $table->string("nfac")->nullable()->default("-");
+            $table->string("nped")->nullable()->default("-");
+            $table->string("clistpr")->nullable()->default("-");
+            $table->string("cuser")->nullable()->default("-");
+            $table->string("fupgr")->nullable()->default("-");
+            $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
         });
     }
