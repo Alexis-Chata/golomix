@@ -16,7 +16,8 @@ class Com36sImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $nuevoRegistro = [
+        $numeroPedido = ['nped'      => $row["nped"] ];
+        $datosPedido = [
             'czon'      => $row["czon"],
             'crut'      => $row["crut"],
             'cletd'     => $row["cletd"],
@@ -38,7 +39,6 @@ class Com36sImport implements ToModel, WithHeadingRow
             'cruccia'   => $row["cruccia"],
             'fliq'      => $row["fliq"] ? Carbon::createFromFormat('d/m/Y', $row["fliq"]) : null,
             'ctipliq'   => $row["ctipliq"],
-            'nped'      => $row["nped"],
             'cmod'      => $row["cmod"],
             'clistpr'   => $row["clistpr"],
             'cuser'     => $row["cuser"],
@@ -46,6 +46,8 @@ class Com36sImport implements ToModel, WithHeadingRow
             'tupgr'     => $row["tupgr"],
         ];
 
-        return new Com36($nuevoRegistro);
+        $pedido = Com36::updateOrCreate($numeroPedido, $datosPedido);
+
+        return $pedido;
     }
 }
