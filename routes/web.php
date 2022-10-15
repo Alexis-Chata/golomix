@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Com36Controller;
+use App\Models\Com36;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +30,11 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('com36', Com36Controller::class)->only(['store']);
+    Route::post('com37', [Com36Controller::class, 'storecom37'])->name('storecom37');
 
+});
+
+Route::get('/pedidos', function () {
+    $com36s = Com36::all();
+    return view('pedidos', compact('com36s'));
 });
