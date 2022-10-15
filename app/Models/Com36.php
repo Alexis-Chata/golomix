@@ -13,6 +13,6 @@ class Com36 extends Model
 
     public function com37s()
     {
-        return $this->hasMany(Com37::class, 'nped');
+        return $this->hasMany(Com37::class, 'nped', 'nped');
     }
 }

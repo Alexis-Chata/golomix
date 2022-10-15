@@ -33,9 +33,9 @@
         <details>
             <summary>{{ $com36->ccli.' '}}<strong>{{ $com36->tnomrep }}</strong>{{ ' - Total: S/. '.$com36->qimpvta }}</summary>
             <div>
-                <ul class="li">acordeion</ul>
-                <ul class="li">acordeion</ul>
-                <ul class="li">acordeion</ul>
+                @foreach ($com36->com37s as $item)
+                    <ul class="li">{{ $item->ccodart.' | '. $item->tdes.' | '. $item->qcanped.' | '. $item->qpreuni.' | '. $item->qimp }}</ul>
+                @endforeach
             </div>
         </details>
     @endforeach

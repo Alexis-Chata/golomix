@@ -5,8 +5,9 @@ namespace App\Imports;
 use App\Models\Com37;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class Com37sImport implements ToModel
+class Com37sImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,7 +16,8 @@ class Com37sImport implements ToModel
     */
     public function model(array $row)
     {
-        $numeroPedido = ['nped'      => $row["nped"] ];
+        $numeroPedido = ['nped'      => $row["nped"],
+                        'ccodart'   => $row["ccodart"] ];
         $datosPedido = [
 
             'fmov'      => $row["fmov"] ? Carbon::createFromFormat('d/m/Y', $row["fmov"]) : null,
@@ -28,8 +30,7 @@ class Com37sImport implements ToModel
             'cuser'     => $row["cuser"],
             'fupgr'     => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'     => $row["tupgr"],
-            'qimp'      => $row["qimp"],
-            'ccodart'   => $row["ccodart"],
+            'qimp'      => $row["qimp"] ? $row["qimp"] : 0,
             'qcanped'   => $row["qcanped"],
             'tdes'      => $row["tdes"],
             'citem'     => $row["citem"],
