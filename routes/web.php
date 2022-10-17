@@ -36,5 +36,15 @@ Route::middleware([
 
 Route::get('/pedidos', function () {
     $com36s = Com36::all();
-    return view('pedidos', compact('com36s'));
+    $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
+    return view('pedidos', compact('com36s', 'pedidosAgrupados'));
+});
+
+Route::get('/pedidos/{cven}', function ($cven) {
+    $com36s = Com36::all();
+    if(isset($cven)){
+        $com36s = $com36s->where('cven', $cven);
+    }
+    $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
+    return view('pedidos', compact('com36s', 'pedidosAgrupados'));
 });
