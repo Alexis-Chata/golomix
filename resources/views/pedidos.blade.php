@@ -62,7 +62,7 @@
 <body>
     {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
     {{-- @dd($pedidosAgrupados); --}}
-    {{ 'Total de vendedores: '.$pedidosAgrupados->count() }}
+    {{ 'Total de vendedores: '.$pedidosAgrupados->count().' - Fecha: '.$fupgr }}
     @foreach ($pedidosAgrupados as $cven => $tvens)
         <details open>
             <summary>{{ $cven . ' ' }}
@@ -71,7 +71,7 @@
             </summary>
             @foreach ($cruts as $crut => $pedidos)
                 <details style="background: #d9d9be;">
-                    <summary>{{ $crut.' - (#Clientes / #Pedidos) : ('.$pedidos->groupBy(['ccli'])->count().' / '.$pedidos->count().')' }}</summary>
+                    <summary>{{ $crut.' - (#Clientes / #Pedidos) : ('.$pedidos->groupBy(['ccli'])->count().' / '.$pedidos->count().')' }}<strong>{{ ' Monto: S/. '.$pedidos->sum('qimpvta') }}</strong></summary>
                     <div>
                         @foreach ($pedidos as $key => $pedido)
                             <details>
