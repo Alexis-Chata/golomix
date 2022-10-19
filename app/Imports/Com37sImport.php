@@ -16,9 +16,9 @@ class Com37sImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        $numeroPedido = ['nped'      => $row["nped"],
+        $numeroDetallePedido = ['nped'      => $row["nped"],
                         'ccodart'   => $row["ccodart"] ];
-        $datosPedido = [
+        $datosDetallePedido = [
 
             'fmov'      => $row["fmov"] ? Carbon::createFromFormat('d/m/Y', $row["fmov"]) : null,
             'ccli'      => $row["ccli"],
@@ -37,8 +37,8 @@ class Com37sImport implements ToModel, WithHeadingRow
             'cprom'     => $row["cprom"],
         ];
 
-        $pedido = Com37::updateOrCreate($numeroPedido, $datosPedido);
+        $detallePedido = Com37::updateOrCreate($numeroDetallePedido, $datosDetallePedido);
 
-        return $pedido;
+        return $detallePedido;
     }
 }

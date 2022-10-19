@@ -33,7 +33,7 @@ class CreateCom30sTable extends Migration
             $table->string("cuser")->nullable()->default("-");
             $table->string("cidpr")->nullable()->default("-");
             $table->string("fupgr")->nullable()->default("-");
-            $table->string("tupgr")->nullable()->default("-");
+            $table->date("tupgr")->nullable();
             $table->timestamps();
         });
     }

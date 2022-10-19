@@ -15,7 +15,7 @@ class CreateCom37sTable extends Migration
     {
         Schema::create('com37s', function (Blueprint $table) {
             $table->id();
-            $table->string("fmov")->nullable()->default("-");
+            $table->date("fmov")->nullable();
             $table->string("ccli")->nullable()->default("-");
             $table->string("qpreuni")->nullable()->default("-");
             $table->string("qimp")->nullable()->default("-");
@@ -30,7 +30,7 @@ class CreateCom37sTable extends Migration
             $table->string("nped")->nullable()->default("-");
             $table->string("clistpr")->nullable()->default("-");
             $table->string("cuser")->nullable()->default("-");
-            $table->string("fupgr")->nullable()->default("-");
+            $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
         });

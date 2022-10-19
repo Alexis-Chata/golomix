@@ -16,8 +16,8 @@ class Com30sImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        $numeroPedido = ['crut'      => $row["crut"] ];
-        $datosPedido = [
+        $numeroRuta = ['crut'      => $row["crut"] ];
+        $datosRuta = [
             'clin'     => $row["clin"],
             'cter'     => $row["cter"],
             'creg'     => $row["creg"],
@@ -38,8 +38,8 @@ class Com30sImport implements ToModel, WithHeadingRow
             'tupgr'    => $row["tupgr"],
         ];
 
-        $pedido = Com30::updateOrCreate($numeroPedido, $datosPedido);
+        $ruta = Com30::updateOrCreate($numeroRuta, $datosRuta);
 
-        return $pedido;
+        return $ruta;
     }
 }
