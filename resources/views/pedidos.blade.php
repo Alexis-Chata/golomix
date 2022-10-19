@@ -33,7 +33,7 @@
         }
 
         .w-320 {
-            width: 320px;
+            width: 270px;
         }
 
         .w-50 {
@@ -71,22 +71,22 @@
             </summary>
             @foreach ($cruts as $crut => $pedidos)
                 <details style="background: #d9d9be;">
-                    <summary>{{ $crut.' - (#Clientes / #Pedidos) : ('.$pedidos->groupBy(['ccli'])->count().' / '.$pedidos->count().')' }}<strong>{{ ' Monto: S/. '.$pedidos->sum('qimpvta') }}</strong></summary>
+                    <summary>{{ $pedidos->first()->com30s->crut }}<strong>{{ ' '.$pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : ('.$pedidos->groupBy(['ccli'])->count().' / '.$pedidos->count().')' }}<strong>{{ ' Monto: S/. '.number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</strong></summary>
                     <div>
                         @foreach ($pedidos as $key => $pedido)
                             <details>
                                 <summary>
-                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . $pedido->qimpvta }}
+                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',')." ( ". $pedido->ctip ." )"}}
                                 </summary>
                                 <div>
                                     @foreach ($pedido->com37s as $item)
                                         <ul class="li p-30">
                                             <p>{{ $item->ccodart . ' | ' }}</p>
                                             <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p
-                                                class="w-50  text-end"><strong>{{ $item->qcanped }}</strong></p>
-                                            {{ ' | ' }}<p class="w-50 text-end">{{ $item->qpreuni }}</p>
+                                                class="w-50  text-end"><strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong></p>
+                                            {{ ' | ' }}<p class="w-50 text-end">{{ number_format($item->qpreuni, 2, '.', ',') }}</p>
                                             {{ ' | ' }}<p class="w-70 text-end">
-                                                <strong>{{ $item->qimp }}</strong>
+                                                <strong>{{ number_format($item->qimp, 2, '.', ',') }}</strong>
                                             </p>
                                         </ul>
                                     @endforeach
@@ -95,7 +95,7 @@
                                         <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
                                         {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
                                         {{ ' | ' }}<p class="w-70 text-end">
-                                            <strong>{{ $pedido->qimpvta }}</strong>
+                                            <strong>{{ "S/. ".number_format($pedido->qimpvta, 2, '.', ',') }}</strong>
                                         </p>
                                     </ul>
                             </details>

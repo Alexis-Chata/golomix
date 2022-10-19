@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\Com37sImport;
-use App\Models\Com37;
+use App\Imports\Com30sImport;
+use App\Models\Com30;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-class Com37Controller extends Controller
+class Com30Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,18 +37,18 @@ class Com37Controller extends Controller
      */
     public function store(Request $request)
     {
-        $archivo = $request->file('arch_com37');
-        Excel::import(new Com37sImport, $archivo);
+        $archivo = $request->file('arch_com30');
+        Excel::import(new Com30sImport, $archivo);
         return redirect()->route('dashboard');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Com37  $com37
+     * @param  \App\Models\Com30  $com30
      * @return \Illuminate\Http\Response
      */
-    public function show(Com37 $com37)
+    public function show(Com30 $com30)
     {
         //
     }
@@ -56,10 +56,10 @@ class Com37Controller extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Com37  $com37
+     * @param  \App\Models\Com30  $com30
      * @return \Illuminate\Http\Response
      */
-    public function edit(Com37 $com37)
+    public function edit(Com30 $com30)
     {
         //
     }
@@ -68,10 +68,10 @@ class Com37Controller extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Com37  $com37
+     * @param  \App\Models\Com30  $com30
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Com37 $com37)
+    public function update(Request $request, Com30 $com30)
     {
         //
     }
@@ -79,10 +79,10 @@ class Com37Controller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Com37  $com37
+     * @param  \App\Models\Com30  $com30
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Com37 $com37)
+    public function destroy(Com30 $com30)
     {
         //
     }

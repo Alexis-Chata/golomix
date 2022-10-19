@@ -15,4 +15,31 @@ class Com36 extends Model
     {
         return $this->hasMany(Com37::class, 'nped', 'nped');
     }
+
+    public function com30s()
+    {
+        return $this->belongsTo(Com30::class, 'crut', 'crut');
+    }
+
+    public function getCtipAttribute($value)
+    {
+        switch ($value) {
+            case '1':
+                $value = "F";
+                break;
+
+            case '2':
+                $value = "B";
+                break;
+
+            case '3':
+                $value = "NP";
+                break;
+
+            default:
+                # code...
+                break;
+        }
+        return ucfirst($value);
+    }
 }

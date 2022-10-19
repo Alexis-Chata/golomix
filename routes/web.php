@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Com30Controller;
 use App\Http\Controllers\Com36Controller;
+use App\Http\Controllers\Com37Controller;
 use App\Models\Com36;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +33,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    Route::resource('com30', Com30Controller::class)->only(['store']);
     Route::resource('com36', Com36Controller::class)->only(['store']);
-    Route::post('com37', [Com36Controller::class, 'storecom37'])->name('storecom37');
+    Route::resource('com37', Com37Controller::class)->only(['store']);
 
 });
 
