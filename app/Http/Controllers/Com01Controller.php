@@ -16,7 +16,8 @@ class Com01Controller extends Controller
      */
     public function index()
     {
-        return Com01::all();
+        $com01s = Com01::all();
+        return view('productos', compact('com01s'));
     }
 
     /**
