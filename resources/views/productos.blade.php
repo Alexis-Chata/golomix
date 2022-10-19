@@ -31,7 +31,7 @@
             @foreach ($com01s as $com01)
                 <tr class="{{ $com01->flagcre ? 'anulado' : '' }}">
                     <td>{{ $com01->cequiv }}</td>
-                    <td>{{ $com01->tcor }}</td>
+                    <td style="font-size: 14px;">{{ $com01->tcor }}</td>
                     <td style="text-align: end;padding-right: 3rem;">{{ number_format($com01->qprecio, 2) }}</td>
                     <td style="text-align: center;">{{ $com01->cc04 }}</td>
                     <td style="text-align: center;">{{ $com01->qfaccon }}</td>
