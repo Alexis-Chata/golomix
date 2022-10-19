@@ -32,10 +32,10 @@
                 <tr class="{{ $com01->flagcre ? 'anulado' : '' }}">
                     <td>{{ $com01->cequiv }}</td>
                     <td style="font-size: 14px;">{{ $com01->tcor }}</td>
-                    <td style="text-align: end;padding-right: 3rem;">{{ number_format($com01->qprecio, 2) }}</td>
+                    <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio, 2) }}</td>
                     <td style="text-align: center;">{{ $com01->cc04 }}</td>
                     <td style="text-align: center;">{{ $com01->qfaccon }}</td>
-                    <td style="text-align: end;padding-right: 3rem;">{{ number_format($com01->qprecio/$com01->qfaccon, 2) }}</td>
+                    <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio/$com01->qfaccon, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
