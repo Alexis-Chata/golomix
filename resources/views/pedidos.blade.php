@@ -53,7 +53,7 @@
             text-align: end;
         }
 
-        .p-30{
+        .p-30 {
             padding-left: 30px;
         }
     </style>
@@ -62,7 +62,7 @@
 <body>
     {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
     {{-- @dd($pedidosAgrupados); --}}
-    {{ 'Total de vendedores: '.$pedidosAgrupados->count().' - Fecha: '.$fupgr }}
+    {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fupgr }}
     @foreach ($pedidosAgrupados as $cven => $tvens)
         <details open>
             <summary>{{ $cven . ' ' }}
@@ -71,20 +71,25 @@
             </summary>
             @foreach ($cruts as $crut => $pedidos)
                 <details style="background: #d9d9be;">
-                    <summary>{{ $pedidos->first()->com30s->crut }}<strong>{{ ' '.$pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : ('.$pedidos->groupBy(['ccli'])->count().' / '.$pedidos->count().')' }}<strong>{{ ' Monto: S/. '.number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</strong></summary>
+                    <summary>
+                        {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : (' . $pedidos->groupBy(['ccli'])->count() . ' / ' . $pedidos->count() . ')' }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</strong>
+                    </summary>
                     <div>
                         @foreach ($pedidos as $key => $pedido)
                             <details>
                                 <summary>
-                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',')." ( ". $pedido->ctip ." )"}}
+                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )' }}
                                 </summary>
                                 <div>
                                     @foreach ($pedido->com37s as $item)
                                         <ul class="li p-30">
                                             <p>{{ $item->ccodart . ' | ' }}</p>
                                             <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p
-                                                class="w-50  text-end"><strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong></p>
-                                            {{ ' | ' }}<p class="w-50 text-end">{{ number_format($item->qpreuni, 2, '.', ',') }}</p>
+                                                class="w-50  text-end">
+                                                <strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong>
+                                            </p>
+                                            {{ ' | ' }}<p class="w-50 text-end">
+                                                {{ number_format($item->qpreuni, 2, '.', ',') }}</p>
                                             {{ ' | ' }}<p class="w-70 text-end">
                                                 <strong>{{ number_format($item->qimp, 2, '.', ',') }}</strong>
                                             </p>
@@ -95,7 +100,7 @@
                                         <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
                                         {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
                                         {{ ' | ' }}<p class="w-70 text-end">
-                                            <strong>{{ "S/. ".number_format($pedido->qimpvta, 2, '.', ',') }}</strong>
+                                            <strong>{{ 'S/. ' . number_format($pedido->qimpvta, 2, '.', ',') }}</strong>
                                         </p>
                                     </ul>
                             </details>
@@ -103,22 +108,8 @@
                     </div>
                 </details>
             @endforeach
+            @endforeach
         </details>
-    @endforeach
-
-    {{-- <details>
-                    <summary>{{ $com36->ccli.' '}}<strong>{{ $com36->tnomrep }}</strong>{{ ' - Total: S/. '.$com36->qimpvta }}</summary>
-                    <div>
-                        @foreach ($com36->com37s as $item)
-                            <ul class="li">
-                            <p>{{ $item->ccodart.' | ' }}</p><p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p class="w-50  text-end"><strong>{{ $item->qcanped }}</strong></p>{{ ' | ' }}<p class="w-50 text-end">{{ $item->qpreuni }}</p>{{ ' | ' }}<p class="w-70 text-end"><strong>{{ $item->qimp }}</strong></p>
-                            </ul>
-                        @endforeach
-                        <ul class="li"><p class="text-end" style="width: 76.31px"></p><p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>{{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>{{ ' | ' }}<p class="w-70 text-end"><strong>{{ $com36->qimpvta }}</strong></p></ul>
-                    </div>
-                </details> --}}
-
-    </details>
     @endforeach
 </body>
 
