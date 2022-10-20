@@ -17,7 +17,20 @@ class Com01Controller extends Controller
     public function index()
     {
         $com01s = Com01::all();
-        return view('productos', compact('com01s'));
+        $precioMayorista = false;
+        return view('productos', compact('com01s', 'precioMayorista'));
+    }
+
+    /**
+     * Display a listing of the resource. lista precios mayorista
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function precioMayorista()
+    {
+        $com01s = Com01::all();
+        $precioMayorista = true;
+        return view('productos', compact('com01s', 'precioMayorista'));
     }
 
     /**

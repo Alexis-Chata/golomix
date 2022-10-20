@@ -59,4 +59,5 @@ Route::get('/pedidos/{cven}', function ($cven) {
 
 Route::controller(Com01Controller::class)->group(function () {
     Route::get('/productos', 'index')->name('allProductos');
+    Route::get('/productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
 });

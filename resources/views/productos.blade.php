@@ -20,11 +20,11 @@
         <thead>
             <tr>
                 <th>Cod</th>
-                <th>Producto</th>
+                <th>Producto {{ $precioMayorista ? 'Mayorista' : 'Bodega' }}</th>
                 <th  style="text-align: center;">Precio Cj</th>
                 <th  style="text-align: center;">Marca</th>
                 <th  style="text-align: center;">Cant/Cj</th>
-                <th  style="text-align: center;">Preio Unidad</th>
+                <th  style="text-align: center;">Precio Unidad</th>
             </tr>
         </thead>
         <tbody>
@@ -32,10 +32,18 @@
                 <tr class="{{ $com01->flagcre ? 'anulado' : '' }}">
                     <td>{{ $com01->cequiv }}</td>
                     <td style="font-size: 14px;">{{ $com01->tcor }}</td>
-                    <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio, 2) }}</td>
+                    @if ($precioMayorista)
+                        <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio2, 2) }}</td>
+                    @else
+                        <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio, 2) }}</td>
+                    @endif
                     <td style="text-align: center;">{{ $com01->cc04 }}</td>
                     <td style="text-align: center;">{{ $com01->qfaccon }}</td>
-                    <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio/$com01->qfaccon, 2) }}</td>
+                    @if ($precioMayorista)
+                        <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio2/$com01->qfaccon, 2) }}</td>
+                    @else
+                        <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio/$com01->qfaccon, 2) }}</td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
@@ -46,7 +54,7 @@
                 <th  style="text-align: center;">Precio Cj</th>
                 <th  style="text-align: center;">Marca</th>
                 <th  style="text-align: center;">Cant/Cj</th>
-                <th  style="text-align: center;">Preio Unidad</th>
+                <th  style="text-align: center;">Precio Unidad</th>
             </tr>
         </tfoot>
     </table>
