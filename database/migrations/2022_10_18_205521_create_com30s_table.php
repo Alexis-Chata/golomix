@@ -32,8 +32,8 @@ class CreateCom30sTable extends Migration
             $table->string("cdis")->nullable()->default("-");
             $table->string("cuser")->nullable()->default("-");
             $table->string("cidpr")->nullable()->default("-");
-            $table->string("fupgr")->nullable()->default("-");
-            $table->date("tupgr")->nullable();
+            $table->date("fupgr")->nullable();
+            $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
         });
     }

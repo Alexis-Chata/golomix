@@ -5,9 +5,12 @@ namespace App\Imports;
 use App\Models\Com37;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class Com37sImport implements ToModel, WithHeadingRow
+class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUpserts, WithChunkReading
 {
     /**
     * @param array $row
@@ -40,5 +43,21 @@ class Com37sImport implements ToModel, WithHeadingRow
         $detallePedido = Com37::updateOrCreate($numeroDetallePedido, $datosDetallePedido);
 
         return $detallePedido;
+    }
+
+
+    public function batchSize(): int
+    {
+        return 600;
+    }
+
+    public function uniqueBy()
+    {
+        return ['nped', 'ccodart'];
+    }
+
+    public function chunkSize(): int
+    {
+        return 600;
     }
 }

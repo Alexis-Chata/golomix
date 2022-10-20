@@ -5,9 +5,12 @@ namespace App\Imports;
 use App\Models\Com36;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class Com36sImport implements ToModel, WithHeadingRow
+class Com36sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUpserts, WithChunkReading
 {
     /**
      * @param array $row
@@ -49,5 +52,20 @@ class Com36sImport implements ToModel, WithHeadingRow
         $pedido = Com36::updateOrCreate($numeroPedido, $datosPedido);
 
         return $pedido;
+    }
+
+    public function batchSize(): int
+    {
+        return 600;
+    }
+
+    public function uniqueBy()
+    {
+        return 'nped';
+    }
+
+    public function chunkSize(): int
+    {
+        return 600;
     }
 }
