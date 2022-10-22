@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class Com01sImport implements ToModel, WithHeadingRow
+class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUpserts, WithChunkReading
 {
     /**
     * @param array $row
