@@ -36,10 +36,26 @@ class Com30sImport implements ToModel, WithHeadingRow
             'cidpr'    => $row["cidpr"],
             'fupgr'    => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'    => $row["tupgr"],
+            'crut'      => $row["crut"]
         ];
 
-        $ruta = Com30::updateOrCreate($numeroRuta, $datosRuta);
+        //$ruta = Com30::updateOrCreate($numeroRuta, $datosRuta);
 
-        return $ruta;
+        return new Com30($datosRuta);
+    }
+
+    public function batchSize(): int
+    {
+        return 200;
+    }
+
+    public function uniqueBy()
+    {
+        return ['crut'];
+    }
+
+    public function chunkSize(): int
+    {
+        return 200;
     }
 }

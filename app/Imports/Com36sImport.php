@@ -47,16 +47,17 @@ class Com36sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'cuser'     => $row["cuser"],
             'fupgr'     => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'     => $row["tupgr"],
+            'nped'      => $row["nped"]
         ];
 
-        $pedido = Com36::updateOrCreate($numeroPedido, $datosPedido);
+        //$pedido = Com36::updateOrCreate($numeroPedido, $datosPedido);
 
-        return $pedido;
+        return new Com36($datosPedido);
     }
 
     public function batchSize(): int
     {
-        return 600;
+        return 200;
     }
 
     public function uniqueBy()
@@ -66,6 +67,6 @@ class Com36sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function chunkSize(): int
     {
-        return 600;
+        return 200;
     }
 }

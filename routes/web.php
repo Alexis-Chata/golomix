@@ -43,7 +43,7 @@ Route::middleware([
 
 Route::get('/pedidos', function () {
     $fupgr = Com36::latest('fupgr')->first()->fupgr;
-    $com36s = Com36::where('fupgr', $fupgr)->get();
+    $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
     $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
     $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr'));
@@ -51,7 +51,7 @@ Route::get('/pedidos', function () {
 
 Route::get('/pedidos/{cven}', function ($cven) {
     $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
-    $com36s = Com36::where('fupgr', $fupgr)->where('cven', $cven)->get();
+    $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
     $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
     $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr'));

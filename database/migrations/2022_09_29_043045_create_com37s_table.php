@@ -33,6 +33,8 @@ class CreateCom37sTable extends Migration
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
+
+            $table->unique(['nped', 'ccodart']);
         });
     }
 
