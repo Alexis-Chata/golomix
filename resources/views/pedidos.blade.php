@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pedidos</title>
+    <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
     <style>
         details {
             background: #f2f2f2;
@@ -72,13 +73,24 @@
             @foreach ($cruts as $crut => $pedidos)
                 <details style="background: #d9d9be;">
                     <summary>
-                        {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : (' . $pedidos->groupBy(['ccli'])->count() . ' / ' . $pedidos->count() . ')' }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</strong>
+                        {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : (' . $pedidos->groupBy(['ccli'])->count() . ' / ' . $pedidos->count() . ')' }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',')." " }}</strong>
+                        @if ($pedidos->whereNull('ccon')->count())
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            {{ $pedidos->whereNull('ccon')->count() }}
+                        @else
+                            <i class="fa-sharp fa-solid fa-circle-check"></i>
+                        @endif
                     </summary>
                     <div>
                         @foreach ($pedidos as $key => $pedido)
                             <details>
                                 <summary>
-                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )' }}
+                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )'." "  }}
+                                    @if ($pedido->ccon)
+                                        <i class="fa-sharp fa-solid fa-circle-check"></i>
+                                    @else
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    @endif
                                 </summary>
                                 <div>
                                     @foreach ($pedido->com37s as $item)
