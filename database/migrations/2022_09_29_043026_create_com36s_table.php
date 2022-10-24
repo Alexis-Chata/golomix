@@ -21,6 +21,7 @@ class CreateCom36sTable extends Migration
             $table->string("ctip")->nullable()->default("-");
             $table->string("nfac")->nullable()->default("-");
             $table->string("cven")->nullable()->default("-");
+            $table->string("ccon")->nullable()->default("-");
             $table->string("ccli")->nullable()->default("-");
             $table->date("fmov")->nullable();
             $table->date("femi")->nullable();
@@ -43,6 +44,8 @@ class CreateCom36sTable extends Migration
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
+
+            $table->unique('nped');
         });
     }
 

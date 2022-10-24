@@ -5,9 +5,12 @@ namespace App\Imports;
 use App\Models\Com01;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
 
-class Com01sImport implements ToModel, WithHeadingRow
+class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUpserts, WithChunkReading
 {
     /**
     * @param array $row
@@ -77,11 +80,26 @@ class Com01sImport implements ToModel, WithHeadingRow
             'cidpr'        => $row["cidpr"],
             'fupgr'        => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'        => $row["tupgr"],
-
+            'cequiv'      => $row["cequiv"]
         ];
 
-        $pedido = Com01::updateOrCreate($numeroPedido, $datosPedido);
+        //$pedido = Com01::updateOrCreate($numeroPedido, $datosPedido);
 
-        return $pedido;
+        return new Com01($datosPedido);
+    }
+
+    public function batchSize(): int
+    {
+        return 600;
+    }
+
+    public function uniqueBy()
+    {
+        return ['cequiv'];
+    }
+
+    public function chunkSize(): int
+    {
+        return 600;
     }
 }

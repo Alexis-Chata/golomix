@@ -38,11 +38,13 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'tdes'      => $row["tdes"],
             'citem'     => $row["citem"],
             'cprom'     => $row["cprom"],
+            'nped'      => $row["nped"],
+            'ccodart'   => $row["ccodart"]
         ];
 
-        $detallePedido = Com37::updateOrCreate($numeroDetallePedido, $datosDetallePedido);
+        //$detallePedido = Com37::updateOrCreate($numeroDetallePedido, $datosDetallePedido);
 
-        return $detallePedido;
+        return new Com37($datosDetallePedido);
     }
 
 
