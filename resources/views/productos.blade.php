@@ -37,7 +37,7 @@
                     @else
                         <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio, 2) }}</td>
                     @endif
-                    <td style="text-align: center;">{{ $com01->cc04 }}</td>
+                    <td style="text-align: center;">{{ $com01->cc04 }} - {{ $marcas->where('ccod', $com01->cc04)->first()->tdes }}</td>
                     <td style="text-align: center;">{{ $com01->qfaccon }}</td>
                     @if ($precioMayorista)
                         <td style="text-align: end;padding-right: 3rem;">{{ "S/. ".number_format($com01->qprecio2/$com01->qfaccon, 2) }}</td>

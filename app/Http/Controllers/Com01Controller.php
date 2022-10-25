@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\Com01sImport;
 use App\Models\Com01;
+use App\Models\Ugr01;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,9 +17,10 @@ class Com01Controller extends Controller
      */
     public function index()
     {
+        $marcas = Ugr01::where('cind', '045')->get();
         $com01s = Com01::all();
         $precioMayorista = false;
-        return view('productos', compact('com01s', 'precioMayorista'));
+        return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }
 
     /**
@@ -28,9 +30,10 @@ class Com01Controller extends Controller
      */
     public function precioMayorista()
     {
+        $marcas = Ugr01::where('cind', '045')->get();
         $com01s = Com01::all();
         $precioMayorista = true;
-        return view('productos', compact('com01s', 'precioMayorista'));
+        return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }
 
     /**
