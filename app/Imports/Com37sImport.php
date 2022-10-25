@@ -47,7 +47,6 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
         return new Com37($datosDetallePedido);
     }
 
-
     public function batchSize(): int
     {
         return 600;
