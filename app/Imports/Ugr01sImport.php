@@ -39,7 +39,7 @@ class Ugr01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function uniqueBy()
     {
-        return ['nped', 'ccodart'];
+        return ['cind', 'ccod'];
     }
 
     public function chunkSize(): int
