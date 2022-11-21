@@ -21,7 +21,7 @@ class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
     {
         $numeroPedido = ['cequiv'      => $row["cequiv"] ];
         $datosPedido = [
-            'cclaart'       => $row["cclaart"],
+            'cclaart'      => $row["cclaart"],
             'csubcla'      => $row["csubcla"],
             'ncorart'      => $row["ncorart"],
             'tcor'         => $row["tcor"],
@@ -80,7 +80,7 @@ class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'cidpr'        => $row["cidpr"],
             'fupgr'        => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'        => $row["tupgr"],
-            'cequiv'      => $row["cequiv"]
+            'cequiv'       => $row["cequiv"]
         ];
 
         //$pedido = Com01::updateOrCreate($numeroPedido, $datosPedido);

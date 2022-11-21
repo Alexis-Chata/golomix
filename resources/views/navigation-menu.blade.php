@@ -24,6 +24,9 @@
                     <x-jet-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
                         {{ __('P.Mayorista') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes')">
+                        {{ __('Lista Clientes') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -157,6 +160,9 @@
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
                 {{ __('P.Mayorista') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes')">
+                {{ __('Lista Clientes') }}
             </x-jet-responsive-nav-link>
         </div>
 

@@ -20,11 +20,11 @@ class Ugr01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
     public function model(array $row)
     {
         $data = [
-            'cind'   => $row["cind"],
-            'ccod'     => $row["ccod"],
-            'tdes'   => $row["tdes"],
+            'cind'      => $row["cind"],
+            'ccod'      => $row["ccod"],
+            'tdes'      => $row["tdes"],
             'cfac'      => $row["cfac"],
-            'cuser'   => $row["cuser"],
+            'cuser'     => $row["cuser"],
             'cidpr'     => $row["cidpr"],
             'fupgr'     => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'     => $row["tupgr"],

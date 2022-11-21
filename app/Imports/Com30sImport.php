@@ -39,7 +39,7 @@ class Com30sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'cidpr'    => $row["cidpr"],
             'fupgr'    => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'    => $row["tupgr"],
-            'crut'      => $row["crut"]
+            'crut'     => $row["crut"]
         ];
 
         //$ruta = Com30::updateOrCreate($numeroRuta, $datosRuta);
