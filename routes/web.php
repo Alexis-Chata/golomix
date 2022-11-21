@@ -53,7 +53,7 @@ Route::middleware([
 Route::get('/listaclientes', function () {
     $com31s = Com31::with(['com07s', 'com30s'])->get();
     //$pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
-    return view('listaclientes', compact('com31s'));
+    return view('listaClientes', compact('com31s'));
 })->name('listaclientes');
 
 Route::get('/pedidos', function () {
