@@ -42,7 +42,7 @@ class Com31sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function uniqueBy()
     {
-        return ['ccli'];
+        return ['ccli', 'crut'];
     }
 
     public function chunkSize(): int
