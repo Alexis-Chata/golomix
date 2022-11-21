@@ -56,6 +56,11 @@ Route::get('/listaclientes', function () {
     return view('listaClientes', compact('com31s'));
 })->name('listaclientes');
 
+Route::get('/listaclientes/{cven}', function ($cven) {
+    $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->get();
+    return view('listaClientes', compact('com31s'));
+})->name('listaclientesXvendedor');
+
 Route::get('/pedidos', function () {
     $fupgr = Com36::latest('fupgr')->first()->fupgr;
     $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
