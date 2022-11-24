@@ -21,6 +21,11 @@ class Com36 extends Model
         return $this->belongsTo(Com30::class, 'crut', 'crut');
     }
 
+    public function com05s()
+    {
+        return $this->belongsTo(Com05::class, 'ccon', 'ccon');
+    }
+
     public function getCtipAttribute($value)
     {
         switch ($value) {

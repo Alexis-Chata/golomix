@@ -68,6 +68,7 @@
 <body>
     {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
     {{-- @dd($pedidosAgrupados); --}}
+    {{ ' - Fecha: ' . $fupgr }}
     <table id="example" class="display" style="width:100%; font-size:9px">
         <thead>
             <tr>
@@ -81,11 +82,9 @@
         <tbody>
             @foreach ($pedidosAgrupados as $indice => $consesionarios)
             <tr style="font-weight: bold;">
-                <td style="padding-top: 12px">{{ '' }}</td>
-                <td style="padding-top: 12px">{{ '' }}</td>
-                <td style="padding-top: 12px">{{ '' }}</td>
-                <td style="padding-top: 12px">{{ $com36s->where('ccon', $indice)->unique('ccli')->count() }}</td>
-                <td style="padding-top: 12px">{{ $com36s->where('ccon', $indice)->sum('qimpvta') }}</td>
+                <td colspan=3 style="padding-top: 12px">{{ $indice ? $indice.' - '.$com05->where('ccon', $indice)->first()->tnom : "Pendientes por Programar" }}</td>
+                <td style="padding-top: 12px; text-align: center;">{{ $com36s->where('ccon', $indice)->unique('ccli')->count() }}</td>
+                <td style="padding-top: 12px; text-align: end;">{{ number_format($com36s->where('ccon', $indice)->sum('qimpvta'), 2, '.', ',') }}</td>
             </tr>
             <tr class="">
                 <td rowspan="{{ $consesionarios->count() }}">{{ $indice }}</td>
@@ -95,8 +94,8 @@
                             @foreach ($vendedor as $tven => $pedidos)
                                     <td>{{ $crut . ' - ' . $trut }}</td>
                                     <td>{{ $cven . ' - ' . $tven }}</td>
-                                    <td>{{ $pedidos->groupBy(['ccli'])->count() }}</td>
-                                    <td>{{ number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</td>
+                                    <td style="text-align: center;">{{ $pedidos->groupBy(['ccli'])->count() }}</td>
+                                    <td style="text-align: end;">{{ number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</td>
                                 </tr>
                             @endforeach
                         @endforeach

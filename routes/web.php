@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Com01Controller;
+use App\Http\Controllers\Com05Controller;
 use App\Http\Controllers\Com07Controller;
 use App\Http\Controllers\Com10Controller;
 use App\Http\Controllers\Com30Controller;
@@ -8,6 +9,7 @@ use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\Ugr01Controller;
+use App\Models\Com05;
 use App\Models\Com31;
 use App\Models\Com36;
 use Illuminate\Support\Carbon;
@@ -41,6 +43,7 @@ Route::middleware([
 
     Route::resource('ugr01', Ugr01Controller::class)->only(['store']);
     Route::resource('com01', Com01Controller::class)->only(['store']);
+    Route::resource('com05', Com05Controller::class)->only(['store']);
     Route::resource('com07', Com07Controller::class)->only(['store']);
     Route::resource('com10', Com10Controller::class)->only(['store']);
     Route::resource('com30', Com30Controller::class)->only(['store']);
@@ -76,7 +79,8 @@ Route::get('/pedidos/transporte', function () {
     $pedidosAgrupados = $com36s->sortBy(['ccon', 'crut', 'cven', 'ccli'])->groupBy(['ccon', 'crut', 'com30s.tdes', 'cven', 'tven'], $preserveKeys = true);
     //dd($pedidosAgrupados);
     $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-    return view('pedidosxtransporte', compact('com36s', 'pedidosAgrupados', 'fupgr'));
+    $com05 = Com05::all();
+    return view('pedidosxtransporte', compact('com36s', 'pedidosAgrupados', 'fupgr', 'com05'));
 })->name('allpedidosXtransporte');
 
 Route::get('/pedidos/{cven}', function ($cven) {
