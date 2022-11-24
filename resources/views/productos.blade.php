@@ -50,7 +50,7 @@
         <tfoot>
             <tr>
                 <th>Cod</th>
-                <th>Producto</th>
+                <th>Producto {{ $precioMayorista ? 'Mayorista' : 'Bodega' }}</th>
                 <th  style="text-align: center;">Precio Cj</th>
                 <th  style="text-align: center;">Marca</th>
                 <th  style="text-align: center;">Cant/Cj</th>

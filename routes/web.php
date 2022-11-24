@@ -69,6 +69,16 @@ Route::get('/pedidos', function () {
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr'));
 })->name('allpedidos');
 
+Route::get('/pedidos/transporte', function () {
+    $fupgr = Com36::latest('fupgr')->first()->fupgr;
+    $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
+    //dd($com36s->first());
+    $pedidosAgrupados = $com36s->sortBy(['ccon', 'crut', 'cven', 'ccli'])->groupBy(['ccon', 'crut', 'com30s.tdes', 'cven', 'tven'], $preserveKeys = true);
+    //dd($pedidosAgrupados);
+    $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
+    return view('pedidosxtransporte', compact('com36s', 'pedidosAgrupados', 'fupgr'));
+})->name('allpedidosXtransporte');
+
 Route::get('/pedidos/{cven}', function ($cven) {
     $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
     $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
