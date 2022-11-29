@@ -26,6 +26,7 @@
                 <th  style="text-align: center;">Direccion Cliente</th>
                 <th  style="text-align: center;">Modulo</th>
                 <th  style="text-align: center;">Zona</th>
+                <th  style="text-align: center;">LP</th>
                 <th  style="text-align: center;">Vendedor</th>
             </tr>
         </thead>
@@ -39,6 +40,7 @@
                     <td>{{ $com31->com07s->tdir }}</td>
                     <td>{{ $com31->cmod }}</td>
                     <td>{{ $com31->com30s->czon }}</td>
+                    <td>{{ $com31->com07s->clistpr }}</td>
                     <td>{{ $com31->com30s->com10s->cven .' - '. $com31->com30s->com10s->tven }}</td>
                 </tr>
             @endforeach
@@ -52,6 +54,7 @@
                 <th  style="text-align: center;">Direccion Cliente</th>
                 <th  style="text-align: center;">Modulo</th>
                 <th  style="text-align: center;">Zona</th>
+                <th  style="text-align: center;">LP</th>
                 <th  style="text-align: center;">Vendedor</th>
             </tr>
         </tfoot>
