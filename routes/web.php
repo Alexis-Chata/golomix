@@ -10,6 +10,7 @@ use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\Ugr01Controller;
 use App\Models\Com05;
+use App\Models\Com10;
 use App\Models\Com31;
 use App\Models\Com36;
 use Illuminate\Support\Carbon;
@@ -63,6 +64,13 @@ Route::get('/listaclientes/{cven}', function ($cven) {
     $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->get();
     return view('listaClientes', compact('com31s'));
 })->name('listaclientesXvendedor');
+
+Route::get('/vendedor-rutas', function () {
+    $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
+    //dd($com10s->firstWhere('cven', '090'));
+    //dd($com10s);
+    return view('vendedorRutas', compact('com10s'));
+})->name('allVendedorRutas');
 
 Route::get('/pedidos', function () {
     $fupgr = Com36::latest('fupgr')->first()->fupgr;
