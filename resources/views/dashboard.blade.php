@@ -137,7 +137,7 @@
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="row px-6" title="Vendedor-Rutas-Zona">
+                    <div class="row px-6" title="Consesioranio">
                         <form action="{{ route('com05.store') }}" class="py-6" method="post" enctype="multipart/form-data">
                             @csrf
                             <label for="arch_com05" class="m-4">Subir archivo Com05 </label>

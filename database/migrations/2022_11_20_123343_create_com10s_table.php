@@ -15,11 +15,11 @@ class CreateCom10sTable extends Migration
     {
         Schema::create('com10s', function (Blueprint $table) {
             $table->id();
+            $table->string("cven")->nullable()->default("-");
             $table->string("tven")->nullable()->default("-");
             $table->string("clin")->nullable()->default("-");
             $table->string("tdir")->nullable()->default("-");
             $table->string("nfon")->nullable()->default("-");
-            $table->string("cven")->nullable()->default("-");
             $table->string("nlibele")->nullable()->default("-");
             $table->string("nlibmil")->nullable()->default("-");
             $table->string("qfacom")->nullable()->default("-");
@@ -45,6 +45,8 @@ class CreateCom10sTable extends Migration
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
+
+            $table->unique(['cven']);
         });
     }
 
