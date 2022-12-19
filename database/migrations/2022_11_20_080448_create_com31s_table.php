@@ -28,7 +28,7 @@ class CreateCom31sTable extends Migration
             $table->string("tupgr")->nullable()->default("-");
             $table->timestamps();
 
-            $table->unique(['crut', 'ccli']);
+            $table->unique(['ccli']);
         });
     }
 
