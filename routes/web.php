@@ -62,7 +62,7 @@ Route::get('/listaclientes', function () {
 
 Route::get('/listaclientes/{cven}', function ($cven) {
     $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->get();
-    return view('listaClientes', compact('com31s'));
+    return view('listaClientes', compact('com31s', 'cven'));
 })->name('listaclientesXvendedor');
 
 Route::get('/vendedor-rutas', function () {
