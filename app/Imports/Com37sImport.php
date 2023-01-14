@@ -23,8 +23,8 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
                         'ccodart'   => $row["ccodart"] ];
         $datosDetallePedido = [
 
-            'fmov'      => $row["fmov"] ? Carbon::createFromFormat('d/m/Y', $row["fmov"]) : null,
-            'ccli'      => $row["ccli"],
+            'fmov'      => isset($row["fmov"]) ? Carbon::createFromFormat('d/m/Y', $row["fmov"]) : null,
+            'ccli'      => $row["ccli"] ?? null,
             'qpreuni'   => $row["qpreuni"],
             'cletd'     => $row["cletd"],
             'ctip'      => $row["ctip"],

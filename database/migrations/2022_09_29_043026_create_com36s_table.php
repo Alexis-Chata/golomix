@@ -43,7 +43,8 @@ class CreateCom36sTable extends Migration
             $table->string("cuser")->nullable()->default("-");
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
 
             $table->unique('nped');
         });

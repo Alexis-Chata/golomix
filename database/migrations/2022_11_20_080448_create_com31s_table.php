@@ -26,7 +26,8 @@ class CreateCom31sTable extends Migration
             $table->string("cidpr")->nullable()->default("-");
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
 
             $table->unique(['ccli']);
         });
