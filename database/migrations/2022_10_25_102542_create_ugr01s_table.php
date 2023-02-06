@@ -24,7 +24,7 @@ class CreateUgr01sTable extends Migration
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable()->default("-");
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->unique(['cind', 'ccod']);
         });

@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\TipoProducto;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDiscontinuadoColumnsToCom01s extends Migration
+class AddTipoProductosIdColumnsToCom01sTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +15,7 @@ class AddDiscontinuadoColumnsToCom01s extends Migration
     public function up()
     {
         Schema::table('com01s', function (Blueprint $table) {
-            $table->string('discontinuado')->after('tupgr')->nullable();
+            $table->foreignIdFor(TipoProducto::class)->nullable()->constrained()->after('tupgr');
         });
     }
 
@@ -26,7 +27,8 @@ class AddDiscontinuadoColumnsToCom01s extends Migration
     public function down()
     {
         Schema::table('com01s', function (Blueprint $table) {
-            $table->dropColumn(['discontinuado']);
+            $table->dropForeign('com01s_tipo_producto_id_foreign');
+            $table->dropColumn(['tipo_producto_id']);
         });
     }
 }
