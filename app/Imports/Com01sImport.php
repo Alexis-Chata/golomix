@@ -30,7 +30,7 @@ class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'cpreuni'      => $row["cpreuni"],
             'qfaccon'      => $row["qfaccon"],
             'qfaccon1'     => $row["qfaccon1"],
-            'flagcre'      => $row["flagcre"],
+            'flagcre'      => $row["flagcre"] ? $row["flagcre"] : '-',
             'fcre'         => $row["fcre"],
             'fanu'         => $row["fanu"] ? Carbon::createFromFormat('d/m/Y', $row["fanu"]) : null,
             'frec'         => $row["frec"] ? Carbon::createFromFormat('d/m/Y', $row["frec"]) : null,
@@ -80,7 +80,8 @@ class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'cidpr'        => $row["cidpr"],
             'fupgr'        => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'        => $row["tupgr"],
-            'cequiv'       => $row["cequiv"]
+            'cequiv'       => $row["cequiv"],
+            'tipo_producto_id'=> isset($row["tipo_producto_id"]) ? $row["tipo_producto_id"] : 1
         ];
 
         //$pedido = Com01::updateOrCreate($numeroPedido, $datosPedido);
