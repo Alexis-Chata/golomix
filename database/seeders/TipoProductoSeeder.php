@@ -29,5 +29,9 @@ class TipoProductoSeeder extends Seeder
         $tipo_producto = new TipoProducto();
         $tipo_producto->name = 'Producto discontinuado';
         $tipo_producto->save();
+
+        $tipo_producto = new TipoProducto();
+        $tipo_producto->name = 'Combos Winter Vencidos';
+        $tipo_producto->save();
     }
 }
