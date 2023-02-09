@@ -80,8 +80,7 @@ class Com01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'cidpr'        => $row["cidpr"],
             'fupgr'        => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'        => $row["tupgr"],
-            'cequiv'       => $row["cequiv"],
-            'tipo_producto_id'=> isset($row["tipo_producto_id"]) ? $row["tipo_producto_id"] : 1
+            'cequiv'       => $row["cequiv"]
         ];
 
         //$pedido = Com01::updateOrCreate($numeroPedido, $datosPedido);

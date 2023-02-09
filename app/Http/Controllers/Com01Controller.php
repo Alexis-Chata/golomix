@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\Com01sImport;
+use App\Imports\Com01sTipoProductoImport;
 use App\Models\Com01;
 use App\Models\Ugr01;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class Com01Controller extends Controller
         if(!Auth::check()){
             // Lista Sin Productos Discontinuados
             $com01s = Com01::whereNotIn('flagcre',['1'])->get();
-            $com01s = $com01s->concat(Com01::where('flagcre', '1')->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get());
+            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get());
         }else{
             $com01s = Com01::all();
         }
@@ -63,6 +64,13 @@ class Com01Controller extends Controller
     {
         $archivo = $request->file('arch_com01');
         Excel::import(new Com01sImport, $archivo);
+        return redirect()->route('dashboard');
+    }
+
+    public function actualizaTipoProductoId(Request $request)
+    {
+        $archivo = $request->file('com01_actualizaTipoProducto');
+        Excel::import(new Com01sTipoProductoImport, $archivo);
         return redirect()->route('dashboard');
     }
 

@@ -10,7 +10,7 @@
         body{
             padding: 1.5rem;
         }
-        tr.anulado.even, tr.anulado.odd{
+        tr.baja.even, tr.baja.odd{
             background: #ff00005c;
         }
     </style>

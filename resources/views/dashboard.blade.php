@@ -150,5 +150,21 @@
                 </div>
             </div>
         </div>
+        <div class="py-6">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="row px-6" title="Actualiza el Tipo Producto">
+                        <form action="{{ route('com01.actualizaTipoProductoId') }}" class="py-6" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <label for="com01_actualizaTipoProducto" class="m-4">Actualizar el Tipo Producto </label>
+                            <input type="file" name="com01_actualizaTipoProducto" id="com01_actualizaTipoProducto" required class="m-4">
+                            <button type="submit"
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-4 m-4">Subir
+                                Archivo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>
