@@ -20,16 +20,14 @@ class Com01Controller extends Controller
     {
         $marcas = Ugr01::where('cind', '045')->get();
         if(!Auth::check()){
-            // Productos Discontinuados
+            // Lista Sin Productos Discontinuados
             $com01s = Com01::whereNotIn('flagcre',['1'])->get();
             $com01s = $com01s->concat(Com01::where('flagcre', '1')->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get());
         }else{
             $com01s = Com01::all();
         }
-        //dd($com01s);
         $precioMayorista = false;
-        $accion = 'Quitar ';
-        return view('productos', compact('com01s', 'precioMayorista', 'marcas', 'accion'));
+        return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }
 
     /**

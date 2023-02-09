@@ -49,13 +49,6 @@
 </head>
 
 <body>
-    @auth
-        <form method="post">
-            <div class="m-1">
-                <button type="submit" class="btn btn-primary">{{ $accion }}Discontinuados</button>
-            </div>
-        </form>
-    @endauth
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
