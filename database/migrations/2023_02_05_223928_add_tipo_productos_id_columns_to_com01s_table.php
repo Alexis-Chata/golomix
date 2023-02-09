@@ -15,7 +15,7 @@ class AddTipoProductosIdColumnsToCom01sTable extends Migration
     public function up()
     {
         Schema::table('com01s', function (Blueprint $table) {
-            $table->foreignIdFor(TipoProducto::class)->default(1)->constrained()->after('tupgr');
+            $table->foreignIdFor(TipoProducto::class)->default(1)->after('tupgr')->constrained();
         });
     }
 
