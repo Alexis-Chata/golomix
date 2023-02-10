@@ -20,13 +20,7 @@ class Com01Controller extends Controller
     public function index()
     {
         $marcas = Ugr01::where('cind', '045')->get();
-        if(!Auth::check()){
-            // Lista Sin Productos Discontinuados
-            $com01s = Com01::whereNotIn('flagcre',['1'])->get();
-            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get());
-        }else{
-            $com01s = Com01::all();
-        }
+        $com01s = $this->listaPrecios();
         $precioMayorista = false;
         return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }
@@ -39,9 +33,20 @@ class Com01Controller extends Controller
     public function precioMayorista()
     {
         $marcas = Ugr01::where('cind', '045')->get();
-        $com01s = Com01::all();
+        $com01s = $this->listaPrecios();
         $precioMayorista = true;
         return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
+    }
+
+    public function listaPrecios(){
+        if(!Auth::check()){
+            // Lista Sin Productos Discontinuados
+            $com01s = Com01::whereNotIn('flagcre',['1'])->get();
+            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get());
+        }else{
+            $com01s = Com01::all();
+        }
+        return $com01s;
     }
 
     /**
