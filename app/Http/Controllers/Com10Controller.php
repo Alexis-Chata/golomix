@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Imports\Com10sImport;
 use App\Models\Com10;
+use App\Models\Com31;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -27,6 +29,16 @@ class Com10Controller extends Controller
     public function create()
     {
         //
+    }
+
+    public function listaclientesDownloadPdf($cven, $crut)
+    {
+        $nro = 1;
+        $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->where('crut', $crut)->get();
+        //dd($com31s);
+        return View('listaclientesDownloadPdf', compact('com31s', 'nro'));
+        $pdf = Pdf::loadView('listaclientesDownloadPdf', compact('com31s', 'nro'));
+        return $pdf->download('listaclientesDownloadPdf.pdf');
     }
 
     /**

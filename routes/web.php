@@ -61,9 +61,13 @@ Route::get('/listaclientes', function () {
 })->name('listaclientes');
 
 Route::get('/listaclientes/{cven}', function ($cven) {
+    $com10s = Com10::with('com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7' )->firstWhere('cven', $cven);
+    //dd($com10s->toArray());
     $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->get();
-    return view('listaClientes', compact('com31s', 'cven'));
+    return view('listaClientes', compact('com31s', 'cven', 'com10s'));
 })->name('listaclientesXvendedor');
+
+Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
 
 Route::get('/vendedor-rutas', function () {
     $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
