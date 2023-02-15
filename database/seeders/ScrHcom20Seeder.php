@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ScrHcom20Seeder extends Seeder
 {
@@ -13,6 +14,8 @@ class ScrHcom20Seeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::insert("
+
+        ");
     }
 }

@@ -27,6 +27,7 @@
                     <th style="text-align: center;">Nombre Cliente</th>
                     <th style="text-align: center;">Direccion Cliente</th>
                     <th style="text-align: center;">RUC / DNI</th>
+                    <th style="text-align: center;">Ult. Compra</th>
                     <th style="text-align: center;">Zona</th>
                     <th style="text-align: center;">LP</th>
                 </tr>
@@ -41,6 +42,7 @@
                         <td>{{ $com31->com07s->tcli }}</td>
                         <td>{{ $com31->com07s->tdir }}</td>
                         <td>{{ $com31->com07s->cruc ?? $com31->com07s->le }}</td>
+                        <td>{{ $com31->com30s->czon }}</td>
                         <td>{{ $com31->com30s->czon }}</td>
                         <td>{{ $com31->com07s->clistpr }}</td>
                     </tr>
