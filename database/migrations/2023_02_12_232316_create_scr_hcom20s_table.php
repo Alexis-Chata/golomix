@@ -91,7 +91,7 @@ class CreateScrHcom20sTable extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
-            $table->unique('nped');
+            $table->unique(['nfac', 'nped']);
         });
     }
 

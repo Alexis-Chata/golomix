@@ -104,7 +104,7 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
     public function uniqueBy()
     {
-        return ['nped'];
+        return ['nfac', 'nped'];
     }
 
     public function chunkSize(): int
