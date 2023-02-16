@@ -20,4 +20,9 @@ class Com31 extends Model
     {
         return $this->belongsTo(Com30::class, 'crut', 'crut');
     }
+
+    public function scrhcom20s()
+    {
+        return $this->hasMany(ScrHcom20::class, 'ccli', 'ccli');
+    }
 }

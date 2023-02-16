@@ -8,6 +8,7 @@ use App\Http\Controllers\Com30Controller;
 use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
+use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\Ugr01Controller;
 use App\Models\Com05;
 use App\Models\Com10;
@@ -51,6 +52,7 @@ Route::middleware([
     Route::resource('com31', Com31Controller::class)->only(['store']);
     Route::resource('com36', Com36Controller::class)->only(['store']);
     Route::resource('com37', Com37Controller::class)->only(['store']);
+    Route::resource('scrhcom20', ScrHcom20Controller::class)->only(['store']);
 
 });
 

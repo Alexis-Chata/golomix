@@ -24,6 +24,9 @@
         .pointer{
             cursor: pointer;
         }
+        div#example_wrapper{
+            margin-top: 12px;
+        }
     </style>
 </head>
 

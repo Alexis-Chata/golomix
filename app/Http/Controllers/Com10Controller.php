@@ -34,9 +34,9 @@ class Com10Controller extends Controller
     public function listaclientesDownloadPdf($cven, $crut)
     {
         $nro = 1;
-        $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->where('crut', $crut)->get();
-        //dd($com31s);
-        return View('listaclientesDownloadPdf', compact('com31s', 'nro'));
+        $com31s = Com31::with(['com07s', 'com30s', 'scrhcom20s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->where('crut', $crut)->get();
+        //dd($com31s->firstwhere('ccli', '07001040')->scrhcom20s->last()->femi);
+        //return View('listaclientesDownloadPdf', compact('com31s', 'nro'));
         $pdf = Pdf::loadView('listaclientesDownloadPdf', compact('com31s', 'nro'));
         return $pdf->download('listaclientesDownloadPdf.pdf');
     }

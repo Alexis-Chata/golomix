@@ -40,6 +40,7 @@ class Com36Controller extends Controller
      */
     public function store(Request $request)
     {
+        //elimina pedidos anulados (borrados)
         $f = fopen($request->file('arch_com36'), 'r');
         $npeds = array();
         while (($data = fgetcsv($f)) !== false) {
