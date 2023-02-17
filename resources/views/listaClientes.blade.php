@@ -21,85 +21,90 @@
             display: inline-block;
         }
 
-        .pointer{
+        .pointer {
             cursor: pointer;
         }
-        div#example_wrapper{
+
+        div#example_wrapper {
             margin-top: 12px;
         }
     </style>
 </head>
 
 <body>
-    @if ($com10s->com30sr1)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr1->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr1->crut }}</button>
-                </a>
+    @if (isset($com10s))
+
+        @if ($com10s->com30sr1)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr1->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr1->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
-    @if ($com10s->com30sr2)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr2->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr2->crut }}</button>
-                </a>
+        @endif
+        @if ($com10s->com30sr2)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr2->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr2->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
-    @if ($com10s->com30sr3)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr3->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr3->crut }}</button>
-                </a>
+        @endif
+        @if ($com10s->com30sr3)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr3->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr3->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
-    @if ($com10s->com30sr4)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr4->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr4->crut }}</button>
-                </a>
+        @endif
+        @if ($com10s->com30sr4)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr4->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr4->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
-    @if ($com10s->com30sr5)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr5->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr5->crut }}</button>
-                </a>
+        @endif
+        @if ($com10s->com30sr5)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr5->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr5->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
-    @if ($com10s->com30sr6)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr6->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr6->crut }}</button>
-                </a>
+        @endif
+        @if ($com10s->com30sr6)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr6->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr6->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
-    @endif
-    @if ($com10s->com30sr7)
-        <div class="row d-inline-block">
-            <div class="col-xl-12 text-right">
-                <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr7->crut]) }}"
-                    class="btn btn-success btn-sm">
-                    <button type="button" class="pointer">{{ $com10s->com30sr7->crut }}</button>
-                </a>
+        @endif
+        @if ($com10s->com30sr7)
+            <div class="row d-inline-block">
+                <div class="col-xl-12 text-right">
+                    <a href="{{ route('listaclientesDownload-pdf', [$cven, $com10s->com30sr7->crut]) }}"
+                        class="btn btn-success btn-sm">
+                        <button type="button" class="pointer">{{ $com10s->com30sr7->crut }}</button>
+                    </a>
+                </div>
             </div>
-        </div>
+        @endif
+
     @endif
 
     <table id="example" class="display" style="width:100%">
@@ -110,6 +115,8 @@
                 <th style="text-align: center;">Codigo Cliente</th>
                 <th style="text-align: center;">Nombre Cliente</th>
                 <th style="text-align: center;">Direccion Cliente</th>
+                <th style="text-align: center;">RUC / DNI</th>
+                <th style="text-align: center;">Ult. Compra</th>
                 <th style="text-align: center;">Modulo</th>
                 <th style="text-align: center;">Zona</th>
                 <th style="text-align: center;">LP</th>
@@ -124,6 +131,8 @@
                     <td>{{ $com31->ccli }}</td>
                     <td>{{ $com31->com07s->tcli }}</td>
                     <td>{{ $com31->com07s->tdir }}</td>
+                    <td>{{ $com31->com07s->cruc ?? $com31->com07s->le }}</td>
+                    <td>{{ $com31->scrhcom20s->count() ? $com31->scrhcom20s->last()->femi : '-' }}</td>
                     <td>{{ $com31->cmod }}</td>
                     <td>{{ $com31->com30s->czon }}</td>
                     <td>{{ $com31->com07s->clistpr }}</td>
@@ -138,6 +147,8 @@
                 <th style="text-align: center;">Codigo Cliente</th>
                 <th style="text-align: center;">Nombre Cliente</th>
                 <th style="text-align: center;">Direccion Cliente</th>
+                <th style="text-align: center;">RUC / DNI</th>
+                <th style="text-align: center;">Ult. Compra</th>
                 <th style="text-align: center;">Modulo</th>
                 <th style="text-align: center;">Zona</th>
                 <th style="text-align: center;">LP</th>
