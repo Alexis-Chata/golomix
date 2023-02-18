@@ -67,6 +67,8 @@ Route::get('/listaclientes', function () {
     , `com30s`.`czon`
     , `com07s`.`tcli`
     , `com07s`.`tdir`
+    , `com07s`.`cruc`
+    , `com07s`.`le`
     , `com07s`.`clistpr`
     , `com10s`.`cven`
     , `com10s`.`tven`
