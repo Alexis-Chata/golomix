@@ -115,8 +115,8 @@
                 <th style="text-align: center;">Codigo Cliente</th>
                 <th style="text-align: center;">Nombre Cliente</th>
                 <th style="text-align: center;">Direccion Cliente</th>
-                {{-- <th style="text-align: center;">RUC / DNI</th>
-                <th style="text-align: center;">Ult. Compra</th> --}}
+                <th style="text-align: center;">RUC / DNI</th>
+                <th style="text-align: center;">Ult. Compra</th>
                 <th style="text-align: center;">Modulo</th>
                 <th style="text-align: center;">Zona</th>
                 <th style="text-align: center;">LP</th>
@@ -131,8 +131,8 @@
                     <td>{{ $com31->ccli }}</td>
                     <td>{{ $com31->tcli }}</td>
                     <td>{{ $com31->tdir }}</td>
-                    {{-- <td>{{ $com31->com07s->cruc ?? $com31->com07s->le }}</td>
-                    <td>{{ $com31->scrhcom20s->count() ? $com31->scrhcom20s->last()->femi : '-' }}</td> --}}
+                    <td>{{ $com31->cruc ?? $com31->le }}</td>
+                    <td>{{ $com31->femi ? $com31->femi : '-' }}</td>
                     <td>{{ $com31->cmod }}</td>
                     <td>{{ $com31->czon }}</td>
                     <td>{{ $com31->clistpr }}</td>
@@ -147,8 +147,8 @@
                 <th style="text-align: center;">Codigo Cliente</th>
                 <th style="text-align: center;">Nombre Cliente</th>
                 <th style="text-align: center;">Direccion Cliente</th>
-                {{-- <th style="text-align: center;">RUC / DNI</th>
-                <th style="text-align: center;">Ult. Compra</th> --}}
+                <th style="text-align: center;">RUC / DNI</th>
+                <th style="text-align: center;">Ult. Compra</th>
                 <th style="text-align: center;">Modulo</th>
                 <th style="text-align: center;">Zona</th>
                 <th style="text-align: center;">LP</th>
