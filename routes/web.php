@@ -15,6 +15,7 @@ use App\Models\Com10;
 use App\Models\Com31;
 use App\Models\Com36;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,17 +54,40 @@ Route::middleware([
     Route::resource('com36', Com36Controller::class)->only(['store']);
     Route::resource('com37', Com37Controller::class)->only(['store']);
     Route::resource('scrhcom20', ScrHcom20Controller::class)->only(['store']);
-
 });
 
 Route::get('/listaclientes', function () {
-    $com31s = Com31::with(['com07s', 'com30s'])->get();
+    //$com31s = Com31::with(['com07s', 'com30s'])->get();
+    $com31s = DB::select("SELECT
+    `com31s`.`ccli`
+    , `com31s`.`crut`
+    , `com31s`.`nsecprev`
+    , `com31s`.`cmod`
+    , `com30s`.`tdes`
+    , `com30s`.`czon`
+    , `com07s`.`tcli`
+    , `com07s`.`tdir`
+    , `com07s`.`clistpr`
+    , `com10s`.`cven`
+    , `com10s`.`tven`
+    , `scr_hcom20s`.`femi`
+    FROM
+        `com31s`
+        INNER JOIN `com07s`
+            ON (`com31s`.`ccli` = `com07s`.`ccli`)
+        INNER JOIN `com30s`
+            ON (`com31s`.`crut` = `com30s`.`crut`)
+        INNER JOIN `com10s`
+            ON (`com30s`.`czon` = `com10s`.`czon`)
+        LEFT JOIN (SELECT ccli, MAX(femi) AS femi FROM scr_hcom20s GROUP BY ccli) scr_hcom20s
+            ON (`com31s`.`ccli` = `scr_hcom20s`.`ccli`)");
+    //dd($com31s);
     //$pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
     return view('listaClientes', compact('com31s'));
 })->name('listaclientes');
 
 Route::get('/listaclientes/{cven}', function ($cven) {
-    $com10s = Com10::with('com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7' )->firstWhere('cven', $cven);
+    $com10s = Com10::with('com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7')->firstWhere('cven', $cven);
     //dd($com10s->toArray());
     $com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->get();
     return view('listaClientes', compact('com31s', 'cven', 'com10s'));

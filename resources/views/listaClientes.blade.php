@@ -126,17 +126,17 @@
         <tbody>
             @foreach ($com31s as $com31)
                 <tr class="">
-                    <td>{{ $com31->com30s->crut . ' - ' . $com31->com30s->tdes }}</td>
+                    <td>{{ $com31->crut . ' - ' . $com31->tdes }}</td>
                     <td>{{ $com31->nsecprev }}</td>
                     <td>{{ $com31->ccli }}</td>
-                    <td>{{ $com31->com07s->tcli }}</td>
-                    <td>{{ $com31->com07s->tdir }}</td>
+                    <td>{{ $com31->tcli }}</td>
+                    <td>{{ $com31->tdir }}</td>
                     {{-- <td>{{ $com31->com07s->cruc ?? $com31->com07s->le }}</td>
                     <td>{{ $com31->scrhcom20s->count() ? $com31->scrhcom20s->last()->femi : '-' }}</td> --}}
                     <td>{{ $com31->cmod }}</td>
-                    <td>{{ $com31->com30s->czon }}</td>
-                    <td>{{ $com31->com07s->clistpr }}</td>
-                    <td>{{ $com31->com30s->com10s->cven . ' - ' . $com31->com30s->com10s->tven }}</td>
+                    <td>{{ $com31->czon }}</td>
+                    <td>{{ $com31->clistpr }}</td>
+                    <td>{{ $com31->cven . ' - ' . $com31->tven }}</td>
                 </tr>
             @endforeach
         </tbody>
