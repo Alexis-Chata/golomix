@@ -19,7 +19,7 @@
 <body>
     <div class="">
         <header>
-            <h6 class="">*** RUTA: {{ ucwords(Str::lower($com31s->first()->com30s->crut . ' - ' . $com31s->first()->com30s->tdes)) }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PREVENDEDOR: {{ ucwords(Str::lower($com31s->first()->com30s->com10s->cven . ' - ' . $com31s->first()->com30s->com10s->tven)) }}</h6>
+            <h6 class="">*** RUTA: {{ ucwords(Str::lower($com31s[0]->crut . ' - ' . $com31s[0]->tdes)) }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PREVENDEDOR: {{ ucwords(Str::lower($com31s[0]->cven . ' - ' . $com31s[0]->tven)) }}</h6>
         </header>
 
         <table id="example" class="display" style="width:100%;">
@@ -44,12 +44,12 @@
                         <td>{{ $com31->cmod }}</td>
                         <td>{{ $com31->nsecprev }}</td>
                         <td>{{ $com31->ccli }}</td>
-                        <td>{{ $com31->com07s->tcli }}</td>
-                        <td>{{ $com31->com07s->tdir }}</td>
-                        <td>{{ $com31->com07s->cruc ?? $com31->com07s->le }}</td>
-                        <td>{{ $com31->scrhcom20s->count() ? $com31->scrhcom20s->last()->femi : '-' }}</td>
-                        <td>{{ $com31->com30s->czon }}</td>
-                        <td>{{ $com31->com07s->clistpr }}</td>
+                        <td>{{ $com31->tcli }}</td>
+                        <td>{{ $com31->tdir }}</td>
+                        <td>{{ $com31->cruc ?? $com31->le }}</td>
+                        <td>{{ $com31->femi ? $com31->femi : '-' }}</td>
+                        <td>{{ $com31->czon }}</td>
+                        <td>{{ $com31->clistpr }}</td>
                     </tr>
                 @endforeach
             </tbody>
