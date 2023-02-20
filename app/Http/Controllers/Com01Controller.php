@@ -51,11 +51,11 @@ class Com01Controller extends Controller
         return $com01s;
     }
 
-    public function listaPreciosDownloadPdf()
+    public function listaPreciosDownloadPdf($tipoPrecio = '001')
     {
         $marcas = Ugr01::where('cind', '045')->get();
         $com01s = Com01::whereNotIn('flagcre',['1'])->orderBy('cc04')->orderBy('tcor')->orderBy('qprecio')->orderBy('cequiv')->get();
-        $precioMayorista = true;
+        $tipoPrecio == '001' ? $precioMayorista = false : $precioMayorista = true;
         //dd($com31s->firstwhere('ccli', '07001040')->scrhcom20s->last()->femi);
         //return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
         $nombrePdf = 'Lista_Productos_001'.'.pdf';
