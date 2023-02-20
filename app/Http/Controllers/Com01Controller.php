@@ -58,7 +58,7 @@ class Com01Controller extends Controller
         $tipoPrecio == '001' ? $precioMayorista = false : $precioMayorista = true;
         //dd($com31s->firstwhere('ccli', '07001040')->scrhcom20s->last()->femi);
         //return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
-        $nombrePdf = 'Lista_Productos_001'.'.pdf';
+        $nombrePdf = 'Lista_Productos_'.$tipoPrecio.'.pdf';
         $pdf = Pdf::loadView('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
         return $pdf->download($nombrePdf);
     }
