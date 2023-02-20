@@ -6,8 +6,10 @@ use App\Imports\Com01sImport;
 use App\Imports\Com01sTipoProductoImport;
 use App\Models\Com01;
 use App\Models\Ugr01;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Com01Controller extends Controller
@@ -47,6 +49,18 @@ class Com01Controller extends Controller
             $com01s = Com01::all();
         }
         return $com01s;
+    }
+
+    public function listaPreciosDownloadPdf()
+    {
+        $marcas = Ugr01::where('cind', '045')->get();
+        $com01s = Com01::whereNotIn('flagcre',['1'])->orderBy('cc04')->orderBy('tcor')->orderBy('qprecio')->orderBy('cequiv')->get();
+        $precioMayorista = true;
+        //dd($com31s->firstwhere('ccli', '07001040')->scrhcom20s->last()->femi);
+        //return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
+        $nombrePdf = 'Lista_Productos_001'.'.pdf';
+        $pdf = Pdf::loadView('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
+        return $pdf->download($nombrePdf);
     }
 
     /**
