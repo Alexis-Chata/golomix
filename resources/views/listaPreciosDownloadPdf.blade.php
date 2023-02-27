@@ -94,19 +94,17 @@
             </tr>
         </tfoot>
     </table>
-    {{-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5GTN7JJ32"></script>
     <script>
-        $(document).ready(function() {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-            $('#example').DataTable({
-                "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
-                }
-            });
+        gtag('config', 'G-M5GTN7JJ32');
+    </script>
 
-        });
-    </script> --}}
 </body>
 
 </html>
