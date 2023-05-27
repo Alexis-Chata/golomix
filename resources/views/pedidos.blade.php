@@ -93,6 +93,9 @@
                                     @endif
                                 </summary>
                                 <div>
+                                    <ul class="li p-30">
+                                        <p>{{ utf8_decode($pedido->tdir) }}</p>
+                                    </ul>
                                     @foreach ($pedido->com37s as $item)
                                         <ul class="li p-30">
                                             <p>{{ $item->ccodart . ' | ' }}</p>
