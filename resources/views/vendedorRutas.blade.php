@@ -82,6 +82,10 @@
             });
 
         });
+
+        window.onload = function() {
+            document.querySelector('#example_filter input').focus();
+        };
     </script>
 
 </body>
