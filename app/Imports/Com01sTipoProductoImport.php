@@ -28,7 +28,7 @@ class Com01sTipoProductoImport implements ToModel, WithHeadingRow, WithBatchInse
 
     public function batchSize(): int
     {
-        return 600;
+        return 500;
     }
 
     public function uniqueBy()
@@ -38,6 +38,6 @@ class Com01sTipoProductoImport implements ToModel, WithHeadingRow, WithBatchInse
 
     public function chunkSize(): int
     {
-        return 600;
+        return 500;
     }
 }

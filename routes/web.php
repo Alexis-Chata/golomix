@@ -54,6 +54,13 @@ Route::middleware([
     Route::resource('com36', Com36Controller::class)->only(['store']);
     Route::resource('com37', Com37Controller::class)->only(['store']);
     Route::resource('scrhcom20', ScrHcom20Controller::class)->only(['store']);
+
+    Route::get('/vendedor-rutas', function () {
+        $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
+        //dd($com10s->firstWhere('cven', '090'));
+        //dd($com10s);
+        return view('vendedorRutas', compact('com10s'));
+    })->name('allVendedorRutas');
 });
 
 Route::get('/listaclientes', function () {
@@ -123,13 +130,6 @@ Route::get('/listaclientes/{cven}', function ($cven) {
 })->name('listaclientesXvendedor');
 
 Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
-
-Route::get('/vendedor-rutas', function () {
-    $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
-    //dd($com10s->firstWhere('cven', '090'));
-    //dd($com10s);
-    return view('vendedorRutas', compact('com10s'));
-})->name('allVendedorRutas');
 
 Route::get('/pedidos', function () {
     $fupgr = Com36::latest('fupgr')->first()->fupgr;

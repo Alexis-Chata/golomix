@@ -34,7 +34,7 @@ class Ugr01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function batchSize(): int
     {
-        return 600;
+        return 200;
     }
 
     public function uniqueBy()
@@ -44,6 +44,6 @@ class Ugr01sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function chunkSize(): int
     {
-        return 600;
+        return 200;
     }
 }

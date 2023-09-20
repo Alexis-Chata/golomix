@@ -52,7 +52,7 @@ class Com05sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function batchSize(): int
     {
-        return 600;
+        return 500;
     }
 
     public function uniqueBy()
@@ -62,6 +62,6 @@ class Com05sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function chunkSize(): int
     {
-        return 600;
+        return 500;
     }
 }

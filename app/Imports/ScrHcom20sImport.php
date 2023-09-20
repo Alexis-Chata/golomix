@@ -99,7 +99,7 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
     public function batchSize(): int
     {
-        return 600;
+        return 300;
     }
 
     public function uniqueBy()
@@ -109,6 +109,6 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
     public function chunkSize(): int
     {
-        return 600;
+        return 300;
     }
 }
