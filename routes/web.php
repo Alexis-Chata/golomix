@@ -155,6 +155,7 @@ Route::get('/pedidos/{cven}', function ($cven) {
     $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
     $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
     $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
+    //return $com36s[7]->com37s;
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven'));
 });
 
