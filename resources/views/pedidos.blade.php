@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pedidos {{ isset($cven) ? ' - '.$com36s->first()->tven : '' }}</title>
     <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <style>
         details {
             background: #f2f2f2;
@@ -64,9 +65,9 @@
     {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
     {{-- @dd($pedidosAgrupados); --}}
     {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fupgr }}
-    @foreach ($pedidosAgrupados as $cven => $tvens)
+    @foreach ($pedidosAgrupados as $cvend => $tvens)
         <details open>
-            <summary>{{ $cven . ' ' }}
+            <summary>{{ $cvend . ' ' }}
                 @foreach ($tvens as $tven => $cruts)
                     {{ $tven }}
             </summary>
@@ -126,7 +127,54 @@
             @endforeach
         </details>
     @endforeach
+    @if (isset($cven))
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Cod</th>
+                <th>Producto</th>
+                <th style="text-align: center;">bultos</th>
+                <th style="text-align: center;">Unidads</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($com37s as $key => $com37)
+            <tr>
+                <td>{{ $key }}</td>
+                <td>{{ $com37->first()->tdes }}</td>
+                <td>{{ $com37->totalqcanpedcajas }}</td>
+                <td>{{ $com37->totalqcanpedunidads }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Cod</th>
+                <th>Producto</th>
+                <th style="text-align: center;">bultos</th>
+                <th style="text-align: center;">Unidads</th>
+            </tr>
+        </tfoot>
+    </table>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
 
+            $('#example').DataTable({
+                iDisplayLength: 25,
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+                }
+            });
+
+        });
+
+        window.onload = function() {
+            document.querySelector('#example_filter input').focus();
+        };
+    </script>
+    @endif
 </body>
 
 </html>

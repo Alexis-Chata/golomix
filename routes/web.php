@@ -13,7 +13,6 @@ use App\Http\Controllers\Ugr01Controller;
 use App\Models\Com01;
 use App\Models\Com05;
 use App\Models\Com10;
-use App\Models\Com31;
 use App\Models\Com36;
 use App\Models\Com37;
 use Illuminate\Support\Carbon;
@@ -142,14 +141,14 @@ Route::get('/pedidos', function () {
     //return $com01s;
     $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped'])->sortBy('ccodart');
     $com37s = $com37s->groupBy('ccodart');
-    $com37s->each(function ($item, $key) use ($com01s){
+    $com37s->each(function ($item, $key) use ($com01s) {
         $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
 
         $sumaunidads = $item->sum('qcanpedunidads');
-        $sumaunidadsAcajas = intval($sumaunidads/$unidadMedida);
-        $sumaunidadsAcajasRestoenunidad = (($sumaunidads/$unidadMedida)-$sumaunidadsAcajas)*$unidadMedida;
+        $sumaunidadsAcajas = intval($sumaunidads / $unidadMedida);
+        $sumaunidadsAcajasRestoenunidad = $sumaunidads % $unidadMedida;
 
-        $item['totalqcanpedcajas'] = $item->sum('qcanpedcajas')+$sumaunidadsAcajas;
+        $item['totalqcanpedcajas'] = $item->sum('qcanpedcajas') + $sumaunidadsAcajas;
         $item['totalqcanpedunidads'] = str_pad($sumaunidadsAcajasRestoenunidad, 2, 0, STR_PAD_LEFT);
     });
     //return $com37s->sortBy('ccodart');
@@ -177,18 +176,18 @@ Route::get('/pedidos/{cven}', function ($cven) {
     //return $com01s;
     $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped'])->sortBy('ccodart');
     $com37s = $com37s->groupBy('ccodart');
-    $com37s->each(function ($item, $key) use ($com01s){
+    $com37s->each(function ($item, $key) use ($com01s) {
         $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
 
         $sumaunidads = $item->sum('qcanpedunidads');
-        $sumaunidadsAcajas = intval($sumaunidads/$unidadMedida);
-        $sumaunidadsAcajasRestoenunidad = (($sumaunidads/$unidadMedida)-$sumaunidadsAcajas)*$unidadMedida;
+        $sumaunidadsAcajas = intval($sumaunidads / $unidadMedida);
+        $sumaunidadsAcajasRestoenunidad = $sumaunidads % $unidadMedida;
 
-        $item['totalqcanpedcajas'] = $item->sum('qcanpedcajas')+$sumaunidadsAcajas;
-        $item['totalqcanpedunidads'] = str_pad($sumaunidadsAcajasRestoenunidad, 2, 0, STR_PAD_LEFT);
+        $item->totalqcanpedcajas = $item->sum('qcanpedcajas') + $sumaunidadsAcajas;
+        $item->totalqcanpedunidads = str_pad($sumaunidadsAcajasRestoenunidad, 2, 0, STR_PAD_LEFT);
     });
-    //return $com37s->sortBy('ccodart');
-    return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven'));
+    //return dd($com37s->first());
+    return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven', 'com37s'));
 });
 
 Route::controller(Com01Controller::class)->group(function () {
