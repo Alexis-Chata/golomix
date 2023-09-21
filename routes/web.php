@@ -10,10 +10,12 @@ use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\Ugr01Controller;
+use App\Models\Com01;
 use App\Models\Com05;
 use App\Models\Com10;
 use App\Models\Com31;
 use App\Models\Com36;
+use App\Models\Com37;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -155,7 +157,21 @@ Route::get('/pedidos/{cven}', function ($cven) {
     $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
     $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
     $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-    //return $com36s[7]->com37s;
+    //return $com36s->pluck('nped');
+    $com01s = Com01::all(['id', 'cequiv', 'tcor', 'qfaccon'])->keyBy('cequiv')->sort();
+    //return $com01s;
+    $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped'])->sortBy('ccodart');
+    $com37s = $com37s->groupBy('ccodart');
+    $com37s->each(function ($item, $key) use ($com01s){
+        $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
+
+        $sumaunidads = $item->sum('qcanpedunidads');
+        $sumaunidadsAcajas = intval($sumaunidads/$unidadMedida);
+        $sumaunidadsAcajasRestoenunidad = (($sumaunidads/$unidadMedida)-$sumaunidadsAcajas)*$unidadMedida;
+        $item['totalqcanpedcajas'] = $item->sum('qcanpedcajas')+$sumaunidadsAcajas;
+        $item['totalqcanpedunidads'] = str_pad($sumaunidadsAcajasRestoenunidad, 2, 0, STR_PAD_LEFT);
+    });
+    return $com37s->sortBy('ccodart');
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven'));
 });
 
