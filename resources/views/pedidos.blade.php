@@ -58,6 +58,12 @@
         .p-30 {
             padding-left: 30px;
         }
+
+        #example_wrapper{
+            padding: 15px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
     </style>
 </head>
 
@@ -127,8 +133,9 @@
             @endforeach
         </details>
     @endforeach
+<br/>
     @if (isset($cven))
-    <table id="example" class="display" style="width:100%">
+    <table id="example" class="display" style="width:100%;">
         <thead>
             <tr>
                 <th>Cod</th>
