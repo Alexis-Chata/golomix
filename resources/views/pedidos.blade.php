@@ -147,7 +147,7 @@
         <tbody>
             @foreach ($com37s as $key => $com37)
             <tr>
-                <td>{{ $key }}</td>
+                <td>{{ substr($key, -3) }}</td>
                 <td>{{ $com37->first()->tdes }}</td>
                 <td>{{ $com37->totalqcanpedcajas }}</td>
                 <td>{{ $com37->totalqcanpedunidads }}</td>
