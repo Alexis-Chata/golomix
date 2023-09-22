@@ -142,6 +142,7 @@
                 <th>Producto</th>
                 <th style="text-align: center;">bultos</th>
                 <th style="text-align: center;">Unidads</th>
+                <th>Marca</th>
             </tr>
         </thead>
         <tbody>
@@ -151,6 +152,7 @@
                 <td>{{ $com37->first()->tdes }}</td>
                 <td>{{ $com37->totalqcanpedcajas }}</td>
                 <td>{{ $com37->totalqcanpedunidads }}</td>
+                <td>{{ $com37->marcacod }} - {{ $com37->marca }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -160,6 +162,7 @@
                 <th>Producto</th>
                 <th style="text-align: center;">bultos</th>
                 <th style="text-align: center;">Unidads</th>
+                <th>Marca</th>
             </tr>
         </tfoot>
     </table>
@@ -169,6 +172,7 @@
         $(document).ready(function() {
 
             $('#example').DataTable({
+                order: [[4, 'asc'], [0, 'asc']],
                 iDisplayLength: 25,
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
