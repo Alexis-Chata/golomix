@@ -141,19 +141,19 @@ Route::get('/pedidos', function () {
     $marcas = Ugr01::where('cind', '045')->get();
     $com01s = Com01::all(['id', 'cequiv', 'tcor', 'qfaccon', 'cc04'])->keyBy('cequiv')->sort();
     //return $com01s;
-    $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped'])->sortBy('ccodart');
+    $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped', 'qpreuni', 'qimp', 'cprom'])->sortBy('ccodart');
     $com37s = $com37s->groupBy('ccodart');
     $com37s->each(function ($item, $key) use ($com01s, $marcas) {
         $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
 
         $sumaunidads = $item->sum('qcanpedunidads');
-        $sumaunidadsAcajas = intval($sumaunidads / $unidadMedida);
-        $sumaunidadsAcajasRestoenunidad = $sumaunidads % $unidadMedida;
+        $sumaunidadsAbultos = intval($sumaunidads / $unidadMedida);
+        $sumaunidadsAbultosRestoenunidad = $sumaunidads % $unidadMedida;
 
         $item->marcacod = ($com01s[substr($key, -3)]->cc04);
         $item->marca = $marcas->where('ccod', $com01s[substr($key, -3)]->cc04)->first()->tdes;
-        $item->totalqcanpedcajas = $item->sum('qcanpedcajas') + $sumaunidadsAcajas;
-        $item->totalqcanpedunidads = str_pad($sumaunidadsAcajasRestoenunidad, 2, 0, STR_PAD_LEFT);
+        $item->totalqcanpedbultos = $item->sum('qcanpedbultos') + $sumaunidadsAbultos;
+        $item->totalqcanpedunidads = str_pad($sumaunidadsAbultosRestoenunidad, 2, 0, STR_PAD_LEFT);
     });
     //return dd($com37s->first());
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr'));
@@ -179,19 +179,19 @@ Route::get('/pedidos/{cven}', function ($cven) {
     $marcas = Ugr01::where('cind', '045')->get();
     $com01s = Com01::all(['id', 'cequiv', 'tcor', 'qfaccon', 'cc04'])->keyBy('cequiv')->sort();
     //return $com01s;
-    $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped'])->sortBy('ccodart');
+    $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped', 'qpreuni', 'qimp', 'cprom'])->sortBy('ccodart');
     $com37s = $com37s->groupBy('ccodart');
     $com37s->each(function ($item, $key) use ($com01s, $marcas) {
         $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
 
         $sumaunidads = $item->sum('qcanpedunidads');
-        $sumaunidadsAcajas = intval($sumaunidads / $unidadMedida);
-        $sumaunidadsAcajasRestoenunidad = $sumaunidads % $unidadMedida;
+        $sumaunidadsAbultos = intval($sumaunidads / $unidadMedida);
+        $sumaunidadsAbultosRestoenunidad = $sumaunidads % $unidadMedida;
 
         $item->marcacod = ($com01s[substr($key, -3)]->cc04);
         $item->marca = $marcas->where('ccod', $com01s[substr($key, -3)]->cc04)->first()->tdes;
-        $item->totalqcanpedcajas = $item->sum('qcanpedcajas') + $sumaunidadsAcajas;
-        $item->totalqcanpedunidads = str_pad($sumaunidadsAcajasRestoenunidad, 2, 0, STR_PAD_LEFT);
+        $item->totalqcanpedbultos = $item->sum('qcanpedbultos') + $sumaunidadsAbultos;
+        $item->totalqcanpedunidads = str_pad($sumaunidadsAbultosRestoenunidad, 2, 0, STR_PAD_LEFT);
     });
     //return dd($com37s->first());
     return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven', 'com37s'));
