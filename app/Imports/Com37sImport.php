@@ -19,6 +19,9 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
     */
     public function model(array $row)
     {
+        if( $row["ccodart"] == "0000000031" && $row["nped"] == "0000541075"){
+            dd($row);
+        }
         $numeroDetallePedido = ['nped'      => $row["nped"],
                         'ccodart'   => $row["ccodart"] ];
         $datosDetallePedido = [
@@ -34,7 +37,7 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
             'fupgr'     => $row["fupgr"] ? Carbon::createFromFormat('d/m/Y', $row["fupgr"]) : null,
             'tupgr'     => $row["tupgr"],
             'qimp'      => $row["qimp"] ? $row["qimp"] : 0,
-            'qcanped'   => $row["qcanped"],
+            'qcanped'   => number_format($row["qcanped"], 2),
             'tdes'      => $row["tdes"],
             'citem'     => $row["citem"],
             'cprom'     => $row["cprom"],
