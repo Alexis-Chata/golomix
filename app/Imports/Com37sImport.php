@@ -19,9 +19,6 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
     */
     public function model(array $row)
     {
-        if( $row["ccodart"] == "0000000031" && $row["nped"] == "0000541075"){
-            dd($row);
-        }
         $numeroDetallePedido = ['nped'      => $row["nped"],
                         'ccodart'   => $row["ccodart"] ];
         $datosDetallePedido = [
