@@ -150,7 +150,7 @@
             <tr>
                 <td>{{ substr($key, -3) }}</td>
                 <td>{{ $com37->first()->tdes }}</td>
-                <td>{{ $com37->totalqcanpedcajas }}</td>
+                <td>{{ $com37->totalqcanpedbultos }}</td>
                 <td>{{ $com37->totalqcanpedunidads }}</td>
                 <td>{{ $com37->marcacod }} - {{ $com37->marca }}</td>
             </tr>

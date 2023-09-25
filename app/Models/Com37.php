@@ -10,9 +10,9 @@ class Com37 extends Model
     use HasFactory;
 
     protected $guarded = [];
-    protected $appends = ['qcanpedcajas', 'qcanpedunidads'];
+    protected $appends = ['qcanpedbultos', 'qcanpedunidads'];
 
-    public function getQcanpedcajasAttribute()
+    public function getQcanpedbultosAttribute()
     {
         return explode(localeconv()['decimal_point'], $this->qcanped)[0]??0;
     }
