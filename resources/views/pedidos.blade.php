@@ -59,7 +59,7 @@
             padding-left: 30px;
         }
 
-        #example_wrapper{
+        #example_wrapper {
             padding: 15px;
             padding-top: 30px;
             padding-bottom: 30px;
@@ -72,69 +72,70 @@
     {{-- @dd($pedidosAgrupados); --}}
     {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fupgr }}
     @foreach ($pedidosAgrupados as $cvend => $tvens)
-        <details open>
-            <summary>{{ $cvend . ' ' }}
-                @foreach ($tvens as $tven => $cruts)
-                    {{ $tven }}
+    <details open>
+        <summary>{{ $cvend . ' ' }}
+            @foreach ($tvens as $tven => $cruts)
+            {{ $tven }}
+        </summary>
+        @foreach ($cruts as $crut => $pedidos)
+        <details style="background: #d9d9be;">
+            <summary>
+                {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' -
+                (#Clientes / #Pedidos) : (' . $pedidos->groupBy(['ccli'])->count() . ' / ' . $pedidos->count() . ')'
+                }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',')." " }}</strong>
+                @if ($pedidos->whereNull('ccon')->count())
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                {{ $pedidos->whereNull('ccon')->count() }}
+                @else
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
+                @endif
             </summary>
-            @foreach ($cruts as $crut => $pedidos)
-                <details style="background: #d9d9be;">
+            <div>
+                @foreach ($pedidos as $key => $pedido)
+                <details>
                     <summary>
-                        {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : (' . $pedidos->groupBy(['ccli'])->count() . ' / ' . $pedidos->count() . ')' }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',')." " }}</strong>
-                        @if ($pedidos->whereNull('ccon')->count())
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            {{ $pedidos->whereNull('ccon')->count() }}
+                        {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' .
+                        number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )'." " }}
+                        @if ($pedido->ccon)
+                        <i class="fa-sharp fa-solid fa-circle-check"></i>
                         @else
-                            <i class="fa-sharp fa-solid fa-circle-check"></i>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
                         @endif
                     </summary>
                     <div>
-                        @foreach ($pedidos as $key => $pedido)
-                            <details>
-                                <summary>
-                                    {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )'." "  }}
-                                    @if ($pedido->ccon)
-                                        <i class="fa-sharp fa-solid fa-circle-check"></i>
-                                    @else
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-                                    @endif
-                                </summary>
-                                <div>
-                                    <ul class="li p-30">
-                                        <p>{{ utf8_decode($pedido->tdir) }}</p>
-                                    </ul>
-                                    @foreach ($pedido->com37s as $item)
-                                        <ul class="li p-30">
-                                            <p>{{ $item->ccodart . ' | ' }}</p>
-                                            <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p
-                                                class="w-50  text-end">
-                                                <strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong>
-                                            </p>
-                                            {{ ' | ' }}<p class="w-50 text-end">
-                                                {{ number_format($item->qpreuni, 2, '.', ',') }}</p>
-                                            {{ ' | ' }}<p class="w-70 text-end">
-                                                <strong>{{ number_format($item->qimp, 2, '.', ',') }}</strong>
-                                            </p>
-                                        </ul>
-                                    @endforeach
-                                    <ul class="li p-30">
-                                        <p class="text-end" style="width: 76.31px"></p>
-                                        <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
-                                        {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
-                                        {{ ' | ' }}<p class="w-70 text-end">
-                                            <strong>{{ 'S/. ' . number_format($pedido->qimpvta, 2, '.', ',') }}</strong>
-                                        </p>
-                                    </ul>
-                            </details>
+                        <ul class="li p-30">
+                            <p>{{ utf8_decode($pedido->tdir) }}</p>
+                        </ul>
+                        @foreach ($pedido->com37s as $item)
+                        <ul class="li p-30">
+                            <p>{{ $item->ccodart . ' | ' }}</p>
+                            <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p class="w-50  text-end">
+                                <strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong>
+                            </p>
+                            {{ ' | ' }}<p class="w-50 text-end">
+                                {{ number_format($item->qpreuni, 2, '.', ',') }}</p>
+                            {{ ' | ' }}<p class="w-70 text-end">
+                                <strong>{{ number_format($item->qimp, 2, '.', ',') }}</strong>
+                            </p>
+                        </ul>
                         @endforeach
-                    </div>
+                        <ul class="li p-30">
+                            <p class="text-end" style="width: 76.31px"></p>
+                            <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
+                            {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
+                            {{ ' | ' }}<p class="w-70 text-end">
+                                <strong>{{ 'S/. ' . number_format($pedido->qimpvta, 2, '.', ',') }}</strong>
+                            </p>
+                        </ul>
                 </details>
-            @endforeach
-            @endforeach
+                @endforeach
+            </div>
         </details>
+        @endforeach
+        @endforeach
+    </details>
     @endforeach
-<br/>
-    @if (isset($cven))
+    <br />
     <table id="example" class="display" style="width:100%;">
         <thead>
             <tr>
@@ -185,7 +186,6 @@
             document.querySelector('#example_filter input').focus();
         };
     </script>
-    @endif
 </body>
 
 </html>

@@ -8,15 +8,11 @@ use App\Http\Controllers\Com30Controller;
 use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
+use App\Http\Controllers\ListaclienteController;
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\Ugr01Controller;
-use App\Models\Com01;
-use App\Models\Com05;
 use App\Models\Com10;
-use App\Models\Com36;
-use App\Models\Com37;
-use App\Models\Ugr01;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -64,139 +60,20 @@ Route::middleware([
         return view('vendedorRutas', compact('com10s'));
     })->name('allVendedorRutas');
 
+    Route::controller(PedidosController::class)->group(function () {
+        Route::get('/pedidos', 'pedidosall')->name('allpedidos');
+        Route::get('/pedidos/{cven}', 'pedidos')->name('pedidos');
+        Route::get('/pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte');
+    });
 
-    Route::get('/pedidos', function () {
-        $fupgr = Com36::latest('fupgr')->first()->fupgr;
-        $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
-        $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
-        $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-        $marcas = Ugr01::where('cind', '045')->get();
-        $com01s = Com01::all(['id', 'cequiv', 'tcor', 'qfaccon', 'cc04'])->keyBy('cequiv')->sort();
-        //return $com01s;
-        $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped', 'qpreuni', 'qimp', 'cprom'])->sortBy('ccodart');
-        $com37s = $com37s->groupBy('ccodart');
-        $com37s->each(function ($item, $key) use ($com01s, $marcas) {
-            $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
+    Route::controller(ListaclienteController::class)->group(function () {
+        Route::get('/listaclientes', 'listaclientesall')->name('listaclientes');
+        Route::get('/listaclientes/{cven}', 'listaclientes')->name('listaclientesXvendedor');
+    });
 
-            $sumaunidads = $item->sum('qcanpedunidads');
-            $sumaunidadsAbultos = intval($sumaunidads / $unidadMedida);
-            $sumaunidadsAbultosRestoenunidad = $sumaunidads % $unidadMedida;
-
-            $item->marcacod = ($com01s[substr($key, -3)]->cc04);
-            $item->marca = $marcas->where('ccod', $com01s[substr($key, -3)]->cc04)->first()->tdes;
-            $item->totalqcanpedbultos = $item->sum('qcanpedbultos') + $sumaunidadsAbultos;
-            $item->totalqcanpedunidads = str_pad($sumaunidadsAbultosRestoenunidad, 2, 0, STR_PAD_LEFT);
-        });
-        //return dd($com37s->first());
-        return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'com37s'));
-    })->name('allpedidos');
 });
-
-Route::get('/listaclientes', function () {
-    //$com31s = Com31::with(['com07s', 'com30s'])->get();
-    $com31s = DB::select("SELECT
-    `com31s`.`ccli`
-    , `com31s`.`crut`
-    , `com31s`.`nsecprev`
-    , `com31s`.`cmod`
-    , `com30s`.`tdes`
-    , `com30s`.`czon`
-    , `com07s`.`tcli`
-    , `com07s`.`tdir`
-    , `com07s`.`cruc`
-    , `com07s`.`le`
-    , `com07s`.`clistpr`
-    , `com10s`.`cven`
-    , `com10s`.`tven`
-    , `scr_hcom20s`.`femi`
-    FROM
-        `com31s`
-        INNER JOIN `com07s`
-            ON (`com31s`.`ccli` = `com07s`.`ccli`)
-        INNER JOIN `com30s`
-            ON (`com31s`.`crut` = `com30s`.`crut`)
-        INNER JOIN `com10s`
-            ON (`com30s`.`czon` = `com10s`.`czon`)
-        LEFT JOIN (SELECT ccli, MAX(femi) AS femi FROM scr_hcom20s GROUP BY ccli) scr_hcom20s
-            ON (`com31s`.`ccli` = `scr_hcom20s`.`ccli`)");
-    //dd($com31s);
-    //$pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
-    return view('listaClientes', compact('com31s'));
-})->name('listaclientes');
-
-Route::get('/listaclientes/{cven}', function ($cven) {
-    $com10s = Com10::with('com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7')->firstWhere('cven', $cven);
-    //dd($com10s->toArray());
-    //$com31s = Com31::with(['com07s', 'com30s'])->whereRelation('com30s.com10s', 'cven', '=', $cven)->get();
-    $com31s = DB::select("SELECT
-    `com31s`.`ccli`
-    , `com31s`.`crut`
-    , `com31s`.`nsecprev`
-    , `com31s`.`cmod`
-    , `com30s`.`tdes`
-    , `com30s`.`czon`
-    , `com07s`.`tcli`
-    , `com07s`.`tdir`
-    , `com07s`.`cruc`
-    , `com07s`.`le`
-    , `com07s`.`clistpr`
-    , `com10s`.`cven`
-    , `com10s`.`tven`
-    , `scr_hcom20s`.`femi`
-    FROM
-        `com31s`
-        INNER JOIN `com07s`
-            ON (`com31s`.`ccli` = `com07s`.`ccli`)
-        INNER JOIN `com30s`
-            ON (`com31s`.`crut` = `com30s`.`crut`)
-        INNER JOIN `com10s`
-            ON (`com30s`.`czon` = `com10s`.`czon`)
-        LEFT JOIN (SELECT ccli, MAX(femi) AS femi FROM scr_hcom20s GROUP BY ccli) scr_hcom20s
-            ON (`com31s`.`ccli` = `scr_hcom20s`.`ccli`)
-    WHERE   cven = $cven");
-    //dd($com31s);
-    return view('listaClientes', compact('com31s', 'cven', 'com10s'));
-})->name('listaclientesXvendedor');
 
 Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
-
-Route::get('/pedidos/transporte', function () {
-    $fupgr = Com36::latest('fupgr')->first()->fupgr;
-    $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
-    //dd($com36s->first());
-    $pedidosAgrupados = $com36s->sortBy(['ccon', 'crut', 'cven', 'ccli'])->groupBy(['ccon', 'crut', 'com30s.tdes', 'cven', 'tven'], $preserveKeys = true);
-    //dd($pedidosAgrupados);
-    $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-    $com05 = Com05::all();
-    return view('pedidosxtransporte', compact('com36s', 'pedidosAgrupados', 'fupgr', 'com05'));
-})->name('allpedidosXtransporte');
-
-Route::get('/pedidos/{cven}', function ($cven) {
-    $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
-    $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
-    $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
-    $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-    //return $com36s->pluck('nped');
-    $marcas = Ugr01::where('cind', '045')->get();
-    $com01s = Com01::all(['id', 'cequiv', 'tcor', 'qfaccon', 'cc04'])->keyBy('cequiv')->sort();
-    //return $com01s;
-    $com37s = Com37::whereIn('nped', $com36s->pluck('nped'))->get(['id', 'nped', 'ccodart', 'tdes', 'qcanped', 'qpreuni', 'qimp', 'cprom'])->sortBy('ccodart');
-    $com37s = $com37s->groupBy('ccodart');
-    $com37s->each(function ($item, $key) use ($com01s, $marcas) {
-        $unidadMedida = $com01s[substr($key, -3)]->qfaccon;
-
-        $sumaunidads = $item->sum('qcanpedunidads');
-        $sumaunidadsAbultos = intval($sumaunidads / $unidadMedida);
-        $sumaunidadsAbultosRestoenunidad = $sumaunidads % $unidadMedida;
-
-        $item->marcacod = ($com01s[substr($key, -3)]->cc04);
-        $item->marca = $marcas->where('ccod', $com01s[substr($key, -3)]->cc04)->first()->tdes;
-        $item->totalqcanpedbultos = $item->sum('qcanpedbultos') + $sumaunidadsAbultos;
-        $item->totalqcanpedunidads = str_pad($sumaunidadsAbultosRestoenunidad, 2, 0, STR_PAD_LEFT);
-    });
-    //return dd($com37s->first());
-    return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven', 'com37s'));
-});
 
 Route::controller(Com01Controller::class)->group(function () {
     Route::get('/productos', 'index')->name('allProductos');
