@@ -73,7 +73,7 @@
 
     <div class="py-12">
         <div class="lg:px-8 max-w-7xl mx-auto sm:px-6">
-            <div id="pedidos" class="p-2 bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+            <div id="pedidos" class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
                 {{-- @dd($pedidosAgrupados); --}}
                 {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fupgr }}
@@ -183,6 +183,7 @@
                         $(document).ready(function() {
 
                             $('#example').DataTable({
+                                responsive: true,
                                 order: [
                                     [4, 'asc'],
                                     [0, 'asc']
