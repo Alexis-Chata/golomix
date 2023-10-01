@@ -8,6 +8,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link href="{{ asset('favicon/ic_launcher1024.png') }}" rel="apple-touch-icon" />
+
+    <link href="{{ asset('favicon/ic_launcher192.png') }}" rel="icon" sizes="192x192" />
+    <link href="{{ asset('favicon/ic_launcher128.png') }}" rel="icon" sizes="128x128" />
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
