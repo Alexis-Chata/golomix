@@ -1,70 +1,5 @@
 <x-app-layout>
 
-    @push('estiloscss')
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-        <style>
-            div#pedidos details {
-                background: #e5e7eb;
-                padding: .5rem;
-                border-radius: 6px;
-                margin: .5rem;
-            }
-
-            div#pedidos summary {
-                cursor: pointer;
-                list-style: none;
-            }
-
-            div#pedidos summary::before {
-                content: '+';
-                padding-right: 1rem;
-            }
-
-            div#pedidos details [opren] summary::before {
-                content: '-';
-            }
-
-            div#pedidos div {
-                font-size: 14px;
-            }
-
-            div#pedidos .w-320 {
-                width: 270px;
-            }
-
-            div#pedidos .w-50 {
-                width: 50px;
-            }
-
-            div#pedidos .w-70 {
-                width: 70px;
-            }
-
-            div#pedidos p {
-                display: inline-block;
-                margin: 0px;
-            }
-
-            div#pedidos .text-end {
-                text-align: end;
-            }
-
-            div#pedidos .p-30 {
-                padding-left: 30px;
-            }
-
-            div#pedidos #example_wrapper {
-                padding: 15px;
-                padding-top: 30px;
-                padding-bottom: 30px;
-            }
-
-            div#example_wrapper select {
-                padding-right: 2.5rem;
-            }
-        </style>
-    @endpush
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -86,12 +21,7 @@
                         @foreach ($cruts as $crut => $pedidos)
                             <details style="background: #d9d9be;">
                                 <summary>
-                                    {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' -
-                                                                                                                                                                                                            (#Clientes / #Pedidos) : (' .
-                                        $pedidos->groupBy(['ccli'])->count() .
-                                        ' / ' .
-                                        $pedidos->count() .
-                                        ')' }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',') . ' ' }}</strong>
+                                    {{ $pedidos->first()->com30s->crut }}<strong>{{ ' ' . $pedidos->first()->com30s->tdes }}</strong>{{ ' - (#Clientes / #Pedidos) : (' . $pedidos->groupBy(['ccli'])->count() . ' / ' . $pedidos->count() . ')' }}<strong>{{ ' Monto: S/. ' . number_format($pedidos->sum('qimpvta'), 2, '.', ',') . ' ' }}</strong>
                                     @if ($pedidos->whereNull('ccon')->count())
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                         {{ $pedidos->whereNull('ccon')->count() }}
@@ -175,33 +105,100 @@
                         </tr>
                     </tfoot>
                 </table>
-                @push('javascriptjs')
-                    <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
-                    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-                    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-                    <script defer>
-                        $(document).ready(function() {
-
-                            $('#example').DataTable({
-                                responsive: true,
-                                order: [
-                                    [4, 'asc'],
-                                    [0, 'asc']
-                                ],
-                                iDisplayLength: 25,
-                                "language": {
-                                    "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
-                                }
-                            });
-
-                        });
-
-                        window.onload = function() {
-                            document.querySelector('#example_filter input').focus();
-                        };
-                    </script>
-                @endpush
             </div>
         </div>
     </div>
+
+    @push('estiloscss')
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <style>
+            div#pedidos details {
+                background: #e5e7eb;
+                padding: .5rem;
+                border-radius: 6px;
+                margin: .5rem;
+            }
+
+            div#pedidos summary {
+                cursor: pointer;
+                list-style: none;
+            }
+
+            div#pedidos summary::before {
+                content: '+';
+                padding-right: 1rem;
+            }
+
+            div#pedidos details [opren] summary::before {
+                content: '-';
+            }
+
+            div#pedidos div {
+                font-size: 14px;
+            }
+
+            div#pedidos .w-320 {
+                width: 270px;
+            }
+
+            div#pedidos .w-50 {
+                width: 50px;
+            }
+
+            div#pedidos .w-70 {
+                width: 70px;
+            }
+
+            div#pedidos p {
+                display: inline-block;
+                margin: 0px;
+            }
+
+            div#pedidos .text-end {
+                text-align: end;
+            }
+
+            div#pedidos .p-30 {
+                padding-left: 30px;
+            }
+
+            div#pedidos #example_wrapper {
+                padding: 15px;
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+
+            div#example_wrapper select {
+                padding-right: 2.5rem;
+            }
+        </style>
+    @endpush
+
+    @push('javascriptjs')
+        <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script defer>
+            $(document).ready(function() {
+
+                $('#example').DataTable({
+                    responsive: true,
+                    order: [
+                        [4, 'asc'],
+                        [0, 'asc']
+                    ],
+                    iDisplayLength: 25,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+                    }
+                });
+
+                window.onload = function() {
+                    document.querySelector('#example_filter input').focus();
+                };
+
+            });
+        </script>
+    @endpush
+
 </x-app-layout>
