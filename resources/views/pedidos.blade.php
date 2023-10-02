@@ -6,7 +6,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __(isset($cven) ? 'Pedidos - ' . $com36s->first()->tven : 'Pedidos' ) }}
         </h2>
     </x-slot>
 

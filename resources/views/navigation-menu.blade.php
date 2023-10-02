@@ -15,7 +15,7 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('allpedidos') }}" :active="request()->routeIs('allpedidos')">
+                    <x-jet-nav-link href="{{ route('allpedidos') }}" :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
                         {{ __('Pedidos') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
@@ -158,7 +158,7 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('allpedidos') }}" :active="request()->routeIs('allpedidos')">
+            <x-jet-responsive-nav-link href="{{ route('allpedidos') }}" :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
                 {{ __('Pedidos') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
@@ -167,7 +167,7 @@
             <x-jet-responsive-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
                 {{ __('P.Mayorista') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes')">
+            <x-jet-responsive-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes') || request()->routeIs('listaclientesXvendedor')">
                 {{ __('Lista Clientes') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
