@@ -1,137 +1,108 @@
-<!DOCTYPE html>
-<html lang="es">
+<x-app-layout>
+    @push('title')
+        <title>Pedidos x Transporte</title>
+    @endpush
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pedidos x Transporte</title>
-    <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <style>
-        details {
-            background: #f2f2f2;
-            padding: .5rem;
-            border-radius: 6px;
-            margin: .5rem;
-        }
+    @push('estiloscss')
+        <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <style>
 
-        summary {
-            cursor: pointer;
-            list-style: none;
-        }
+            div {
+                font-size: 14px;
+            }
 
-        summary::before {
-            content: '+';
-            padding-right: 1rem;
-        }
+            table.dataTable tbody td {
+                padding: 4px 10px;
+            }
 
-        details [opren] summary::before {
-            content: '-';
-        }
+            div#example_wrapper select {
+                padding-right: 2.5rem;
+            }
 
-        div {
-            font-size: 14px;
-        }
+            div#example_wrapper {
+                padding: 15px;
+                padding-bottom: 30px;
+            }
+        </style>
+    @endpush
 
-        .w-320 {
-            width: 270px;
-        }
-
-        .w-50 {
-            width: 50px;
-        }
-
-        .w-70 {
-            width: 70px;
-        }
-
-        p {
-            display: inline-block;
-            margin: 0px;
-        }
-
-        .text-end {
-            text-align: end;
-        }
-
-        .p-30 {
-            padding-left: 30px;
-        }
-
-        table.dataTable tbody td {
-            padding: 4px 10px;
-        }
-    </style>
-</head>
-
-<body>
-    {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
-    {{-- @dd($pedidosAgrupados); --}}
-    {{ ' - Fecha: ' . $fupgr }}
-    <table id="example" class="display" style="width:100%; font-size:9px">
-        <thead>
-            <tr>
-                <th>Consesionario</th>
-                <th>Rutas</th>
-                <th>Vendedor</th>
-                <th style="text-align: center;">Nro Clientes</th>
-                <th style="text-align: center;">Total Importe</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($pedidosAgrupados as $indice => $consesionarios)
-            <tr style="font-weight: bold;">
-                <td colspan=3 style="padding-top: 12px">{{ $indice ? $indice.' - '.$com05->where('ccon', $indice)->first()->tnom : "Pendientes por Programar" }}</td>
-                <td style="padding-top: 12px; text-align: center;">{{ $com36s->where('ccon', $indice)->unique('ccli')->count() }}</td>
-                <td style="padding-top: 12px; text-align: end;">{{ number_format($com36s->where('ccon', $indice)->sum('qimpvta'), 2, '.', ',') }}</td>
-            </tr>
-            <tr class="">
-                <td rowspan="{{ $consesionarios->count() }}">{{ $indice }}</td>
-                @foreach ($consesionarios as $crut => $rutas)
-                    @foreach ($rutas as $trut => $vendedores)
-                        @foreach ($vendedores as $cven => $vendedor)
-                            @foreach ($vendedor as $tven => $pedidos)
-                                    <td>{{ $crut . ' - ' . $trut }}</td>
-                                    <td>{{ $cven . ' - ' . $tven }}</td>
-                                    <td style="text-align: center;">{{ $pedidos->groupBy(['ccli'])->count() }}</td>
-                                    <td style="text-align: end;">{{ number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</td>
-                                </tr>
-                            @endforeach
+    <div class="py-12">
+        <div class="lg:px-8 max-w-7xl mx-auto sm:px-6">
+            <div id='productos_pdf' class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
+                {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
+                {{-- @dd($pedidosAgrupados); --}}
+                {{ ' - Fecha: ' . $fupgr }}
+                <table id="example" class="display" style="width:100%; font-size:9px">
+                    <thead>
+                        <tr>
+                            <th>Consesionario</th>
+                            <th>Rutas</th>
+                            <th>Vendedor</th>
+                            <th style="text-align: center;">Nro Clientes</th>
+                            <th style="text-align: center;">Total Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pedidosAgrupados as $indice => $consesionarios)
+                            <tr style="font-weight: bold;">
+                                <td colspan=3 style="padding-top: 12px">{{ $indice ? $indice . ' - ' . $com05->where('ccon', $indice)->first()->tnom : 'Pendientes por Programar' }}</td>
+                                {{-- <td></td>
+                                <td></td> --}}
+                                <td style="padding-top: 12px; text-align: center;">{{ $com36s->where('ccon', $indice)->unique('ccli')->count() }}</td>
+                                <td style="padding-top: 12px; text-align: end;">{{ number_format($com36s->where('ccon', $indice)->sum('qimpvta'), 2, '.', ',') }}</td>
+                            </tr>
+                            @foreach ($consesionarios as $crut => $rutas)
+                            <tr class="">
+                                <td>{{ $indice }}</td>
+                                    @foreach ($rutas as $trut => $vendedores)
+                                        @foreach ($vendedores as $cven => $vendedor)
+                                            @foreach ($vendedor as $tven => $pedidos)
+                                                <td>{{ $crut . ' - ' . $trut }}</td>
+                                                <td>{{ $cven . ' - ' . $tven }}</td>
+                                                <td style="text-align: center;">{{ $pedidos->groupBy(['ccli'])->count() }}</td>
+                                                <td style="text-align: end;">{{ number_format($pedidos->sum('qimpvta'), 2, '.', ',') }}</td>
+                                            @endforeach
+                                        @endforeach
+                                    @endforeach
+                                @endforeach
+                            </tr>
                         @endforeach
-                    @endforeach
-                @endforeach
-            @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Consesionario</th>
-                <th>Rutas</th>
-                <th>Vendedor</th>
-                <th style="text-align: center;">Nro Clientes</th>
-                <th style="text-align: center;">Total Importe</th>
-            </tr>
-        </tfoot>
-    </table>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function() {
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Consesionario</th>
+                            <th>Rutas</th>
+                            <th>Vendedor</th>
+                            <th style="text-align: center;">Nro Clientes</th>
+                            <th style="text-align: center;">Total Importe</th>
+                        </tr>
+                    </tfoot>
+                </table>
 
-            $('#example').DataTable({
-                iDisplayLength: -1,
-                "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
-                }
+            </div>
+        </div>
+    </div>
+
+    @push('javascriptjs')
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function() {
+
+                $('#example').DataTable({
+                    iDisplayLength: -1,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+                    }
+                });
+
+                window.onload = function() {
+                    document.querySelector('#example_filter input').focus();
+                };
+
             });
+        </script>
+    @endpush
 
-        });
-
-        window.onload = function() {
-            document.querySelector('#example_filter input').focus();
-        };
-    </script>
-
-</body>
-
-</html>
+</x-app-layout>

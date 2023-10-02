@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Pedidos">
-    <meta name="keywords" content="Pedidos">
+    <meta name="description" content="Dashboard Pedidos">
+    <meta name="keywords" content="Dashboard Pedidos">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    @stack("title")
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="{{ asset('favicon/ic_launcher1024.png') }}" rel="apple-touch-icon" />

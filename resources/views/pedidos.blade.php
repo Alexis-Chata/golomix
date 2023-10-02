@@ -1,5 +1,9 @@
 <x-app-layout>
 
+    @push('title')
+    <title>Pedidos {{ isset($cven) ? ' - ' . $com36s->first()->tven : '' }}</title>
+    @endpush
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}

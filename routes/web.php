@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('allpedidos');
-    return view('welcome');
 });
 
 Route::middleware([
@@ -62,8 +61,8 @@ Route::middleware([
 
     Route::controller(PedidosController::class)->group(function () {
         Route::get('/pedidos', 'pedidosall')->name('allpedidos');
-        Route::get('/pedidos/{cven}', 'pedidos')->name('pedidos');
         Route::get('/pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte');
+        Route::get('/pedidos/{cven}', 'pedidos')->name('pedidos');
     });
 
     Route::controller(ListaclienteController::class)->group(function () {
@@ -71,13 +70,13 @@ Route::middleware([
         Route::get('/listaclientes/{cven}', 'listaclientes')->name('listaclientesXvendedor');
     });
 
-});
+    Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
 
-Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
+    Route::controller(Com01Controller::class)->group(function () {
+        Route::get('/productos', 'index')->name('allProductos');
+        Route::get('listaclientes-download-pdf/{tipoPrecio}', 'listaPreciosDownloadPdf')->name('ProductosDescargarPdf');
+        Route::get('/productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
+        Route::post('/actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
+    });
 
-Route::controller(Com01Controller::class)->group(function () {
-    Route::get('/productos', 'index')->name('allProductos');
-    Route::get('listaclientes-download-pdf/{tipoPrecio}', 'listaPreciosDownloadPdf')->name('ProductosDescargarPdf');
-    Route::get('/productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
-    Route::post('/actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
 });

@@ -24,7 +24,7 @@
                     <x-jet-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
                         {{ __('P.Mayorista') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes')">
+                    <x-jet-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes') || request()->routeIs('listaclientesXvendedor')">
                         {{ __('Lista Clientes') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
