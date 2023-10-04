@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ScrHcom21Seeder extends Seeder
 {
@@ -12,6 +13,8 @@ class ScrHcom21Seeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::insert("
+
+        ");
     }
 }
