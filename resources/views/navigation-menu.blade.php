@@ -15,6 +15,25 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('allpedidos') }}" :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
+                        {{ __('Pedidos') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                        {{ __('P.Bodega') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
+                        {{ __('P.Mayorista') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes') || request()->routeIs('listaclientesXvendedor')">
+                        {{ __('Lista Clientes') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
+                        {{ __('Distribucion de Carga') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
+                        {{ __('Distribucion de Rutas') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -141,6 +160,25 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('allpedidos') }}" :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
+                {{ __('Pedidos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                {{ __('P.Bodega') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
+                {{ __('P.Mayorista') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('listaclientes') }}" :active="request()->routeIs('listaclientes') || request()->routeIs('listaclientesXvendedor')">
+                {{ __('Lista Clientes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
+                {{ __('Distribucion de Carga') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
+                {{ __('Distribucion de Rutas') }}
             </x-responsive-nav-link>
         </div>
 

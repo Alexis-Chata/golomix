@@ -1,5 +1,17 @@
 <?php
 
+use App\Http\Controllers\Com01Controller;
+use App\Http\Controllers\Com05Controller;
+use App\Http\Controllers\Com07Controller;
+use App\Http\Controllers\Com10Controller;
+use App\Http\Controllers\Com30Controller;
+use App\Http\Controllers\Com31Controller;
+use App\Http\Controllers\Com36Controller;
+use App\Http\Controllers\Com37Controller;
+use App\Http\Controllers\ListaclienteController;
+use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\ScrHcom20Controller;
+use App\Http\Controllers\Ugr01Controller;
 use App\Models\Com10;
 use Illuminate\Support\Facades\Route;
 

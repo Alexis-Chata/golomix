@@ -194,4 +194,20 @@
             </div>
         </div>
     </div>
+
+    <@push('eventsubmit-js')
+    <script>
+        document.body.addEventListener('submit', cargando);
+
+        function cargando(event) {
+            const clickedElement = event.target;
+
+            buttons = document.querySelectorAll("body main button");
+
+            buttons.forEach((element) => element.disabled=true);
+
+            console.log('hi');
+        }
+    </script>
+    @endpush
 </x-app-layout>
