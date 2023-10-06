@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @stack("title")
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Golomix') }}</title>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link href="{{ asset('favicon/ic_launcher1024.png') }}" rel="apple-touch-icon" />
