@@ -3,6 +3,12 @@
         <title>Pedidos x Transporte</title>
     @endpush
 
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Distribucion de Carga') }}
+        </h2>
+    </x-slot>
+
     @push('estiloscss')
         <script src="https://kit.fontawesome.com/1f2290df6f.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">

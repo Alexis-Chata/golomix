@@ -4,6 +4,12 @@
         <title>Lista Clientes {{ isset($cven) ? ' - ' . $com31s[0]->tven : '' }}</title>
     @endpush
 
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Lista Clientes') }}
+        </h2>
+    </x-slot>
+
     @push('estiloscss')
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <style>
