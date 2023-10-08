@@ -49,7 +49,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        <style>
+            #dropdown_custom>div>div, #dropdown_custom>div>div>div{
+                height: 100%;
+            }
+        </style>
         <!-- Styles -->
         @livewireStyles
 
