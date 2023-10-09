@@ -18,10 +18,5 @@ class CodVendedorAsignadoSeeder extends Seeder
         $codVendedorAsignado->cven = "163";
         $codVendedorAsignado->tipo = 'main';
         $codVendedorAsignado->save();
-
-        $codVendedorAsignado = new CodVendedorAsignado();
-        $codVendedorAsignado->user_id = 1;
-        $codVendedorAsignado->cven = "004";
-        $codVendedorAsignado->save();
     }
 }

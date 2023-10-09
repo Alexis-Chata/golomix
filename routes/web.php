@@ -38,7 +38,7 @@ Route::middleware([
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })->name('dashboard');
+    })->name('dashboard')->middleware(['role_or_permission:Super-Admin']);
 
     Route::resource('ugr01', Ugr01Controller::class)->only(['store']);
     Route::resource('com01', Com01Controller::class)->only(['store']);
@@ -56,16 +56,16 @@ Route::middleware([
         //dd($com10s->firstWhere('cven', '090'));
         //dd($com10s);
         return view('vendedorRutas', compact('com10s'));
-    })->name('allVendedorRutas');
+    })->name('allVendedorRutas')->middleware(['role_or_permission:Super-Admin']);
 
     Route::controller(PedidosController::class)->group(function () {
-        Route::get('/pedidos', 'pedidosall')->name('allpedidos');
-        Route::get('/pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte');
+        Route::get('/pedidos', 'pedidosall')->name('allpedidos')->middleware(['role_or_permission:Super-Admin']);
+        Route::get('/pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte')->middleware(['role_or_permission:Super-Admin']);
         Route::get('/pedidos/{cven}', 'pedidos')->name('pedidos');
     });
 
     Route::controller(ListaclienteController::class)->group(function () {
-        Route::get('/listaclientes', 'listaclientesall')->name('listaclientes');
+        Route::get('/listaclientes', 'listaclientesall')->name('listaclientes')->middleware(['role_or_permission:Super-Admin']);
         Route::get('/listaclientes/{cven}', 'listaclientes')->name('listaclientesXvendedor');
     });
 
