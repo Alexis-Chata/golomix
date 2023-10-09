@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Com10;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ListaclienteController extends Controller
 {
@@ -16,6 +17,8 @@ class ListaclienteController extends Controller
 
     public function listaclientes($cven)
     {
+        Gate::authorize('verpedidos', $cven);
+
         $com10s = Com10::with('com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7')->firstWhere('cven', $cven);
         //dd($com10s->toArray());
         $com31s = $this->querylistaclientes($cven);

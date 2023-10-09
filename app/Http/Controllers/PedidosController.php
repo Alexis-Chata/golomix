@@ -9,6 +9,7 @@ use App\Models\Com37;
 use App\Models\ugr01;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class PedidosController extends Controller
 {
@@ -25,6 +26,8 @@ class PedidosController extends Controller
 
     public function pedidos($cven)
     {
+        Gate::authorize('verpedidos', $cven);
+
         $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
         $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
         $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
