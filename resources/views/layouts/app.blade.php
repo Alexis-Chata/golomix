@@ -49,11 +49,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <style>
-            #dropdown_custom>div>div, #dropdown_custom>div>div>div{
-                height: 100%;
-            }
-        </style>
+
         <!-- Styles -->
         @livewireStyles
 
@@ -63,7 +59,7 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @livewire('navigation-menu')
+            <livewire:custom.navigation-menu>
 
             <!-- Page Heading -->
             @if (isset($header))
