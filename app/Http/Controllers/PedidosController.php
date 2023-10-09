@@ -26,7 +26,7 @@ class PedidosController extends Controller
 
     public function pedidos($cven)
     {
-        Gate::authorize('verpedidos', $cven);
+        (Gate::denies('verpedidos', $cven) ? abort(401, auth()->user()->codVendedorAsignados->pluck('cven')->first()) : 'Allowed');
 
         $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
         $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();

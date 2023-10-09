@@ -6,6 +6,7 @@ use App\Models\Com10;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Route;
 
 class ListaclienteController extends Controller
 {
@@ -17,7 +18,7 @@ class ListaclienteController extends Controller
 
     public function listaclientes($cven)
     {
-        Gate::authorize('verpedidos', $cven);
+        (Gate::denies('verpedidos', $cven) ? abort(401, auth()->user()->codVendedorAsignados->pluck('cven')->first()) : 'Allowed');
 
         $com10s = Com10::with('com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7')->firstWhere('cven', $cven);
         //dd($com10s->toArray());

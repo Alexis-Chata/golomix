@@ -1,7 +1,7 @@
 <x-app-layout>
 
     @push('title')
-        <title>Dashboard {{ config('app.name', 'Laravel') }}</title>
+        <title>Dashboard {{ config('app.name', 'Golomix') }}</title>
     @endpush
 
     <x-slot name="header">
