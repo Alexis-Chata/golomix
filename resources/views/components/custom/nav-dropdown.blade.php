@@ -35,7 +35,7 @@
                 @endhasanyrole
                 @foreach ($cvens as $cven)
                     <x-custom.dropdown-link href="{{ route($nameRoute, $cven) }}">
-                        {{ __($cven . '-' . $com10s->firstWhere('cven', $cven)->tven) }}
+                        {{ __( !is_null($com10s->firstWhere('cven', $cven)) ? $cven . '-' . $com10s->firstWhere('cven', $cven)->tven : '' ) }}
                     </x-custom.dropdown-link>
                     <div class="border-t border-gray-200 dark:border-gray-600"></div>
                 @endforeach
