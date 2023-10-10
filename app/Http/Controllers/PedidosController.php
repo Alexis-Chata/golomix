@@ -15,24 +15,38 @@ class PedidosController extends Controller
 {
     public function pedidosall()
     {
-        $fupgr = Com36::latest('fupgr')->first()->fupgr;
-        $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
-        $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
-        $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-        $com37s = $this->sumarCantidades($com36s);
+        $com36s = collect();
+        $pedidosAgrupados = collect();
+        $fupgr = '';
+        $com37s = [];
+
+        if (Com36::latest('fupgr')->exists()) {
+            $fupgr = Com36::latest('fupgr')->first()->fupgr;
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
+            $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
+            $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
+            $com37s = $this->sumarCantidades($com36s);
+        }
 
         return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'com37s'));
     }
 
     public function pedidos($cven)
     {
-        (Gate::denies('verpedidos', $cven) ? abort(401, auth()->user()->codVendedorAsignados->pluck('cven')->first()??'') : 'Allowed');
+        (Gate::denies('verpedidos', $cven) ? abort(401, auth()->user()->codVendedorAsignados->pluck('cven')->first() ?? '') : 'Allowed');
 
-        $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
-        $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
-        $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
-        $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-        $com37s = $this->sumarCantidades($com36s);
+        $com36s = collect();
+        $pedidosAgrupados = collect();
+        $fupgr = '';
+        $com37s = [];
+
+        if (Com36::latest('fupgr')->where('cven', $cven)->exists()) {
+            $fupgr = Com36::latest('fupgr')->where('cven', $cven)->first()->fupgr;
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->where('cven', $cven)->get();
+            $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
+            $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
+            $com37s = $this->sumarCantidades($com36s);
+        }
 
         return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fupgr', 'cven', 'com37s'));
     }
@@ -62,13 +76,21 @@ class PedidosController extends Controller
 
     public function pedidosTransporte()
     {
-        $fupgr = Com36::latest('fupgr')->first()->fupgr;
-        $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
-        //dd($com36s->first());
-        $pedidosAgrupados = $com36s->sortBy(['ccon', 'crut', 'cven', 'ccli'])->groupBy(['ccon', 'crut', 'com30s.tdes', 'cven', 'tven'], $preserveKeys = true);
-        //dd($pedidosAgrupados);
-        $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
-        $com05 = Com05::all();
+        $com36s = collect();
+        $pedidosAgrupados = collect();
+        $fupgr = '';
+        $com05 = collect();
+
+        if (Com36::latest('fupgr')->exists()) {
+            $fupgr = Com36::latest('fupgr')->first()->fupgr;
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fupgr', $fupgr)->get();
+            //dd($com36s->first());
+            $pedidosAgrupados = $com36s->sortBy(['ccon', 'crut', 'cven', 'ccli'])->groupBy(['ccon', 'crut', 'com30s.tdes', 'cven', 'tven'], $preserveKeys = true);
+            //dd($pedidosAgrupados);
+            $fupgr = Carbon::parse($fupgr)->format('d-m-Y');
+            $com05 = Com05::all();
+        }
+
         return view('pedidosxtransporte', compact('com36s', 'pedidosAgrupados', 'fupgr', 'com05'));
     }
 }

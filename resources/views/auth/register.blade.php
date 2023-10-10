@@ -20,6 +20,11 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="cod_vendedor" value="{{ __('Codigo Vendedor') }}" />
+                <x-custom.select :cvens="$cvens" id="cod_vendedor" class="block mt-1 w-full" name="cod_vendedor" :value="old('cod_vendedor')" required />
+            </div>
+
+            <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>

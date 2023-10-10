@@ -61,6 +61,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    protected $guarded = [];
+
     public function codVendedorAsignados()
     {
         return $this->hasMany(CodVendedorAsignado::class);
