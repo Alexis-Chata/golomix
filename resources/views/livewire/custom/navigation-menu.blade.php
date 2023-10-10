@@ -20,8 +20,8 @@
 
                     @if ($cvens->count())
 
-                    @if ($cvens->count() > 1)
-                    <x-custom.nav-dropdown :cvens="$cvens" :com10s="$com10s" titulo="Pedidos" nameRoute="pedidos" />
+                    @if ($cvens->count() > 1 || auth()->user()->hasRole('Super-Admin'))
+                    <x-custom.nav-dropdown :cvens="$cvens" :com10s="$com10s" titulo="Pedidos" nameRoute="pedidos" allroute="allpedidos" />
                     @else
                     <x-nav-link href="{{ route('pedidos', $cvens->first()) }}"
                         :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
@@ -41,9 +41,9 @@
 
                     @if ($cvens->count())
 
-                    @if ($cvens->count() > 1)
+                    @if ($cvens->count() > 1 || auth()->user()->hasRole('Super-Admin'))
                     <x-custom.nav-dropdown :cvens="$cvens" :com10s="$com10s" titulo="Lista Clientes"
-                        nameRoute="listaclientesXvendedor" />
+                        nameRoute="listaclientesXvendedor" allroute="listaclientes" />
                     @else
                     <x-nav-link href="{{ route('listaclientesXvendedor', $cvens->first()) }}"
                         :active="request()->routeIs('listaclientes') || request()->routeIs('listaclientesXvendedor')">
@@ -206,8 +206,8 @@
 
             @if ($cvens->count())
 
-            @if ($cvens->count() > 1)
-            <x-custom.responsive-nav-dropdown :cvens="$cvens" :com10s="$com10s" titulo="Pedidos" nameRoute="pedidos" />
+            @if ($cvens->count() > 1 || auth()->user()->hasRole('Super-Admin'))
+            <x-custom.responsive-nav-dropdown :cvens="$cvens" :com10s="$com10s" titulo="Pedidos" nameRoute="pedidos" allroute="allpedidos" />
             @else
             <x-responsive-nav-link href="{{ route('pedidos', $cvens->first()) }}"
                 :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
@@ -227,9 +227,9 @@
 
                 @if ($cvens->count())
 
-                @if ($cvens->count() > 1)
+                @if ($cvens->count() > 1 || auth()->user()->hasRole('Super-Admin'))
                 <x-custom.responsive-nav-dropdown :cvens="$cvens" :com10s="$com10s" titulo="Lista Clientes"
-                    nameRoute="listaclientesXvendedor" />
+                    nameRoute="listaclientesXvendedor" allroute="listaclientes" />
                 @else
                 <x-responsive-nav-link href="{{ route('listaclientesXvendedor', $cvens->first()) }}"
                     :active="request()->routeIs('listaclientes') || request()->routeIs('listaclientesXvendedor')">

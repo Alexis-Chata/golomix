@@ -1,8 +1,8 @@
-@props(['cvens', 'com10s', 'titulo', 'nameRoute'])
+@props(['cvens', 'com10s', 'titulo', 'nameRoute', 'allroute'])
 
 @php
 $classes_responsive_nav_link =
-request()->routeIs('listaclientesXvendedor') ?? false ? 'block w-full pl-3 pr-4 border-l-4 border-indigo-400
+(request()->routeIs($nameRoute) || request()->routeIs($allroute)) ?? false ? 'block w-full pl-3 pr-4 border-l-4 border-indigo-400
 dark:border-indigo-600 text-left text-base font-medium text-indigo-700 dark:text-indigo-300 bg-indigo-50
 dark:bg-indigo-900/50 focus:outline-none focus:text-indigo-800 dark:focus:text-indigo-200 focus:bg-indigo-100
 dark:focus:bg-indigo-900 focus:border-indigo-700 dark:focus:border-indigo-300 transition duration-150 ease-in-out' :
@@ -35,6 +35,13 @@ dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transiti
                 <div class="block px-4 py-2 text-xs text-gray-400">
                     {{ __($titulo) }}
                 </div>
+
+                @hasanyrole('Super-Admin')
+                    <x-custom.dropdown-link href="{{ route($allroute) }}">
+                        {{ __('Todos') }}
+                    </x-custom.dropdown-link>
+                    <div class="border-t border-gray-200 dark:border-gray-600"></div>
+                @endhasanyrole
 
                 @foreach ($cvens as $cven)
                     <x-custom.dropdown-link href="{{ route($nameRoute, $cven) }}">
