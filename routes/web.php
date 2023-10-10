@@ -8,6 +8,7 @@ use App\Http\Controllers\Com30Controller;
 use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ListaclienteController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ScrHcom20Controller;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('allpedidos');
+    return redirect()->route('login');
 });
 
 Route::middleware([
@@ -36,9 +37,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard')->middleware(['role_or_permission:Super-Admin']);
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('ugr01', Ugr01Controller::class)->only(['store']);
     Route::resource('com01', Com01Controller::class)->only(['store']);
@@ -51,7 +50,7 @@ Route::middleware([
     Route::resource('com37', Com37Controller::class)->only(['store']);
     Route::resource('scrhcom20', ScrHcom20Controller::class)->only(['store']);
 
-    Route::get('/vendedor-rutas', function () {
+    Route::get('vendedor-rutas', function () {
         $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
         //dd($com10s->firstWhere('cven', '090'));
         //dd($com10s);
@@ -59,23 +58,23 @@ Route::middleware([
     })->name('allVendedorRutas')->middleware(['role_or_permission:Super-Admin']);
 
     Route::controller(PedidosController::class)->group(function () {
-        Route::get('/pedidos', 'pedidosall')->name('allpedidos')->middleware(['role_or_permission:Super-Admin']);
-        Route::get('/pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte')->middleware(['role_or_permission:Super-Admin']);
-        Route::get('/pedidos/{cven}', 'pedidos')->name('pedidos');
+        Route::get('pedidos', 'pedidosall')->name('allpedidos')->middleware(['role_or_permission:Super-Admin']);
+        Route::get('pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte')->middleware(['role_or_permission:Super-Admin']);
+        Route::get('pedidos/{cven}', 'pedidos')->name('pedidos');
     });
 
     Route::controller(ListaclienteController::class)->group(function () {
-        Route::get('/listaclientes', 'listaclientesall')->name('listaclientes')->middleware(['role_or_permission:Super-Admin']);
-        Route::get('/listaclientes/{cven}', 'listaclientes')->name('listaclientesXvendedor');
+        Route::get('listaclientes', 'listaclientesall')->name('listaclientes')->middleware(['role_or_permission:Super-Admin']);
+        Route::get('listaclientes/{cven}', 'listaclientes')->name('listaclientesXvendedor');
     });
 
     Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
 
     Route::controller(Com01Controller::class)->group(function () {
-        Route::get('/productos', 'index')->name('allProductos');
+        Route::get('productos', 'index')->name('allProductos');
         Route::get('listaclientes-download-pdf/{tipoPrecio}', 'listaPreciosDownloadPdf')->name('ProductosDescargarPdf');
-        Route::get('/productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
-        Route::post('/actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
+        Route::get('productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
+        Route::post('actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
     });
 
 });
