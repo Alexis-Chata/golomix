@@ -11,17 +11,22 @@
 
             <div>
                 <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" placeholder="Ingrese su Nombre" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Ingrese su Email" required autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="celular" value="{{ __('Celular') }}" />
+                <x-input id="celular" class="block mt-1 w-full" type="number" name="celular" :value="old('celular')" placeholder="Ingrese su Celular" required />
             </div>
 
             <div class="mt-4">
                 <x-label for="cod_vendedor" value="{{ __('Codigo Vendedor') }}" />
-                <x-custom.select :cvens="$cvens" id="cod_vendedor" class="block mt-1 w-full" name="cod_vendedor" :value="old('cod_vendedor')" required />
+                <x-custom.select :cvens="$cvens" id="cod_vendedor" class="block mt-1 w-full" name="cod_vendedor" required />
             </div>
 
             <div class="mt-4">

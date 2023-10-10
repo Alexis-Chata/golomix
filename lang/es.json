@@ -35,5 +35,6 @@
     "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "¿Ha olvidado su contraseña? No hay problema. Simplemente háganos saber su dirección de correo electrónico y le enviaremos por correo electrónico un enlace de restablecimiento de contraseña que le permitirá elegir uno nuevo.",
     "Email Password Reset Link": " Enlace de restablecimiento de contraseña de correo electrónico ",
     "Forbidden": "Prohibido",
-    "User does not have any of the necessary access rights.": "EL USUARIO NO TIENE NINGUNO DE LOS DERECHOS DE ACCESO NECESARIOS."
+    "User does not have any of the necessary access rights.": "EL USUARIO NO TIENE NINGUNO DE LOS DERECHOS DE ACCESO NECESARIOS.",
+    "The :attribute must be at least :length characters.": "El campo :attribute debe tener al menos :length caracteres."
 }

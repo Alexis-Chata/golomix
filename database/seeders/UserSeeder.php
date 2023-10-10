@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         $usuarioadmin = new User();
         $usuarioadmin->name = 'Administrador Golomix';
         $usuarioadmin->email = 'alexizz.19.ac@gmail.com';
+        $usuarioadmin->celular = '989785058';
         $usuarioadmin->password = bcrypt('989785058');
         $usuarioadmin->save();
 
