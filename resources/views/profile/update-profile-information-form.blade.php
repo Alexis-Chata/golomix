@@ -81,6 +81,26 @@
                 @endif
             @endif
         </div>
+
+        <!-- Celular -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="celular" value="{{ __('Celular') }}" />
+            <x-input id="celular" type="text" class="mt-1 block w-full" :disabled="true"  wire:model="state.celular"/>
+            <x-input-error for="celular" class="mt-2" />
+        </div>
+
+        @if (Auth::user()->codVendedorAsignados->count())
+        <!-- Codigo de Vendedor -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label value="{{ __('Codigo de Vendedor') }}" />
+                @forelse (Auth::user()->codVendedorAsignados as $codVendedorAsignado)
+                    <x-input id="cod_vendedor_{{ $codVendedorAsignado->cven }}" type="text" class="mt-1 block w-full" :disabled="true" :value="$codVendedorAsignado->cven.($codVendedorAsignado->tipo ? ' - '.$codVendedorAsignado->tipo : '')"/>
+                    <x-input-error for="cod_vendedor_{{ $codVendedorAsignado->cven }}" class="mt-2" />
+                @empty
+                @endforelse
+            </div>
+        @endif
+
     </x-slot>
 
     <x-slot name="actions">
