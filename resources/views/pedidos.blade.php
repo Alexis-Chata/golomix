@@ -2,24 +2,24 @@
 
     @if (request()->routeIs('allpedidos') || request()->routeIs('pedidos'))
         @push('title')
-            <title>Pedidos {{ isset($cven) ? (isset($com36s->first()->tven) ? ' - ' . $cven . ' - '. $com36s->first()->tven : $cven) : 'Todos' }}</title>
+            <title>Pedidos {{ isset($cven) ? (isset($com36s->first()->tven) ? ' - ' . $cven . ' - ' . $com36s->first()->tven : $cven) : 'Todos' }}</title>
         @endpush
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __(isset($cven) ? 'Pedidos ' . (isset($com36s->first()->tven) ? ' - ' . $cven . ' - '. $com36s->first()->tven : $cven) : 'Todos los Pedidos') }}
+                {{ __(isset($cven) ? 'Pedidos ' . (isset($com36s->first()->tven) ? ' - ' . $cven . ' - ' . $com36s->first()->tven : $cven) : 'Todos los Pedidos') }}
             </h2>
         </x-slot>
     @endif
 
     @if (request()->routeIs('planillaCarga'))
         @push('title')
-            <title>Planilla de Carga {{ isset($ccon) ? (isset($com36s->first()->ccon) ? ' - ' . $ccon . ' - '. $com36s->first()->com05s->tnom : $ccon) : 'Todos' }}</title>
+            <title>Planilla de Carga {{ isset($ccon) ? (isset($com36s->first()->ccon) ? ' - ' . $ccon . ' - ' . $com36s->first()->com05s->tnom : $ccon) : 'Todos' }}</title>
         @endpush
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __(isset($ccon) ? 'Planilla de Carga ' . (isset($com36s->first()->ccon) ? ' - '. $ccon . ' - '. $com36s->first()->com05s->tnom : $ccon) : 'Planilla de Carga Todos') }}
+                {{ __(isset($ccon) ? 'Planilla de Carga ' . (isset($com36s->first()->ccon) ? ' - ' . $ccon . ' - ' . $com36s->first()->com05s->tnom : $ccon) : 'Planilla de Carga Todos') }}
             </h2>
         </x-slot>
     @endif
@@ -30,7 +30,7 @@
                 {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
                 {{-- @dd($pedidosAgrupados); --}}
                 <div class="p-2">
-                    {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . ($fmov) }}
+                    {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fmov }}
                     @if (request()->routeIs('planillaCarga'))
                         <br />
                         {{ 'Importe Total de Carga: S/.' . number_format($com36s->sum('qimpvta'), 2) }}
@@ -105,6 +105,9 @@
                             <th>Producto</th>
                             <th style="text-align: center;">bultos</th>
                             <th style="text-align: center;">Unidads</th>
+                            @hasanyrole('Super-Admin')
+                                <th>Importe</th>
+                            @endhasanyrole
                             <th>Marca</th>
                         </tr>
                     </thead>
@@ -113,8 +116,11 @@
                             <tr>
                                 <td>{{ substr($key, -3) }}</td>
                                 <td>{{ $com37->first()->tdes }}</td>
-                                <td>{{ $com37->totalqcanpedbultos }}</td>
-                                <td>{{ $com37->totalqcanpedunidads }}</td>
+                                <td class="text-center">{{ $com37->totalqcanpedbultos }}</td>
+                                <td class="text-center">{{ $com37->totalqcanpedunidads }}</td>
+                                @hasanyrole('Super-Admin')
+                                    <td class="text-end" style="padding-right: 1.4rem;">{{ $com37->importe }}</td>
+                                @endhasanyrole
                                 <td>{{ $com37->marcacod }} - {{ $com37->marca }}</td>
                             </tr>
                         @endforeach
@@ -125,6 +131,9 @@
                             <th>Producto</th>
                             <th style="text-align: center;">bultos</th>
                             <th style="text-align: center;">Unidads</th>
+                            @hasanyrole('Super-Admin')
+                                <th>Importe</th>
+                            @endhasanyrole
                             <th>Marca</th>
                         </tr>
                     </tfoot>
@@ -205,10 +214,19 @@
         <script defer>
             $(document).ready(function() {
 
+                @php
+                    $nro = 4;
+                @endphp
+                @hasanyrole('Super-Admin')
+                    @php
+                        $nro = 5;
+                    @endphp
+                @endhasanyrole
+
                 $('#example').DataTable({
                     responsive: true,
                     order: [
-                        [4, 'asc'],
+                        [{{ $nro }}, 'asc'],
                         [0, 'asc']
                     ],
                     iDisplayLength: 25,

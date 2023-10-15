@@ -73,7 +73,6 @@ class PedidosController extends Controller
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
         }
-        dd($com37s);
 
         return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fmov', 'ccon', 'com37s'));
     }
@@ -97,10 +96,10 @@ class PedidosController extends Controller
             $item->totalqcanpedbultos = $item->sum('qcanpedbultos') + $sumaunidadsAbultos;
             $item->totalqcanpedunidads = str_pad($sumaunidadsAbultosRestoenunidad, 2, 0, STR_PAD_LEFT);
 
-            $qprecio = ($com01s[substr($key, -3)]->qprecio);
             $item->qfaccon = ($com01s[substr($key, -3)]->qfaccon);
-            $item->qprecio = ($qprecio);
-            $item->importe = ($item->totalqcanpedbultos*$qprecio) + ($qprecio*$item->totalqcanpedunidads)/$item->qfaccon;
+            $item->qprecio = ($com01s[substr($key, -3)]->qprecio);
+            $importe = ($item->totalqcanpedbultos*$item->qprecio) + ($item->qprecio*$item->totalqcanpedunidads)/$item->qfaccon;
+            $item->importe = number_format($importe, 2);
         });
 
         return $com37s;
