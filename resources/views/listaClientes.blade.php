@@ -1,12 +1,12 @@
 <x-app-layout>
 
     @push('title')
-        <title>Lista Clientes {{ isset($cven) ? (isset($com31s[0]->tven) ? ' - ' . $com31s[0]->tven : '') : '' }}</title>
+        <title>Lista Clientes {{ isset($cven) ? (isset($com31s[0]->tven) ? ' - ' . $cven. ' - '. $com31s[0]->tven : $cven) : 'Todos' }}</title>
     @endpush
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Lista Clientes') }}
+            {{ __('Lista Clientes') }} {{ isset($cven) ? (isset($com31s[0]->tven) ? ' - ' . $cven. ' - '. $com31s[0]->tven : $cven) : 'Todos' }}
         </h2>
     </x-slot>
 
