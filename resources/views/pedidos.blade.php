@@ -33,7 +33,7 @@
                     {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fmov }}
                     @if (request()->routeIs('planillaCarga'))
                         <br />
-                        {{ 'Importe Total de Carga: S/.' . number_format($com36s->sum('qimpvta'), 2) }}
+                        {{ 'Importe Total de Venta: S/.' . number_format($com36s->sum('qimpvta'), 2) }}
                     @endif
                 </div>
                 @foreach ($pedidosAgrupados as $cvend => $tvens)
@@ -98,6 +98,15 @@
                 </details>
                 @endforeach
                 <br />
+
+                <div class="p-2">
+                    @if (request()->routeIs('planillaCarga'))
+                        <br />
+                        {{ 'Importe Total de Carga: S/.' . number_format($com37s->sum('importe'), 2) }}
+                    @endif
+                    <br />
+                </div>
+
                 <table id="example" class="display" style="width:100%;">
                     <thead>
                         <tr>
