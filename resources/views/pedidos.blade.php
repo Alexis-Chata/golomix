@@ -2,24 +2,24 @@
 
     @if (request()->routeIs('allpedidos') || request()->routeIs('pedidos'))
         @push('title')
-            <title>Pedidos {{ isset($cven) ? (isset($com36s->first()->tven) ? ' - ' . $com36s->first()->tven : $cven) : 'Todos' }}</title>
+            <title>Pedidos {{ isset($cven) ? (isset($com36s->first()->tven) ? ' - ' . $cven . ' - '. $com36s->first()->tven : $cven) : 'Todos' }}</title>
         @endpush
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __(isset($cven) ? 'Pedidos ' . (isset($com36s->first()->tven) ? ' - ' . $com36s->first()->tven : $cven) : 'Todos los Pedidos') }}
+                {{ __(isset($cven) ? 'Pedidos ' . (isset($com36s->first()->tven) ? ' - ' . $cven . ' - '. $com36s->first()->tven : $cven) : 'Todos los Pedidos') }}
             </h2>
         </x-slot>
     @endif
 
     @if (request()->routeIs('planillaCarga'))
         @push('title')
-            <title>Planilla de Carga {{ isset($ccon) ? (isset($com36s->first()->ccon) ? ' - ' . $com36s->first()->com05s->tnom : $ccon) : 'Todos' }}</title>
+            <title>Planilla de Carga {{ isset($ccon) ? (isset($com36s->first()->ccon) ? ' - ' . $ccon . ' - '. $com36s->first()->com05s->tnom : $ccon) : 'Todos' }}</title>
         @endpush
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __(isset($ccon) ? 'Planilla de Carga ' . (isset($com36s->first()->ccon) ? ' - ' . $com36s->first()->com05s->tnom : $ccon) : 'Planilla de Carga Todos') }}
+                {{ __(isset($ccon) ? 'Planilla de Carga ' . (isset($com36s->first()->ccon) ? ' - '. $ccon . ' - '. $com36s->first()->com05s->tnom : $ccon) : 'Planilla de Carga Todos') }}
             </h2>
         </x-slot>
     @endif
