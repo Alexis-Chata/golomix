@@ -54,12 +54,13 @@
                     @endif
                     @hasanyrole('Super-Admin')
                         <x-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
-                            {{ __('Distribucion de Carga') }}
+                            {{ __('Distrib. de Carga') }}
                         </x-nav-link>
 
                         <x-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
-                            {{ __('Distribucion de Rutas') }}
+                            {{ __('Distrib. de Rutas') }}
                         </x-nav-link>
+                        <x-custom.nav-dropdown :com05s="$com05s" titulo="Planilla de Carga" nameRoute="planillaCarga" allroute="planillaCarga" />
                     @endhasanyrole
                 </div>
             </div>

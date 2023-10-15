@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Custom;
 
+use App\Models\Com05;
 use App\Models\Com10;
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -15,7 +16,8 @@ class NavigationMenu extends Component
     public function render()
     {
         $com10s = Com10::all();
+        $com05s = Com05::all();
         $cvens = auth()->user()->codVendedorAsignados->pluck('cven');
-        return view('livewire.custom.navigation-menu', compact('cvens', 'com10s'));
+        return view('livewire.custom.navigation-menu', compact('cvens', 'com10s', 'com05s'));
     }
 }

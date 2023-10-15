@@ -38,7 +38,7 @@
             <div id='productos_pdf' class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
                 {{-- @dd($pedidosAgrupados); --}}
-                {{ ' - Fecha: ' . $fupgr }}
+                {{ ' - Fecha: ' . $fmov }}
                 <table id="example" class="display" style="width:100%; font-size:9px">
                     <thead>
                         <tr>

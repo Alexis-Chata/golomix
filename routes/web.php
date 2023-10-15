@@ -59,8 +59,9 @@ Route::middleware([
 
     Route::controller(PedidosController::class)->group(function () {
         Route::get('pedidos', 'pedidosall')->name('allpedidos')->middleware(['role_or_permission:Super-Admin']);
-        Route::get('pedidos/transporte', 'pedidosTransporte')->name('allpedidosXtransporte')->middleware(['role_or_permission:Super-Admin']);
         Route::get('pedidos/{cven}', 'pedidos')->name('pedidos');
+        Route::get('planilla-carga/{ccon?}', 'planillaCarga')->name('planillaCarga')->middleware(['role_or_permission:Super-Admin']);
+        Route::get('distribucion-pedidos', 'pedidosTransporte')->name('allpedidosXtransporte')->middleware(['role_or_permission:Super-Admin']);
     });
 
     Route::controller(ListaclienteController::class)->group(function () {

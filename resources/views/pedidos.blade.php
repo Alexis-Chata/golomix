@@ -1,21 +1,41 @@
 <x-app-layout>
 
-    @push('title')
-    <title>Pedidos {{ isset($cven) ? (isset($com36s->first()->tven) ? ' - ' . $com36s->first()->tven : '') : '' }}</title>
-    @endpush
+    @if (request()->routeIs('allpedidos') || request()->routeIs('pedidos'))
+        @push('title')
+            <title>Pedidos {{ isset($cven) ? (isset($com36s->first()->tven) ? ' - ' . $com36s->first()->tven : $cven) : 'Todos' }}</title>
+        @endpush
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __(isset($cven) ? 'Pedidos ' . (isset($com36s->first()->tven) ? ' - ' . $com36s->first()->tven : '') : 'Pedidos' ) }}
-        </h2>
-    </x-slot>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __(isset($cven) ? 'Pedidos ' . (isset($com36s->first()->tven) ? ' - ' . $com36s->first()->tven : $cven) : 'Todos los Pedidos') }}
+            </h2>
+        </x-slot>
+    @endif
+
+    @if (request()->routeIs('planillaCarga'))
+        @push('title')
+            <title>Planilla de Carga {{ isset($ccon) ? (isset($com36s->first()->ccon) ? ' - ' . $com36s->first()->com05s->tnom : $ccon) : 'Todos' }}</title>
+        @endpush
+
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __(isset($ccon) ? 'Planilla de Carga ' . (isset($com36s->first()->ccon) ? ' - ' . $com36s->first()->com05s->tnom : $ccon) : 'Planilla de Carga Todos') }}
+            </h2>
+        </x-slot>
+    @endif
 
     <div class="py-12">
         <div class="lg:px-8 max-w-7xl mx-auto sm:px-6">
             <div id="pedidos" class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
                 {{-- @dd($pedidosAgrupados); --}}
-                {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fupgr }}
+                <div class="p-2">
+                    {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . ($fmov) }}
+                    @if (request()->routeIs('planillaCarga'))
+                        <br />
+                        {{ 'Importe Total de Carga: S/.' . number_format($com36s->sum('qimpvta'), 2) }}
+                    @endif
+                </div>
                 @foreach ($pedidosAgrupados as $cvend => $tvens)
                     <details open>
                         <summary>{{ $cvend . ' ' }}
