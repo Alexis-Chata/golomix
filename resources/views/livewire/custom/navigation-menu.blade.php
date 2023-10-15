@@ -237,6 +237,7 @@
             <x-responsive-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
                 {{ __('Distribucion de Rutas') }}
             </x-responsive-nav-link>
+            <x-custom.responsive-nav-dropdown :com05s="$com05s" titulo="Planilla de Carga" nameRoute="planillaCarga" allroute="planillaCarga" />
             @endhasanyrole
         </div>
 
