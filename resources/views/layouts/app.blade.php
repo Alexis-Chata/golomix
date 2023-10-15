@@ -55,7 +55,7 @@
 
         @stack("estiloscss")
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased text-sm">
         <x-banner />
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
