@@ -99,7 +99,7 @@ class PedidosController extends Controller
             $item->qfaccon = ($com01s[substr($key, -3)]->qfaccon);
             $item->qprecio = ($com01s[substr($key, -3)]->qprecio);
             $importe = ($item->totalqcanpedbultos*$item->qprecio) + ($item->qprecio*$item->totalqcanpedunidads)/$item->qfaccon;
-            $item->importe = number_format($importe, 2);
+            $item->importe = ($importe);
         });
 
         return $com37s;

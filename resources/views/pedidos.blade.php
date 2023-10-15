@@ -128,7 +128,7 @@
                                 <td class="text-center">{{ $com37->totalqcanpedbultos }}</td>
                                 <td class="text-center">{{ $com37->totalqcanpedunidads }}</td>
                                 @hasanyrole('Super-Admin')
-                                    <td class="text-end" style="padding-right: 1.4rem;">{{ $com37->importe }}</td>
+                                    <td class="text-end" style="padding-right: 1.4rem;">{{ number_format($com37->importe, 2) }}</td>
                                 @endhasanyrole
                                 <td>{{ $com37->marcacod }} - {{ $com37->marca }}</td>
                             </tr>
