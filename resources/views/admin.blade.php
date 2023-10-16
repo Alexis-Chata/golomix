@@ -25,6 +25,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Cod. Vendedor</th>
                         <th scope="col">Email</th>
                         <th scope="col">Celular</th>
                         <th scope="col">Remember Token</th>
@@ -36,6 +37,7 @@
                         <tr>
                             <th scope="row">{{ $user->id }}</th>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->celular }}</td>
                             <td>{{ $user->remember_token }}</td>
