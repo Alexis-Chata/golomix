@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Com01Controller;
 use App\Http\Controllers\Com05Controller;
 use App\Http\Controllers\Com07Controller;
@@ -78,8 +79,6 @@ Route::middleware([
         Route::post('actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
     });
 
-    Route::get('admin', function(){
-        return view('admin');
-    });
+    Route::get('admin', [AdminController::class, 'admin'])->name('admin')->middleware(['role_or_permission:Super-Admin']);
 
 });

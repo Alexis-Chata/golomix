@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-6 sm:-my-px sm:ml-10 sm:flex">
                     @hasanyrole('Super-Admin')
                         <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
@@ -147,6 +147,12 @@
                                 {{ __('Manage Account') }}
                             </div>
 
+                            @hasanyrole('Super-Admin')
+                                <x-dropdown-link href="{{ route('admin') }}">
+                                    {{ __('Admin') }}
+                                </x-dropdown-link>
+                            @endhasanyrole
+
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
@@ -231,13 +237,13 @@
             @endif
 
             @hasanyrole('Super-Admin')
-            <x-responsive-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
-                {{ __('Distribucion de Carga') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
-                {{ __('Distribucion de Rutas') }}
-            </x-responsive-nav-link>
-            <x-custom.responsive-nav-dropdown :com05s="$com05s" titulo="Planilla de Carga" nameRoute="planillaCarga" allroute="planillaCarga" />
+                <x-responsive-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
+                    {{ __('Distribucion de Carga') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
+                    {{ __('Distribucion de Rutas') }}
+                </x-responsive-nav-link>
+                <x-custom.responsive-nav-dropdown :com05s="$com05s" titulo="Planilla de Carga" nameRoute="planillaCarga" allroute="planillaCarga" />
             @endhasanyrole
         </div>
 
@@ -259,6 +265,10 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
+                <x-responsive-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
+                    {{ __('Admin') }}
+                </x-responsive-nav-link>
+
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
