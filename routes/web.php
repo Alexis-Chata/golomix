@@ -78,4 +78,8 @@ Route::middleware([
         Route::post('actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
     });
 
+    Route::get('admin', function(){
+        return view('admin');
+    });
+
 });
