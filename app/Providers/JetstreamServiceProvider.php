@@ -30,7 +30,7 @@ class JetstreamServiceProvider extends ServiceProvider
 
         Fortify::registerView(function () {
             $cven_asignados = CodVendedorAsignado::whereTipo('main')->get('cven');
-            $cvens = Com10::whereNotIn('cven', $cven_asignados)->get('cven');
+            $cvens = Com10::where('ccargo', '1')->whereNotIn('cven', $cven_asignados)->get('cven');
             return view('auth.register', compact('cvens'));
         });
     }
