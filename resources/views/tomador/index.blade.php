@@ -9,17 +9,20 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <div class="info-box">
-                    <div class="info-box-content">
-                        <span class="info-box-text">#70272 - ESPEJO LIZARASO JOHAN MICHAEL</span>
-                        <span class="info-box-number">AV. GRAN CHIMU 876 URB. ZARATE</span>
+            @forelse($clientes as $key => $cliente)
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <div class="info-box-content">
+                            <span class="info-box-number">#{{ $cliente->ccli }} - {{ $cliente->tcli }}</span>
+                            <span class="info-box-text">{{ $cliente->tdir }}</span>
+                        </div>
+                        <span class="info-box-icon bg-info">
+                            <i class="fas fa-address-card"></i>
+                        </span>
                     </div>
-                    <span class="info-box-icon bg-info">
-                        <i class="fas fa-address-card"></i>
-                    </span>
                 </div>
-            </div>
+            @empty
+            @endforelse
         </div>
     </div>
 @stop

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Com31;
+use App\Traits\QueryTrait;
 use Illuminate\Http\Request;
 
 class TomadorController extends Controller
 {
+    use QueryTrait;
+
     public function index()
     {
-        $Clientes = new ListaclienteController();
-        //return auth()->user()->codVendedorAsignadosMain()->cven;
         $cven = auth()->user()->codVendedorAsignados()->firstWhere('tipo', 'main')->cven;
-        dd($cven);
-        $Clientes->querylistaclientes();
-        return $Clientes;
-        return view('tomador.index');
+        $clientes = $this->querylistaclientes($cven);
+        //return $clientes;
+        return view('tomador.index', compact('clientes'));
     }
 }
