@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ListaclienteController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ScrHcom20Controller;
+use App\Http\Controllers\TomadorController;
 use App\Http\Controllers\Ugr01Controller;
 use App\Models\Com10;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,6 @@ Route::middleware([
 
     Route::get('admin', [AdminController::class, 'admin'])->name('admin')->middleware(['role_or_permission:Super-Admin']);
 
-    Route::view('tomador', 'tomador.index');
+    Route::get('tomador', [TomadorController::class, 'index']);
 
 });

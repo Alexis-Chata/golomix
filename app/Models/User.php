@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CodVendedorAsignado::class);
     }
+
+    public function codVendedorAsignadosMain()
+    {
+        return $this->hasMany(CodVendedorAsignado::class)->firstWhere('tipo', 'main');
+    }
 }
