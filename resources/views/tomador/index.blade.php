@@ -1,9 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Index')
+@section('title', 'Tomador de Pedidos')
 
 @section('content_header')
-<h1>Lista Clientes</h1>
+<h1>Clientes {{isset($rutaDelDia)?"Ruta ".$clientes[0]->crut ." - ". $clientes[0]->tdes:""}}</h1>
+<br>
 @stop
 
 @section('content')
@@ -16,8 +17,7 @@
                     <span class="info-box-number">#{{ $cliente->ccli }} - {{ $cliente->tcli }}</span>
                     <span class="info-box-text">
                         <ul class="m-0 pl-4">
-                            <li>
-                                {{ $cliente->crut }} - {{ $cliente->tdes }}</li>
+                            <li>{{ $cliente->crut }} - {{ $cliente->tdes }}</li>
                         </ul>
                     </span>
                     <span class="info-box-text">{{ $cliente->tdir }}</span>

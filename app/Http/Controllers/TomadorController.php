@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Com31;
+use App\Models\Com10;
 use App\Traits\QueryTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TomadorController extends Controller
 {
@@ -12,9 +13,12 @@ class TomadorController extends Controller
 
     public function index()
     {
+        $dia = Carbon::now()->format('w');
+        // $dia = Carbon::parse('2023-10-22')->format('w');
+        $dia = ($dia == 0 ? '7' : $dia);
         $cven = auth()->user()->codVendedorAsignados()->firstWhere('tipo', 'main')->cven;
-        $clientes = $this->querylistaclientes($cven);
-        //return $clientes;
-        return view('tomador.index', compact('clientes'));
+        $rutaDelDia = Com10::whereCven($cven)->get('r'.$dia)->first()['r'.$dia];
+        $clientes = $this->querylistaclientes($cven, $rutaDelDia);
+        return view('tomador.index', compact('clientes', 'rutaDelDia'));
     }
 }

@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\DB;
 trait QueryTrait
 {
 
-    public function querylistaclientes($cven = null){
+    public function querylistaclientes($cven = null, $crut = null){
         ($cven != null) ? $where = "\n WHERE   cven = $cven" : $where = "";
+        ($crut != null) ? $where = "\n WHERE   com31s.crut = $crut" : $where = "";
 
         $com31s = DB::select("SELECT
         `com31s`.`ccli`
