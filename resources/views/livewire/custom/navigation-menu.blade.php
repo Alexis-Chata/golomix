@@ -265,9 +265,11 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
+                @hasanyrole('Super-Admin')
                 <x-responsive-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
                     {{ __('Admin') }}
                 </x-responsive-nav-link>
+                @endhasanyrole
 
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}

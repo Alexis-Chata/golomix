@@ -13,6 +13,15 @@ class TomadorController extends Controller
 
     public function index()
     {
+        dd(
+            __METHOD__,
+            get_class($this),
+            __FUNCTION__,
+            request()->method(),
+            request()->url(),
+            request()->ip(),
+            request()->route()->getName()
+        );
         $dia = Carbon::now()->format('w');
         // $dia = Carbon::parse('2023-10-22')->format('w');
         $dia = ($dia == 0 ? '7' : $dia);

@@ -82,6 +82,6 @@ Route::middleware([
 
     Route::get('admin', [AdminController::class, 'admin'])->name('admin')->middleware(['role_or_permission:Super-Admin']);
 
-    Route::get('tomador', [TomadorController::class, 'index']);
+    Route::get('tomador', [TomadorController::class, 'index'])->name('tomador');
 
 });
