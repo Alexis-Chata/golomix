@@ -47,7 +47,7 @@ class PedidosController extends Controller
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
         }
-
+        $this->bitacora('Pedidos ', __METHOD__);
         return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fmov', 'cven', 'com37s'));
     }
 
