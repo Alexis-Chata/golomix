@@ -7,12 +7,15 @@ use App\Models\Com05;
 use App\Models\Com36;
 use App\Models\Com37;
 use App\Models\ugr01;
+use App\Traits\BitacoraTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 
 class PedidosController extends Controller
 {
+    Use BitacoraTrait;
+
     public function pedidosall()
     {
         $com36s = collect();
@@ -47,7 +50,8 @@ class PedidosController extends Controller
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
         }
-        $this->bitacora('Pedidos ', __METHOD__);
+
+        $this->bitacora('Pedidos '.$cven.$com36s->first()->tven, __METHOD__);
         return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fmov', 'cven', 'com37s'));
     }
 
