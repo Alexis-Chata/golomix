@@ -42,6 +42,7 @@ class PedidosController extends Controller
         $pedidosAgrupados = collect();
         $fmov = '';
         $com37s = [];
+        $descripcion = "Pedidos ".$cven;
 
         if (Com36::latest('fmov')->where('cven', $cven)->exists()) {
             $fmov = Com36::latest('fmov')->where('cven', $cven)->first()->fmov;
@@ -49,9 +50,10 @@ class PedidosController extends Controller
             $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
+            $descripcion .= " - ".$com36s->first()->tven;
         }
 
-        $this->bitacora('Pedidos '.$cven.$com36s->first()->tven, __METHOD__);
+        $this->bitacora($descripcion, __METHOD__);
         return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fmov', 'cven', 'com37s'));
     }
 
