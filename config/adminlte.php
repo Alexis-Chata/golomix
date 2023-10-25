@@ -303,6 +303,11 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text' => 'Bitacora',
+            'url'  => 'bitacora',
+            'can'  => 'manage-blog',
+        ],
+        [
             'text'        => 'tomador',
             'url'         => 'tomador',
             'icon'        => 'far fa-fw fa-file',

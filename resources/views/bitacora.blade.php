@@ -10,7 +10,7 @@
 
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">Usuarios</h3>
+            <h3 class="card-title">Bitacora</h3>
             <div class="card-tools">
                 <!-- Buttons, labels, and many other things can be placed here! -->
                 <!-- Here is a label for example -->
@@ -24,24 +24,24 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Cod. Vendedor</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Celular</th>
-                        <th scope="col">Remember Token</th>
-                        <th scope="col">Foto Path</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Nombre Usuario</th>
+                        <th scope="col">ip</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Roles</th>
+                        <th scope="col">Permisos</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($users as $user)
                         <tr>
                             <th scope="row">{{ $user->id }}</th>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->celular }}</td>
-                            <td>{{ $user->limit() }}</td>
-                            <td>{{ $user->profile_photo_path }}</td>
+                            <td>{{ $user->descripcion }}</td>
+                            <td>{{ $user->user_name }}</td>
+                            <td>{{ $user->ip }}</td>
+                            <td>{{ $user->url }}</td>
+                            <td>{{ $user->roles_names }}</td>
+                            <td>{{ $user->permisos_names }}</td>
                         </tr>
                     @empty
                     @endforelse

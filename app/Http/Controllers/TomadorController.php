@@ -21,7 +21,7 @@ class TomadorController extends Controller
         $cven = auth()->user()->codVendedorAsignados()->firstWhere('tipo', 'main')->cven;
         $rutaDelDia = Com10::whereCven($cven)->get('r'.$dia)->first()['r'.$dia];
         $clientes = $this->querylistaclientes($cven, $rutaDelDia);
-        $this->bitacora('Tomador Pedidos', __METHOD__);
+        // $this->bitacora('Tomador Pedidos', __METHOD__);
         return view('tomador.index', compact('clientes', 'rutaDelDia'));
     }
 }
