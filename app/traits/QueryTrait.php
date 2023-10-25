@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 trait QueryTrait
 {
 
-    public function querylistaclientes($cven = null, $crut = null){
-        ($cven != null) ? $where = "\n WHERE   cven = $cven" : $where = "";
-        ($crut != null) ? $where = "\n WHERE   com31s.crut = $crut" : $where = "";
-
+    public function querylistaclientes($cven = null, $crut = null)
+    {
+        $whereCven = ($cven != null) ? "\n WHERE   cven = $cven" : null;
+        $whereCrut = ($crut != null) ? "\n WHERE   com31s.crut = $crut" : null;
+        $where = $whereCven != null && $whereCrut != null ? "\n WHERE   cven = $cven AND com31s.crut = $crut" : null;
+        $where = ($where??$whereCrut??$whereCven??"");
         $com31s = DB::select("SELECT
         `com31s`.`ccli`
         , `com31s`.`crut`
@@ -35,7 +37,7 @@ trait QueryTrait
             INNER JOIN `com10s`
                 ON (`com30s`.`czon` = `com10s`.`czon`)
             LEFT JOIN (SELECT ccli, MAX(femi) AS femi FROM scr_hcom20s GROUP BY ccli) scr_hcom20s
-                ON (`com31s`.`ccli` = `scr_hcom20s`.`ccli`)".$where);
+                ON (`com31s`.`ccli` = `scr_hcom20s`.`ccli`)" . $where);
         //dd($com31s);
         return $com31s;
     }
