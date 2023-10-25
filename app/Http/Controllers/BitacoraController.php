@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class BitacoraController extends Controller
 {
     public function bitacora(){
-        $users = Bitacora::all();
-        return view('bitacora', compact('users'));
+        $bitacoras = Bitacora::orderBy('id', 'DESC')->get();
+        return view('bitacora', compact('bitacoras'));
     }
 }

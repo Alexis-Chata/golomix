@@ -33,15 +33,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($users as $user)
+                    @forelse ($bitacoras as $bitacora)
                         <tr>
-                            <th scope="row">{{ $user->id }}</th>
-                            <td>{{ $user->descripcion }}</td>
-                            <td>{{ $user->user_name }}</td>
-                            <td>{{ $user->ip }}</td>
-                            <td>{{ $user->url }}</td>
-                            <td>{{ $user->roles_names }}</td>
-                            <td>{{ $user->permisos_names }}</td>
+                            <th scope="row">{{ $bitacora->id }}</th>
+                            <td>{{ $bitacora->descripcion }}</td>
+                            <td>{{ $bitacora->user_name }}</td>
+                            <td>{{ $bitacora->ip }}</td>
+                            <td>{{ $bitacora->url }}</td>
+                            <td>{{ $bitacora->roles_names }}</td>
+                            <td>{{ $bitacora->permisos_names }}</td>
                         </tr>
                     @empty
                     @endforelse
