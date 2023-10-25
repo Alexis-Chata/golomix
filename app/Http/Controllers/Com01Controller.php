@@ -6,17 +6,22 @@ use App\Imports\Com01sImport;
 use App\Imports\Com01sTipoProductoImport;
 use App\Models\Com01;
 use App\Models\ugr01;
+use App\Traits\BitacoraTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Com01Controller extends Controller
 {
+    use BitacoraTrait;
+
     public function index()
     {
         $marcas = ugr01::where('cind', '045')->get();
         $com01s = $this->listaPrecios();
         $precioMayorista = false;
+        $descripcion = "Lista Precios Bodega";
+        $this->bitacora($descripcion, __METHOD__);
         return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }
 
@@ -30,6 +35,8 @@ class Com01Controller extends Controller
         $marcas = Ugr01::where('cind', '045')->get();
         $com01s = $this->listaPrecios();
         $precioMayorista = true;
+        $descripcion = "Lista Precios Mayorista";
+        $this->bitacora($descripcion, __METHOD__);
         return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }
 

@@ -24,15 +24,15 @@ class DatabaseSeeder extends Seeder
         $this->call(CodVendedorAsignadoSeeder::class);
 
         // Datos de Prueba
-        $this->call(Com36Seeder::class);
-        $this->call(Com37Seeder::class);
-        $this->call(Com30Seeder::class);
-        $this->call(Com01Seeder::class);
-        $this->call(Ugr01Seeder::class);
-        $this->call(Com07Seeder::class);
-        $this->call(Com31Seeder::class);
-        $this->call(Com10Seeder::class);
-        $this->call(Com05Seeder::class);
-        $this->call(ScrHcom20Seeder::class);
+        // $this->call(Com36Seeder::class);
+        // $this->call(Com37Seeder::class);
+        // $this->call(Com30Seeder::class);
+        // $this->call(Com01Seeder::class);
+        // $this->call(Ugr01Seeder::class);
+        // $this->call(Com07Seeder::class);
+        // $this->call(Com31Seeder::class);
+        // $this->call(Com10Seeder::class);
+        // $this->call(Com05Seeder::class);
+        // $this->call(ScrHcom20Seeder::class);
     }
 }
