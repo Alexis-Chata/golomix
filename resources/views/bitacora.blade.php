@@ -6,6 +6,8 @@
     <h1>Dashboard</h1>
 @stop
 
+@section('plugins.Datatables', true)
+
 @section('content')
 
     <div class="card card-outline card-primary">
@@ -31,6 +33,7 @@
                         <th scope="col">Roles</th>
                         <th scope="col">Permisos</th>
                         <th scope="col">Fecha Hora</th>
+                        <th scope="col">Time Transcurrido</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +47,7 @@
                             <td>{{ $bitacora->roles_names }}</td>
                             <td>{{ $bitacora->permisos_names }}</td>
                             <td>{{ $bitacora->created_at }}</td>
+                            <td>{{ $bitacora->created_at->diffForHumans() }}</td>
                         </tr>
                     @empty
                     @endforelse
