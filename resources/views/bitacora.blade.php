@@ -68,12 +68,19 @@
 @section('js')
     <script>
         $('#bitacora').DataTable({
-            order: [[0, 'desc']],
+            "columnDefs": [{
+                "type": "num",
+                "targets": 0
+            }],
+            order: [
+                [0, 'desc']
+            ],
             responsive: true,
             autoWidth: false,
             "language": {
-                        "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
-                    }
+                "url": "https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+            },
+            "pagingType": "numbers",
         });
     </script>
 @stop
