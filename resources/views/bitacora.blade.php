@@ -7,6 +7,7 @@
 @stop
 
 @section('plugins.Datatables', true)
+@section('plugins.Datatables-Plugins', true)
 
 @section('content')
 
@@ -22,7 +23,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            <table class="table table-striped table-hover table-responsive-sm table-responsive-md">
+            <table class="table table-striped table-hover" id="bitacora">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -66,6 +67,9 @@
 
 @section('js')
     <script>
-        console.log('Hi!');
+        $('#bitacora').DataTable({
+            responsive: true,
+            autoWidth: false,
+        });
     </script>
 @stop
