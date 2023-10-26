@@ -68,6 +68,7 @@
 @section('js')
     <script>
         $('#bitacora').DataTable({
+            order: [[0, 'desc']],
             responsive: true,
             autoWidth: false,
         });
