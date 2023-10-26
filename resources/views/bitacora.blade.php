@@ -30,6 +30,7 @@
                         <th scope="col">Url</th>
                         <th scope="col">Roles</th>
                         <th scope="col">Permisos</th>
+                        <th scope="col">Fecha Hora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,7 @@
                             <td>{{ $bitacora->url }}</td>
                             <td>{{ $bitacora->roles_names }}</td>
                             <td>{{ $bitacora->permisos_names }}</td>
+                            <td>{{ $bitacora->created_at }}</td>
                         </tr>
                     @empty
                     @endforelse
