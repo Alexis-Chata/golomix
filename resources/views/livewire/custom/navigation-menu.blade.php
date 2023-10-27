@@ -151,6 +151,9 @@
                                 <x-dropdown-link href="{{ route('admin') }}">
                                     {{ __('Admin') }}
                                 </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('bitacora') }}">
+                                    {{ __('Bitacora') }}
+                                </x-dropdown-link>
                             @endhasanyrole
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
@@ -266,9 +269,12 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 @hasanyrole('Super-Admin')
-                <x-responsive-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
-                    {{ __('Admin') }}
-                </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
+                        {{ __('Admin') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
+                        {{ __('Bitacora') }}
+                    </x-responsive-nav-link>
                 @endhasanyrole
 
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
