@@ -10,11 +10,14 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div class="col-12 mb-3">
+            <input class="form-control" type="text" name="buscador" id="buscador" placeholder="Buscar...">
+        </div>
         @forelse($clientes as $key => $cliente)
         <div class="col-md-6">
             <div class="info-box">
                 <div class="info-box-content">
-                    <span class="info-box-number">#{{ $cliente->ccli }} - {{ $cliente->tcli }}</span>
+                    <span class="info-box-number cliente">#{{ $cliente->ccli }} - {{ $cliente->tcli }}</span>
                     <span class="info-box-text">
                         <ul class="m-0 pl-4">
                             <li>{{ $cliente->crut }} - {{ $cliente->tdes }}</li>
@@ -40,6 +43,14 @@
 
 @section('js')
 <script>
-    console.log('Hi!');
+    document.addEventListener("keyup", e=>{
+        if(e.target.matches("#buscador")){
+            document.querySelectorAll(".cliente").forEach(element => {
+                element.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+                ? element.parentNode.parentNode.parentNode.classList.remove("d-none")
+                : element.parentNode.parentNode.parentNode.classList.add("d-none")
+            });
+        }
+})
 </script>
 @stop
