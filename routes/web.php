@@ -84,6 +84,7 @@ Route::middleware([
     Route::get('admin', [AdminController::class, 'admin'])->name('admin')->middleware(['role_or_permission:Super-Admin']);
     Route::get('bitacora', [BitacoraController::class, 'bitacora'])->name('bitacora')->middleware(['role_or_permission:Super-Admin']);
 
-    Route::get('tomador', [TomadorController::class, 'index'])->name('tomador');
+    Route::get('tomador', [TomadorController::class, 'index'])->name('tomador.index');
+    Route::get('tomador/{ccli}', [TomadorController::class, 'show'])->name('tomador.show');
 
 });

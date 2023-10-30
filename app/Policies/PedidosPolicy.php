@@ -20,6 +20,6 @@ class PedidosPolicy
      */
     public function verpedidos(User $user, $cven)
     {
-        return in_array($cven, $user->codVendedorAsignados->pluck('cven')->toArray(), $cven);
+        return in_array($cven, $user->codVendedorAsignados->pluck('cven')->toArray());
     }
 }

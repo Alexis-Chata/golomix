@@ -15,7 +15,7 @@
         </div>
         @forelse($clientes as $key => $cliente)
         <div class="col-md-6">
-            <div class="info-box">
+            <a class="info-box no-underline text-body" style="height: calc(100% - 1rem);" href="{{ route('tomador.show', $cliente->ccli) }}">
                 <div class="info-box-content">
                     <span class="info-box-number cliente">#{{ $cliente->ccli }} - {{ $cliente->tcli }}</span>
                     <span class="info-box-text">
@@ -28,7 +28,7 @@
                 <span class="info-box-icon bg-info">
                     <i class="fas fa-address-card"></i>
                 </span>
-            </div>
+            </a>
         </div>
         @empty
         @endforelse

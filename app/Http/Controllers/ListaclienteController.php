@@ -6,9 +6,7 @@ use App\Models\Com10;
 use App\Traits\BitacoraTrait;
 use App\Traits\QueryTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Route;
 
 class ListaclienteController extends Controller
 {
