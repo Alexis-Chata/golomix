@@ -73,7 +73,7 @@ Route::middleware([
     });
 
     Route::get('listaclientes-download-pdf/{cven}/{crut}', [Com10Controller::class, 'listaclientesDownloadPdf'])->name('listaclientesDownload-pdf');
-    Route::get('listaclientes-download-excel/{cven}/{crut?}', [Com10Controller::class, 'listaclientesDownloadExcel'])->name('listaclientesDownload-excel');
+    Route::get('listaclientes-download-excel/{cven?}/{crut?}', [Com10Controller::class, 'listaclientesDownloadExcel'])->name('listaclientesDownload-excel');
 
     Route::controller(Com01Controller::class)->group(function () {
         Route::get('productos', 'index')->name('allProductos');

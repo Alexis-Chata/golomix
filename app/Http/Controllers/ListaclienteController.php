@@ -14,8 +14,9 @@ class ListaclienteController extends Controller
 
     public function listaclientesall()
     {
+        $cven = null;
         $com31s = $this->querylistaclientes();
-        return view('listaClientes', compact('com31s'));
+        return view('listaClientes', compact('com31s', 'cven'));
     }
 
     public function listaclientes($cven)

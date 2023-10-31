@@ -23,7 +23,7 @@ class Com10Controller extends Controller
         $pdf = Pdf::loadView('listaclientesDownloadPdf', compact('com31s', 'nro'));
         return $pdf->download($nombrePdf);
     }
-    public function listaclientesDownloadExcel($cven, $crut = null){
+    public function listaclientesDownloadExcel($cven = null, $crut = null){
         $filePath = isset($crut) ? 'Vendedor_'.$cven.'_Ruta_'.$crut.'.xlsx' : 'Vendedor_'.$cven.'_lista_clientes.xlsx';
         return Excel::download(new Com31sExport($cven, $crut), $filePath);
     }
