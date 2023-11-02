@@ -78,6 +78,7 @@ Route::middleware([
     Route::controller(Com01Controller::class)->group(function () {
         Route::get('productos', 'index')->name('allProductos');
         Route::get('listaclientes-download-pdf/{tipoPrecio}', 'listaPreciosDownloadPdf')->name('ProductosDescargarPdf');
+        Route::get('listaclientes-download-excel', 'listaPreciosDownloadExcel')->name('ProductosDescargarExcel');
         Route::get('productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
         Route::post('actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
     });

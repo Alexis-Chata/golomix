@@ -17,8 +17,7 @@ class Com01Controller extends Controller
 
     public function index()
     {
-        $marcas = ugr01::where('cind', '045')->get();
-        $com01s = $this->listaPrecios();
+        list($com01s, $marcas) = $this->listaPrecios();
         $precioMayorista = false;
         $descripcion = "Lista Precios Bodega";
         $this->bitacora($descripcion, __METHOD__);
@@ -32,8 +31,7 @@ class Com01Controller extends Controller
      */
     public function precioMayorista()
     {
-        $marcas = Ugr01::where('cind', '045')->get();
-        $com01s = $this->listaPrecios();
+        list($com01s, $marcas) = $this->listaPrecios();
         $precioMayorista = true;
         $descripcion = "Lista Precios Mayorista";
         $this->bitacora($descripcion, __METHOD__);
@@ -42,23 +40,23 @@ class Com01Controller extends Controller
 
     public function listaPrecios()
     {
-        if (!auth()->check()) {
+        $marcas = ugr01::where('cind', '045')->get();
+        if (auth()->check()) {
             // Lista Sin Productos Discontinuados
             $com01s = Com01::whereNotIn('flagcre', ['1'])->get();
-            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get());
+            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get())->sortBy('cc04')->sortBy('tcor')->sortBy('qprecio')->sortBy('cequiv');
         } else {
             $com01s = Com01::all();
         }
-        return $com01s;
+        return [$com01s, $marcas];
     }
 
     public function listaPreciosDownloadPdf($tipoPrecio = '001')
     {
-        $marcas = Ugr01::where('cind', '045')->get();
-        $com01s = Com01::whereNotIn('flagcre', ['1'])->orderBy('cc04')->orderBy('tcor')->orderBy('qprecio')->orderBy('cequiv')->get();
+        list($com01s, $marcas) = $this->listaPrecios();
         $tipoPrecio == '001' ? $precioMayorista = false : $precioMayorista = true;
         //dd($com31s->firstwhere('ccli', '07001040')->scrhcom20s->last()->femi);
-        //return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
+        return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
         $nombrePdf = 'Lista_Productos_' . $tipoPrecio . '.pdf';
         $pdf = Pdf::loadView('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
         return $pdf->download($nombrePdf);
