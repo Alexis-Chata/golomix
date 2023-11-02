@@ -43,8 +43,10 @@ class Com01Controller extends Controller
         $marcas = ugr01::where('cind', '045')->get();
         if (auth()->check()) {
             // Lista Sin Productos Discontinuados
-            $com01s = Com01::whereNotIn('flagcre', ['1'])->get();
-            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get())->sortBy('cc04')->sortBy('tcor')->sortBy('qprecio')->sortBy('cequiv');
+            $com01s = Com01::whereNotIn('flagcre', ['1'])->get('id');
+            $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get('id'));
+            $com01s = Com01::whereIn('id', $com01s->pluck('id'))->orderBy('cc04')->orderBy('tcor')->orderBy('qprecio')->orderBy('cequiv')->get();
+            //dd($com01s->first());
         } else {
             $com01s = Com01::all();
         }
