@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Com01sExport;
 use App\Imports\Com01sImport;
 use App\Imports\Com01sTipoProductoImport;
 use App\Models\Com01;
@@ -58,10 +59,17 @@ class Com01Controller extends Controller
         list($com01s, $marcas) = $this->listaPrecios();
         $tipoPrecio == '001' ? $precioMayorista = false : $precioMayorista = true;
         //dd($com31s->firstwhere('ccli', '07001040')->scrhcom20s->last()->femi);
-        return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
+        //return View('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
         $nombrePdf = 'Lista_Productos_' . $tipoPrecio . '.pdf';
         $pdf = Pdf::loadView('listaPreciosDownloadPdf', compact('com01s', 'precioMayorista', 'marcas'));
         return $pdf->download($nombrePdf);
+    }
+
+    public function listaPreciosDownloadExcel($tipoPrecio = '001')
+    {
+        list($com01s, $marcas) = $this->listaPrecios();
+        $filename = ($tipoPrecio == '001') ? 'Bodega.xlsx' : 'Mayorista.xlsx';
+        return Excel::download(new Com01sExport, $filename);
     }
 
     /**
