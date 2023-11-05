@@ -42,7 +42,7 @@ class Com01Controller extends Controller
     public function listaPrecios()
     {
         $marcas = ugr01::where('cind', '045')->get();
-        if (auth()->check()) {
+        if(!auth()->user()->hasAnyRole('Super-Admin')){
             // Lista Sin Productos Discontinuados
             $com01s = Com01::whereNotIn('flagcre', ['1'])->get('id');
             $com01s = $com01s->concat(Com01::where('flagcre', '1')->whereNotIn('tipo_producto_id', ['5'])->where('fanu', '>', now()->subMonth(5))->whereNotIn('qprecio', ['0.01'])->get('id'));
@@ -68,7 +68,10 @@ class Com01Controller extends Controller
     public function listaPreciosDownloadExcel($tipoPrecio = '001')
     {
         $filename = ($tipoPrecio == '001') ? 'Bodega.xlsx' : 'Mayorista.xlsx';
-        return Excel::download(new Com01sExport($tipoPrecio), $filename);
+        $descarga = Excel::download(new Com01sExport($tipoPrecio), $filename);
+        $descripcion = "Descarga Lista Precios ".$filename;
+        $this->bitacora($descripcion, __METHOD__);
+        return $descarga;
     }
 
     /**

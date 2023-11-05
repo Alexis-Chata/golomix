@@ -3,7 +3,6 @@
 namespace App\Traits;
 
 use App\Models\Bitacora;
-use Illuminate\Support\Facades\DB;
 
 trait BitacoraTrait
 {
