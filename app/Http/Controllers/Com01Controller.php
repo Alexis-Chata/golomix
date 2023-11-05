@@ -67,9 +67,8 @@ class Com01Controller extends Controller
 
     public function listaPreciosDownloadExcel($tipoPrecio = '001')
     {
-        list($com01s, $marcas) = $this->listaPrecios();
         $filename = ($tipoPrecio == '001') ? 'Bodega.xlsx' : 'Mayorista.xlsx';
-        return Excel::download(new Com01sExport, $filename);
+        return Excel::download(new Com01sExport($tipoPrecio), $filename);
     }
 
     /**
