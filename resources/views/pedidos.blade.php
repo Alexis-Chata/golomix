@@ -102,7 +102,7 @@
                 <div class="p-2">
                     @if (request()->routeIs('planillaCarga'))
                         <br />
-                        {{ 'Importe Total de Carga: S/.' . number_format($com37s->sum('importe'), 2) }}
+                        Importe Total de Carga: S/.{{ $com37s != [] ? number_format($com37s->sum('importe'), 2) : number_format(0, 2) }}
                     @endif
                     <br />
                 </div>

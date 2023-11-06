@@ -22,7 +22,7 @@ class TomadorController extends Controller
         $dia = ($dia == 0 ? '7' : $dia);
         $cven = $this->getCvenMain();
         $rutaDelDia = Com10::whereCven($cven)->get('r'.$dia)->first()['r'.$dia];
-        $clientes = $this->querylistaclientes($cven, $rutaDelDia);
+        $clientes = $this->querylistaclientes($cven);
         // $this->bitacora('Tomador Pedidos', __METHOD__);
         return view('tomador.index', compact('clientes', 'rutaDelDia'));
     }
