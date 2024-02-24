@@ -47,7 +47,7 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function batchSize(): int
     {
-        return 400;
+        return 300;
     }
 
     public function uniqueBy()
@@ -57,6 +57,6 @@ class Com37sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
 
     public function chunkSize(): int
     {
-        return 400;
+        return 300;
     }
 }
