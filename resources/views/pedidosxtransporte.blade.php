@@ -39,7 +39,7 @@
                 {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
                 {{-- @dd($pedidosAgrupados); --}}
                 {{ ' - Fecha: ' . $fmov }}
-                <table id="example" class="display" style="width:100%; font-size:9px">
+                <table id="example" class="display" style="width:100%; font-size:12px">
                     <thead>
                         <tr>
                             <th>Consesionario</th>

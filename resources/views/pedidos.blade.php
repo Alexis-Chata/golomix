@@ -31,10 +31,10 @@
                 {{-- @dd($pedidosAgrupados); --}}
                 <div class="p-2">
                     {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fmov }}
-                    @if (request()->routeIs('planillaCarga'))
+                    {{-- @if (request()->routeIs('planillaCarga')) --}}
                         <br />
                         {{ 'Importe Total de Venta: S/.' . number_format($com36s->sum('qimpvta'), 2) }}
-                    @endif
+                    {{-- @endif --}}
                 </div>
                 @foreach ($pedidosAgrupados as $cvend => $tvens)
                     <details open>
