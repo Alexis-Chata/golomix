@@ -19,7 +19,7 @@
             }
 
             tr {
-                font-size: 10px;
+                font-size: 11px;
             }
 
             table.dataTable tbody th,
