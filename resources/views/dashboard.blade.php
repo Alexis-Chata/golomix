@@ -12,51 +12,67 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-{{-- isset de Prueba se esta usando banner de jetstream --}}
-@isset($archivoName)
-
-<div id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-  <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-  </svg>
-  <span class="sr-only">Info</span>
-  <div class="ms-3 text-sm font-medium">
-    Error: Al Subir Archivo... {{ $archivoName }}
-  </div>
-  <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
-    <span class="sr-only">Close</span>
-    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-    </svg>
-  </button>
-</div>
-<div id="alert-3" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-  <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-  </svg>
-  <span class="sr-only">Info</span>
-  <div class="ms-3 text-sm font-medium">
-    Archivo... {{ $archivoName }} Se Subio Correctamente!!
-  </div>
-  <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-3" aria-label="Close">
-    <span class="sr-only">Close</span>
-    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-    </svg>
-  </button>
-</div>
-
-@endisset
+            {{-- isset de Prueba se esta usando banner de jetstream --}}
+            @isset($archivoName)
+                <div id="alert-2"
+                    class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                    role="alert">
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div class="ms-3 text-sm font-medium">
+                        Error: Al Subir Archivo... {{ $archivoName }}
+                    </div>
+                    <button type="button"
+                        class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                        data-dismiss-target="#alert-2" aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="alert-3"
+                    class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div class="ms-3 text-sm font-medium">
+                        Archivo... {{ $archivoName }} Se Subio Correctamente!!
+                    </div>
+                    <button type="button"
+                        class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+                        data-dismiss-target="#alert-3" aria-label="Close">
+                        <span class="sr-only">Close</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                    </button>
+                </div>
+            @endisset
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-1 md:grid-cols-2">
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Pedidos">
-                                    <form action="{{ route('com36.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com36.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com36" class="cursor-pointer">Subir archivo Com36 </label>
-                                        <input type="file" name="arch_com36" id="arch_com36" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com36" id="arch_com36" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -69,10 +85,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Detalle Pedidos">
-                                    <form action="{{ route('com37.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com37.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com37" class="cursor-pointer">Subir archivo Com37 </label>
-                                        <input type="file" name="arch_com37" id="arch_com37" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com37" id="arch_com37" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -85,10 +103,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Rutas">
-                                    <form action="{{ route('com30.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com30.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com30" class="cursor-pointer">Subir archivo Com30 </label>
-                                        <input type="file" name="arch_com30" id="arch_com30" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com30" id="arch_com30" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -101,10 +121,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Productos">
-                                    <form action="{{ route('com01.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com01.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com01" class="cursor-pointer">Subir archivo Com01 </label>
-                                        <input type="file" name="arch_com01" id="arch_com01" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com01" id="arch_com01" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -117,10 +139,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Marca de Productos">
-                                    <form action="{{ route('ugr01.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('ugr01.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_ugr01" class="cursor-pointer">Subir archivo Ugr01 </label>
-                                        <input type="file" name="arch_ugr01" id="arch_ugr01" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_ugr01" id="arch_ugr01" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -133,10 +157,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Clientes">
-                                    <form action="{{ route('com07.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com07.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com07" class="cursor-pointer">Subir archivo Com07 </label>
-                                        <input type="file" name="arch_com07" id="arch_com07" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com07" id="arch_com07" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -149,10 +175,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Cliente-Ruta">
-                                    <form action="{{ route('com31.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com31.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com31" class="cursor-pointer">Subir archivo Com31 </label>
-                                        <input type="file" name="arch_com31" id="arch_com31" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com31" id="arch_com31" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -165,10 +193,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Vendedor-Rutas-Zona">
-                                    <form action="{{ route('com10.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com10.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com10" class="cursor-pointer">Subir archivo Com10 </label>
-                                        <input type="file" name="arch_com10" id="arch_com10" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com10" id="arch_com10" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -181,10 +211,12 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Consesioranio">
-                                    <form action="{{ route('com05.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com05.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <label for="arch_com05" class="cursor-pointer">Subir archivo Com05 </label>
-                                        <input type="file" name="arch_com05" id="arch_com05" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="arch_com05" id="arch_com05" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -197,11 +229,15 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Actualiza Tipo Producto">
-                                    <form action="{{ route('com01.actualizaTipoProductoId') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('com01.actualizaTipoProductoId') }}" class="py-6"
+                                        method="post" enctype="multipart/form-data">
                                         @csrf
-                                        <label for="com01_actualizaTipoProducto" class="cursor-pointer">Actualizar Tipo Producto
+                                        <label for="com01_actualizaTipoProducto" class="cursor-pointer">Actualizar
+                                            Tipo Producto
                                         </label>
-                                        <input type="file" name="com01_actualizaTipoProducto" id="com01_actualizaTipoProducto" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <input type="file" name="com01_actualizaTipoProducto"
+                                            id="com01_actualizaTipoProducto" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
@@ -214,10 +250,13 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                 <div class="row px-6" title="Actualiza el Tipo Producto">
-                                    <form action="{{ route('scrhcom20.store') }}" class="py-6" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('scrhcom20.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
-                                        <label for="arch_scr_hcom20" class="cursor-pointer">Subir archivo ScrHcom20 </label>
-                                        <input type="file" name="arch_scr_hcom20" id="arch_scr_hcom20" required class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <label for="arch_scr_hcom20" class="cursor-pointer">Subir archivo ScrHcom20
+                                        </label>
+                                        <input type="file" name="arch_scr_hcom20" id="arch_scr_hcom20" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                                         <button type="submit"
                                             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
                                             Archivo</button>
