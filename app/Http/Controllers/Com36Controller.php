@@ -48,6 +48,6 @@ class Com36Controller extends Controller
         $archivo = $request->file('arch_com36');
         Excel::import(new Com36sImport, $archivo);
         //$archivo = $this->import($archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }

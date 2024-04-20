@@ -19,6 +19,6 @@ class Com37Controller extends Controller
     {
         $archivo = $request->file('arch_com37');
         Excel::import(new Com37sImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }

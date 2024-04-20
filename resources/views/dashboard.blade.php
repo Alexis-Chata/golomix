@@ -12,6 +12,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+{{-- isset de Prueba se esta usando banner de jetstream --}}
 @isset($archivoName)
 
 <div id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">

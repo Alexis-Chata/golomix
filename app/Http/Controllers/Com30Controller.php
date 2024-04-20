@@ -18,6 +18,6 @@ class Com30Controller extends Controller
     {
         $archivo = $request->file('arch_com30');
         Excel::import(new Com30sImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }

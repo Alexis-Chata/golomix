@@ -19,6 +19,6 @@ class Ugr01Controller extends Controller
     {
         $archivo = $request->file('arch_ugr01');
         Excel::import(new Ugr01sImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }

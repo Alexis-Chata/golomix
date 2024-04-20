@@ -84,13 +84,13 @@ class Com01Controller extends Controller
     {
         $archivo = $request->file('arch_com01');
         Excel::import(new Com01sImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 
     public function actualizaTipoProductoId(Request $request)
     {
         $archivo = $request->file('com01_actualizaTipoProducto');
         Excel::import(new Com01sTipoProductoImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }

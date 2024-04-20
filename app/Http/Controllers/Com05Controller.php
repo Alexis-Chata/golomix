@@ -18,6 +18,6 @@ class Com05Controller extends Controller
     {
         $archivo = $request->file('arch_com05');
         Excel::import(new Com05sImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }

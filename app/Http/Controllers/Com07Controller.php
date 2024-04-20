@@ -19,6 +19,6 @@ class Com07Controller extends Controller
     {
         $archivo = $request->file('arch_com07');
         Excel::import(new Com07sImport, $archivo);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
     }
 }
