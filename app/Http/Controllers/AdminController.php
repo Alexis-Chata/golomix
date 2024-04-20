@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function admin(){
-        $users = User::all();
+        $users = User::with('codVendedorAsignados')->get();
         return view('admin', compact('users'));
     }
 }
