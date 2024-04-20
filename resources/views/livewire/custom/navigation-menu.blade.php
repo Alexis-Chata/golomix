@@ -154,6 +154,9 @@
                                 <x-dropdown-link href="{{ route('bitacora') }}">
                                     {{ __('Bitacora') }}
                                 </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('liquidaciones') }}">
+                                    {{ __('Liquidaciones') }}
+                                </x-dropdown-link>
                             @endhasanyrole
 
                             <x-dropdown-link href="{{ route('profile.show') }}">
@@ -274,6 +277,9 @@
                     </x-responsive-nav-link>
                     <x-responsive-nav-link href="{{ route('bitacora') }}" :active="request()->routeIs('bitacora')">
                         {{ __('Bitacora') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{ route('liquidaciones') }}" :active="request()->routeIs('liquidaciones')">
+                        {{ __('Liquidaciones') }}
                     </x-responsive-nav-link>
                 @endhasanyrole
 

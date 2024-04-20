@@ -308,6 +308,11 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text' => 'Liquidaciones',
+            'url'  => 'liquidaciones',
+            'can'  => 'manage-blog',
+        ],
+        [
             'text'        => 'tomador',
             'url'         => 'tomador',
             'icon'        => 'far fa-fw fa-file',

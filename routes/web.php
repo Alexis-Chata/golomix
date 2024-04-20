@@ -11,6 +11,7 @@ use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LiquidacionesController;
 use App\Http\Controllers\ListaclienteController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ScrHcom20Controller;
@@ -85,6 +86,7 @@ Route::middleware([
 
     Route::get('admin', [AdminController::class, 'admin'])->name('admin')->middleware(['role_or_permission:Super-Admin']);
     Route::get('bitacora', [BitacoraController::class, 'bitacora'])->name('bitacora')->middleware(['role_or_permission:Super-Admin']);
+    Route::get('liquidaciones', [LiquidacionesController::class, 'liquidaciones'])->name('liquidaciones')->middleware(['role_or_permission:Super-Admin']);
 
     Route::get('tomador', [TomadorController::class, 'index'])->name('tomador.index');
     Route::get('tomador/{ccli}', [TomadorController::class, 'show'])->name('tomador.show');
