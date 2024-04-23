@@ -44,6 +44,9 @@ class PedidosController extends Controller
         $com37s = [];
         $descripcion = "Pedidos ".$cven;
 
+        if (!Com36::latest('fmov')->where('cven', $cven)->exists()) {
+            $cven = auth()->user()->codVendedorAsignados->pluck('cven')->first();
+        }
         if (Com36::latest('fmov')->where('cven', $cven)->exists()) {
             $fmov = Com36::latest('fmov')->where('cven', $cven)->first()->fmov;
             $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->where('cven', $cven)->get();
