@@ -12,15 +12,15 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                        {{ __('Precios') }}
                     </x-nav-link>
 
                     <x-nav-link href="{{ route('allpedidos') }}"
                         :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
                         {{ __('Pedidos') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                    <x-nav-link href="{{ route('allProductosBodega') }}" :active="request()->routeIs('allProductosBodega')">
                         {{ __('P.Bodega') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('allProductosMayorista') }}"
@@ -179,15 +179,15 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                <x-responsive-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                    {{ __('Precios') }}
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link href="{{ route('allpedidos') }}"
                     :active="request()->routeIs('allpedidos') || request()->routeIs('pedidos')">
                     {{ __('Pedidos') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                <x-responsive-nav-link href="{{ route('allProductosBodega') }}" :active="request()->routeIs('allProductosBodega')">
                     {{ __('P.Bodega') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link href="{{ route('allProductosMayorista') }}"

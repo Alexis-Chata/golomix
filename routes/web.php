@@ -77,10 +77,11 @@ Route::middleware([
     Route::get('listaclientes-download-excel/{cven?}/{crut?}', [Com10Controller::class, 'listaclientesDownloadExcel'])->name('listaclientesDownload-excel');
 
     Route::controller(Com01Controller::class)->group(function () {
-        Route::get('productos', 'index')->name('allProductos');
+        Route::get('productos', 'index')->name('allProductos')->middleware(['role_or_permission:Super-Admin']);
         Route::get('listaprecios-download-pdf/{tipoPrecio}', 'listaPreciosDownloadPdf')->name('ProductosDescargarPdf');
         Route::get('listaprecios-download-excel/{tipoPrecio}', 'listaPreciosDownloadExcel')->name('ProductosDescargarExcel');
         Route::get('productos/mayorista', 'precioMayorista')->name('allProductosMayorista');
+        Route::get('productos/bodega', 'precioBodega')->name('allProductosBodega');
         Route::post('actualizaTipoProductoId', 'actualizaTipoProductoId')->name('com01.actualizaTipoProductoId');
     });
 

@@ -73,6 +73,7 @@ class PedidosController extends Controller
             $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
+            return view('pedidos', compact('com36s', 'pedidosAgrupados', 'fmov', 'ccon', 'com37s'));
         }
 
         if (Com36::latest('fmov')->where('ccon', $ccon)->exists()) {

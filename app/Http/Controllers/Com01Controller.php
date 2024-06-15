@@ -22,7 +22,7 @@ class Com01Controller extends Controller
         $precioMayorista = false;
         $descripcion = "Lista Precios Bodega";
         $this->bitacora($descripcion, __METHOD__);
-        return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
+        return view('precios', compact('com01s', 'precioMayorista', 'marcas'));
     }
 
     /**
@@ -35,6 +35,15 @@ class Com01Controller extends Controller
         list($com01s, $marcas) = $this->listaPrecios();
         $precioMayorista = true;
         $descripcion = "Lista Precios Mayorista";
+        $this->bitacora($descripcion, __METHOD__);
+        return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
+    }
+
+    public function precioBodega()
+    {
+        list($com01s, $marcas) = $this->listaPrecios();
+        $precioMayorista = false;
+        $descripcion = "Lista Precios Bodega";
         $this->bitacora($descripcion, __METHOD__);
         return view('productos', compact('com01s', 'precioMayorista', 'marcas'));
     }

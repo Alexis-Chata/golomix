@@ -13,8 +13,8 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-5 sm:-my-px sm:ml-8 sm:flex">
                     @hasanyrole('Super-Admin')
-                        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
+                        <x-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                            {{ __('Precios') }}
                         </x-nav-link>
                     @endhasanyrole
 
@@ -32,7 +32,7 @@
 
                     @endif
 
-                    <x-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                    <x-nav-link href="{{ route('allProductosBodega') }}" :active="request()->routeIs('allProductosBodega')">
                         {{ __('P.Bodega') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">
@@ -202,8 +202,8 @@
         <div class="pt-2 pb-3 space-y-1">
 
             @hasanyrole('Super-Admin')
-                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                <x-responsive-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+                    {{ __('Precios') }}
                 </x-responsive-nav-link>
             @endhasanyrole
 
@@ -221,7 +221,7 @@
 
             @endif
 
-            <x-responsive-nav-link href="{{ route('allProductos') }}" :active="request()->routeIs('allProductos')">
+            <x-responsive-nav-link href="{{ route('allProductosBodega') }}" :active="request()->routeIs('allProductosBodega')">
                 {{ __('P.Bodega') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('allProductosMayorista') }}" :active="request()->routeIs('allProductosMayorista')">

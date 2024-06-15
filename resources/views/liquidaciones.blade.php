@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - Liquidaciones')
 
 @section('content_header')
-    <h1>liquidaciones</h1>
+    <h1>Dashboard - Liquidaciones</h1>
 @stop
 
 @section('plugins.Datatables', true)
@@ -13,7 +13,7 @@
 
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h3 class="card-title">liquidaciones</h3>
+            <h3 class="card-title">Liquidaciones</h3>
             <div class="card-tools">
                 <!-- Buttons, labels, and many other things can be placed here! -->
                 <!-- Here is a label for example -->

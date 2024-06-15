@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard - Bitacora')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Dashboard - Bitacora</h1>
 @stop
 
 @section('plugins.Datatables', true)
