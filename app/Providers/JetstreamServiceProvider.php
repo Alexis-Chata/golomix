@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\Jetstream\DeleteUser;
 use App\Models\CodVendedorAsignado;
 use App\Models\Com10;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Jetstream\Jetstream;
@@ -29,7 +30,7 @@ class JetstreamServiceProvider extends ServiceProvider
         Jetstream::deleteUsersUsing(DeleteUser::class);
 
         Fortify::registerView(function () {
-            $cven_asignados = CodVendedorAsignado::whereTipo('main')->get('cven');
+            $cven_asignados = CodVendedorAsignado::whereIn('user_id', User::all("id")->pluck('id'))->whereTipo('main')->get('cven');
             $cvens = Com10::where('ccargo', '1')->whereNotIn('cven', $cven_asignados)->get('cven');
             return view('auth.register', compact('cvens'));
         });
