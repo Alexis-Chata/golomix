@@ -121,8 +121,8 @@
                             <th style="text-align: center;">Precio Cj B</th>
                             <th style="text-align: center;">Marca</th>
                             <th style="text-align: center;">Cant/Cj</th>
-                            <th style="text-align: center;">Precio Unidad M</th>
                             <th style="text-align: center;">Precio Cj M</th>
+                            <th style="text-align: center;">Precio Unidad M</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,9 +140,9 @@
                                 </td>
                                 <td style="text-align: center;">{{ $com01->qfaccon }}</td>
                                 <td style="text-align: end;padding-right: 3rem;">
-                                    {{ 'S/. ' . number_format($com01->qprecio2 / $com01->qfaccon, 2) }}</td>
-                                <td style="text-align: end;padding-right: 3rem;">
                                     {{ 'S/. ' . number_format($com01->qprecio2, 2) }}</td>
+                                <td style="text-align: end;padding-right: 3rem;">
+                                    {{ 'S/. ' . number_format($com01->qprecio2 / $com01->qfaccon, 2) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -154,8 +154,8 @@
                             <th style="text-align: center;">Precio Cj B</th>
                             <th style="text-align: center;">Marca</th>
                             <th style="text-align: center;">Cant/Cj</th>
-                            <th style="text-align: center;">Precio Unidad M</th>
                             <th style="text-align: center;">Precio Cj M</th>
+                            <th style="text-align: center;">Precio Unidad M</th>
                         </tr>
                     </tfoot>
                 </table>
