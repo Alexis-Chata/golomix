@@ -29,7 +29,7 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             'crut'  =>  $row['crut'],
             'csisven'   =>  $row['csisven'],
             'clin'  =>  $row['clin'],
-            'cletd' =>  $row['cletd'],
+            'cletd' =>  $row['cletd']??"NP",
             'ccia'  =>  $row['ccia'],
             'ctip'  =>  $row['ctip'],
             'nfac'  =>  $row['nfac'],
@@ -104,7 +104,7 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
         public function uniqueBy()
         {
-            return ['nfac', 'ccli'];
+            return ['cletd', 'nfac'];
         }
 
         public function chunkSize(): int

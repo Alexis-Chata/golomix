@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("tdes")->nullable()->default("-");
             $table->string("citem")->nullable()->default("-");
             $table->string("cprom")->nullable()->default("-");
-            $table->string("cletd")->nullable()->default("-");
+            $table->string("cletd")->default("NP");
             $table->string("ctip")->nullable()->default("-");
             $table->string("nfac")->nullable()->default("-");
             $table->string("nped")->nullable()->default("-");

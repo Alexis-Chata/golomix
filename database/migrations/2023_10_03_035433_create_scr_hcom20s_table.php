@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("crut")->nullable()->default("-");;
             $table->string("csisven")->nullable()->default("-");
             $table->string("clin")->nullable()->default("-");
-            $table->string("cletd")->nullable()->default("-");
+            $table->string("cletd")->default("NP");
             $table->string("ccia")->nullable()->default("-");
             $table->string("ctip")->nullable()->default("-");
             $table->string("nfac")->nullable()->default("-");;
@@ -89,7 +89,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
-            $table->unique(['nfac', 'ccli']);
+            $table->unique(['cletd', 'nfac']);
         });
     }
 

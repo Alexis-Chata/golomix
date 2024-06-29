@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("czon")->nullable()->default("-");
             $table->string("crut")->nullable()->default("-");
-            $table->string("cletd")->nullable()->default("-");
+            $table->string("cletd")->default("NP");
             $table->string("ctip")->nullable()->default("-");
             $table->string("nfac")->nullable()->default("-");
             $table->string("cven")->nullable()->default("-");
