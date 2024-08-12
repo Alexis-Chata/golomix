@@ -19,6 +19,11 @@ class Com36Controller extends Controller
      */
     public function store(Request $request)
     {
+        $mensaje = $this->procesando($request);
+        return redirect()->route('dashboard')->banner($mensaje);
+    }
+
+    public function procesando(Request $request){
         //elimina pedidos anulados (borrados)
         $f = fopen($request->file('arch_com36'), 'r');
         $npeds = array();
@@ -48,6 +53,6 @@ class Com36Controller extends Controller
         $archivo = $request->file('arch_com36');
         Excel::import(new Com36sImport, $archivo);
         //$archivo = $this->import($archivo);
-        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
+        return $archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!';
     }
 }
