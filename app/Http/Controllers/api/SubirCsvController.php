@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Com01Controller;
 use App\Http\Controllers\Com05Controller;
+use App\Http\Controllers\Com07Controller;
 use App\Http\Controllers\Com10Controller;
 use App\Http\Controllers\Com30Controller;
 use App\Http\Controllers\Com31Controller;
@@ -75,7 +76,7 @@ class SubirCsvController extends Controller
     }
 
     private function subirCom07(Request $request){
-        $objetCom37= new Com05Controller();
+        $objetCom37= new Com07Controller();
         $mensaje = $objetCom37->procesando($request);
         return $mensaje;
     }
