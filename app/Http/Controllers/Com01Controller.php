@@ -91,9 +91,14 @@ class Com01Controller extends Controller
      */
     public function store(Request $request)
     {
+        $mensaje = $this->procesando($request);
+        return redirect()->route('dashboard')->banner($mensaje);
+    }
+
+    public function procesando(Request $request){
         $archivo = $request->file('arch_com01');
         Excel::import(new Com01sImport, $archivo);
-        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
+        return $archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!';
     }
 
     public function actualizaTipoProductoId(Request $request)

@@ -16,8 +16,13 @@ class ScrHcom20Controller extends Controller
      */
     public function store(Request $request)
     {
+        $mensaje = $this->procesando($request);
+        return redirect()->route('dashboard')->banner($mensaje);
+    }
+
+    public function procesando(Request $request){
         $archivo = $request->file('arch_scr_hcom20');
         Excel::import(new ScrHcom20sImport, $archivo);
-        return redirect()->route('dashboard')->banner($archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!');
+        return $archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!';
     }
 }
