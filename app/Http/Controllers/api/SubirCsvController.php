@@ -25,6 +25,7 @@ class SubirCsvController extends Controller
             "com30" => $this->subirCom30($request),
             "com10" => $this->subirCom10($request),
             "com05" => $this->subirCom05($request),
+            "com07" => $this->subirCom07($request),
             "com31" => $this->subirCom31($request),
             default => 'Especificar tipo de archivo o tipo no encontrado',
         };
@@ -68,6 +69,12 @@ class SubirCsvController extends Controller
     }
 
     private function subirCom05(Request $request){
+        $objetCom37= new Com05Controller();
+        $mensaje = $objetCom37->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirCom07(Request $request){
         $objetCom37= new Com05Controller();
         $mensaje = $objetCom37->procesando($request);
         return $mensaje;
