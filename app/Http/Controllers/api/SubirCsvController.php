@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Com01Controller;
+use App\Http\Controllers\Com05Controller;
+use App\Http\Controllers\Com10Controller;
+use App\Http\Controllers\Com30Controller;
+use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\Controller;
@@ -18,6 +22,10 @@ class SubirCsvController extends Controller
             "com37" => $this->subirCom37($request),
             "ugr01" => $this->subirUgr01($request),
             "com01" => $this->subirCom01($request),
+            "com30" => $this->subirCom30($request),
+            "com10" => $this->subirCom10($request),
+            "com05" => $this->subirCom05($request),
+            "com31" => $this->subirCom31($request),
             default => 'Especificar tipo de archivo o tipo no encontrado',
         };
         return response()->json(['mensaje' => $mensaje], 200);
@@ -44,6 +52,30 @@ class SubirCsvController extends Controller
     private function subirCom01(Request $request){
         $objetCom01= new Com01Controller();
         $mensaje = $objetCom01->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirCom30(Request $request){
+        $objetCom01= new Com30Controller();
+        $mensaje = $objetCom01->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirCom10(Request $request){
+        $objetCom36= new Com10Controller();
+        $mensaje = $objetCom36->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirCom05(Request $request){
+        $objetCom37= new Com05Controller();
+        $mensaje = $objetCom37->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirCom31(Request $request){
+        $objetUgr01= new Com31Controller();
+        $mensaje = $objetUgr01->procesando($request);
         return $mensaje;
     }
 }
