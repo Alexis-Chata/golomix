@@ -11,6 +11,7 @@ use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\Ugr01Controller;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,7 @@ class SubirCsvController extends Controller
             "com05" => $this->subirCom05($request),
             "com07" => $this->subirCom07($request),
             "com31" => $this->subirCom31($request),
+            "scrhcom20" => $this->subirScrHcom20($request),
             default => 'Especificar tipo de archivo o tipo no encontrado',
         };
         return response()->json(['mensaje' => $mensaje], 200);
@@ -83,6 +85,12 @@ class SubirCsvController extends Controller
 
     private function subirCom31(Request $request){
         $objetUgr01= new Com31Controller();
+        $mensaje = $objetUgr01->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirScrHcom20(Request $request){
+        $objetUgr01= new ScrHcom20Controller();
         $mensaje = $objetUgr01->procesando($request);
         return $mensaje;
     }
