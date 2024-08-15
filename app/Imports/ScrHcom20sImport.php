@@ -39,7 +39,7 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             'cadm'  =>  $row['cadm'],
             'ccon'  =>  $row['ccon'],
             'ccli'  =>  $row['ccli'],
-            'femi'  =>  isset($row["fmov"]) ? Carbon::createFromFormat('d/m/Y', $row["fmov"]) : null,
+            'fmov'  =>  isset($row["fmov"]) ? Carbon::createFromFormat('d/m/Y', $row["fmov"]) : null,
             'femi'  =>  isset($row["femi"]) ? Carbon::createFromFormat('d/m/Y', $row["femi"]) : null,
             'ord'   =>  $row['ord'],
             'tnomrep'   =>  $row['tnomrep'],

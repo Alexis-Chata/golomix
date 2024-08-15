@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ScrHcom21 extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }
