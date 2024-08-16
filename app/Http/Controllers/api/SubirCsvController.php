@@ -12,6 +12,7 @@ use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ScrHcom20Controller;
+use App\Http\Controllers\ScrHcom21Controller;
 use App\Http\Controllers\Ugr01Controller;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,7 @@ class SubirCsvController extends Controller
             "com07" => $this->subirCom07($request),
             "com31" => $this->subirCom31($request),
             "scrhcom20" => $this->subirScrHcom20($request),
+            "scrhcom21" => $this->subirScrHcom21($request),
             default => 'Especificar tipo de archivo o tipo no encontrado',
         };
         return response()->json(['mensaje' => $mensaje], 200);
@@ -60,38 +62,44 @@ class SubirCsvController extends Controller
     }
 
     private function subirCom30(Request $request){
-        $objetCom01= new Com30Controller();
-        $mensaje = $objetCom01->procesando($request);
+        $objetCom30= new Com30Controller();
+        $mensaje = $objetCom30->procesando($request);
         return $mensaje;
     }
 
     private function subirCom10(Request $request){
-        $objetCom36= new Com10Controller();
-        $mensaje = $objetCom36->procesando($request);
+        $objetCom10= new Com10Controller();
+        $mensaje = $objetCom10->procesando($request);
         return $mensaje;
     }
 
     private function subirCom05(Request $request){
-        $objetCom37= new Com05Controller();
-        $mensaje = $objetCom37->procesando($request);
+        $objetCom05= new Com05Controller();
+        $mensaje = $objetCom05->procesando($request);
         return $mensaje;
     }
 
     private function subirCom07(Request $request){
-        $objetCom37= new Com07Controller();
-        $mensaje = $objetCom37->procesando($request);
+        $objetCom07= new Com07Controller();
+        $mensaje = $objetCom07->procesando($request);
         return $mensaje;
     }
 
     private function subirCom31(Request $request){
-        $objetUgr01= new Com31Controller();
-        $mensaje = $objetUgr01->procesando($request);
+        $objetCom31= new Com31Controller();
+        $mensaje = $objetCom31->procesando($request);
         return $mensaje;
     }
 
     private function subirScrHcom20(Request $request){
-        $objetUgr01= new ScrHcom20Controller();
-        $mensaje = $objetUgr01->procesando($request);
+        $objetScrHcom20= new ScrHcom20Controller();
+        $mensaje = $objetScrHcom20->procesando($request);
+        return $mensaje;
+    }
+
+    private function subirScrHcom21(Request $request){
+        $objetScrHcom21= new ScrHcom21Controller();
+        $mensaje = $objetScrHcom21->procesando($request);
         return $mensaje;
     }
 }

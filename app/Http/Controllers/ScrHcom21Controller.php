@@ -15,7 +15,7 @@ class ScrHcom21Controller extends Controller
     }
 
     public function procesando(Request $request){
-        $archivo = $request->file('arch_scr_hcom20');
+        $archivo = $request->file('arch_scr_hcom21');
         Excel::import(new ScrHcom21sImport, $archivo);
         return $archivo->getClientOriginalName().' Archivo... Se Subio Correctamente!!';
     }
