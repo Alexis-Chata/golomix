@@ -23,12 +23,12 @@ return new class extends Migration
             $table->string("qpreuni");
             $table->string("qimp")->default('0');
             $table->string("tdes");
-            $table->string("cps")->default('-');
-            $table->string("prom")->default('-');
+            $table->string("cps")->default('');
+            $table->string("prom")->default('');
             $table->string("qdesc")->default('0');
             $table->string("qpordes")->default('0');
             $table->string("qdesisc")->default('0');
-            $table->string("cpolcre")->default('-');
+            $table->string("cpolcre")->default('');
             $table->string("cletd")->default('NP');
             $table->string("ccia")->default('11');
             $table->string("ctip")->default('3');
@@ -36,8 +36,8 @@ return new class extends Migration
             $table->string("citem")->default('1');
             $table->string("qcanotr")->default('0');
             $table->string("ctipart")->default('1');
-            $table->string("ndcto")->default('-');
-            $table->string("cprom")->default('-');
+            $table->string("ndcto")->default('');
+            $table->string("cprom")->default('');
             $table->string("qdesofe")->default('0');
             $table->string("qprecos")->default('0');
             $table->string("nped")->default('-');
