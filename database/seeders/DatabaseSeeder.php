@@ -33,6 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Com31Seeder::class);
         $this->call(Com10Seeder::class);
         $this->call(Com05Seeder::class);
-        $this->call(ScrHcom20Seeder::class);
+        // $this->call(ScrHcom20Seeder::class);
     }
 }
