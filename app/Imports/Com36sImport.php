@@ -22,7 +22,7 @@ class Com36sImport implements ToModel, WithHeadingRow, WithBatchInserts, WithUps
         $datosPedido = [
             'czon'      => $row["czon"],
             'crut'      => $row["crut"],
-            'cletd'     => $row["cletd"] ?? "NP",
+            'cletd'     => $row["cletd"],
             'ctip'      => $row["ctip"],
             'nfac'      => $row["nfac"],
             'cven'      => $row["cven"],
