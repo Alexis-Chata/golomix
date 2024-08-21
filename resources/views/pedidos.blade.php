@@ -82,7 +82,7 @@
                                                     </ul>
                                                 @endforeach
                                                 <ul class="li p-30 monospaced-text">
-                                                    <p class="text-end" style="width: 100.83px"></p>
+                                                    <p class="text-end" style="width: 93.63px"></p>
                                                     <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
                                                     {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
                                                     {{ ' | ' }}<p class="w-70 text-end">
@@ -180,7 +180,7 @@
             }
 
             div#pedidos .w-320 {
-                width: 270px;
+                width: 240px;
             }
 
             div#pedidos .w-50 {
@@ -215,6 +215,7 @@
             }
             .monospaced-text{
                 font-family: "Courier New", Courier, monospace;
+                font-size: 13px;
             }
         </style>
     @endpush
