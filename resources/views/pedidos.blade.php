@@ -201,7 +201,7 @@
             }
 
             div#pedidos .p-30 {
-                padding-left: 30px;
+                padding-left: 12px;
             }
 
             div#pedidos #example_wrapper {
@@ -216,6 +216,7 @@
             .monospaced-text{
                 font-family: "Courier New", Courier, monospace;
                 font-size: 12px;
+                letter-spacing: -0.9px;
             }
         </style>
     @endpush
