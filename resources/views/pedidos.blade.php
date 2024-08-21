@@ -82,7 +82,7 @@
                                                     </ul>
                                                 @endforeach
                                                 <ul class="li p-30 monospaced-text">
-                                                    <p class="text-end" style="width: 86.34px"></p>
+                                                    <p class="text-end" style="width: 37.81px"></p>
                                                     <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
                                                     {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
                                                     {{ ' | ' }}<p class="w-70 text-end">
