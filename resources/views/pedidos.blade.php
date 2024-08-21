@@ -188,7 +188,7 @@
             }
 
             div#pedidos .w-70 {
-                width: 100px;
+                width: 89px;
             }
 
             div#pedidos p {
