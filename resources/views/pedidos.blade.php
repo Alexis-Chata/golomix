@@ -70,6 +70,7 @@
                                                 </ul>
                                                 @foreach ($pedido->com37s as $item)
                                                     <ul class="li p-30 monospaced-text">
+                                                        <p>123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</p>
                                                         <p>{{ substr($item->ccodart, -4) . ' | ' }}</p>
                                                         <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p class="w-50  text-end">
                                                             <strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong>
