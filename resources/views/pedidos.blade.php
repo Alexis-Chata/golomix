@@ -70,7 +70,7 @@
                                                 </ul>
                                                 @foreach ($pedido->com37s as $item)
                                                     <ul class="li p-30 monospaced-text">
-                                                        <p>{{ $item->ccodart . ' | ' }}</p>
+                                                        <p>{{ substr($item->ccodart, -4) . ' | ' }}</p>
                                                         <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p class="w-50  text-end">
                                                             <strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong>
                                                         </p>
@@ -180,7 +180,7 @@
             }
 
             div#pedidos .w-320 {
-                width: 225px;
+                width: 195px;
             }
 
             div#pedidos .w-50 {
@@ -188,7 +188,7 @@
             }
 
             div#pedidos .w-70 {
-                width: 101px;
+                width: 100px;
             }
 
             div#pedidos p {
