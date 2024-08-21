@@ -82,7 +82,7 @@
                                                     </ul>
                                                 @endforeach
                                                 <ul class="li p-30 monospaced-text">
-                                                    <p class="text-end" style="width: 76.31px"></p>
+                                                    <p class="text-end" style="width: 100.83px"></p>
                                                     <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
                                                     {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
                                                     {{ ' | ' }}<p class="w-70 text-end">
@@ -188,7 +188,7 @@
             }
 
             div#pedidos .w-70 {
-                width: 70px;
+                width: 105px;
             }
 
             div#pedidos p {
