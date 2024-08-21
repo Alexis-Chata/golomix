@@ -59,7 +59,7 @@
                                             <summary>
                                                 {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )' . ' ' }}
                                                 @if ($pedido->ccon)
-                                                    <i class="fa-sharp fa-solid fa-circle-check"></i>
+                                                    <i class="fa-sharp fa-solid fa-circle-check"></i><strong>( {{ $pedido->ccon }} )</strong>
                                                 @else
                                                     <i class="fa-solid fa-triangle-exclamation"></i>
                                                 @endif
@@ -69,7 +69,7 @@
                                                     <p>{{ utf8_decode($pedido->tdir) }}</p>
                                                 </ul>
                                                 @foreach ($pedido->com37s as $item)
-                                                    <ul class="li p-30">
+                                                    <ul class="li p-30 monospaced-text">
                                                         <p>{{ $item->ccodart . ' | ' }}</p>
                                                         <p class="w-320">{{ $item->tdes }}</p>{{ ' | ' }}<p class="w-50  text-end">
                                                             <strong>{{ number_format($item->qcanped, 2, '.', ',') }}</strong>
@@ -81,7 +81,7 @@
                                                         </p>
                                                     </ul>
                                                 @endforeach
-                                                <ul class="li p-30">
+                                                <ul class="li p-30 monospaced-text">
                                                     <p class="text-end" style="width: 76.31px"></p>
                                                     <p class="w-320"></p>{{ ' | ' }}<p class="w-50  text-end"></p>
                                                     {{ ' | ' }}<p class="w-50 text-end"><strong>TOTAL: </strong></p>
@@ -212,6 +212,9 @@
 
             div#example_wrapper select {
                 padding-right: 2.5rem;
+            }
+            .monospaced-text{
+                font-family: "Courier New", Courier, monospace;
             }
         </style>
     @endpush
