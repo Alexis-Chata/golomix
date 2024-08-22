@@ -108,7 +108,9 @@
                 });
 
                 window.onload = function() {
-                    document.querySelector('#example_filter input').focus();
+                    setTimeout(() => {
+                        document.querySelector('#example_filter input').focus();
+                    }, 500);
                 };
             });
 

@@ -59,9 +59,13 @@ Route::middleware([
     Route::get('vendedor-rutas', function () {
         $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
         //dd($com10s->firstWhere('cven', '090'));
+        if(auth()->user()->hasRole(['Super-Admin'])){
+            $cvens = auth()->user()->codVendedorAsignados->pluck('cven');
+            $com10s = $com10s->WhereIn('cven', $cvens);
+        }
         //dd($com10s);
         return view('vendedorRutas', compact('com10s'));
-    })->name('allVendedorRutas')->middleware(['role_or_permission:Super-Admin']);
+    })->name('allVendedorRutas');
 
     Route::controller(PedidosController::class)->group(function () {
         Route::get('pedidos', 'pedidosall')->name('allpedidos')->middleware(['role_or_permission:Super-Admin']);
