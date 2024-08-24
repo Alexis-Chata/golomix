@@ -176,7 +176,7 @@
             }
 
             div#pedidos div {
-                font-size: 14px;
+                font-size: 12px;
             }
 
             div#pedidos .w-320 {
