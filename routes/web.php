@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Com10;
+use App\Traits\BitacoraTrait;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\Com01Controller;
 use App\Http\Controllers\Com05Controller;
 use App\Http\Controllers\Com07Controller;
@@ -10,16 +12,16 @@ use App\Http\Controllers\Com30Controller;
 use App\Http\Controllers\Com31Controller;
 use App\Http\Controllers\Com36Controller;
 use App\Http\Controllers\Com37Controller;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LiquidacionesController;
-use App\Http\Controllers\ListaclienteController;
+use App\Http\Controllers\Ugr01Controller;
 use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\TomadorController;
+use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\ScrHcom21Controller;
-use App\Http\Controllers\TomadorController;
-use App\Http\Controllers\Ugr01Controller;
-use App\Models\Com10;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListaclienteController;
+use App\Http\Controllers\LiquidacionesController;
+use App\Http\Controllers\DistribucionPedidosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,16 +58,7 @@ Route::middleware([
     Route::resource('scrhcom20', ScrHcom20Controller::class)->only(['store']);
     Route::resource('scrhcom21', ScrHcom21Controller::class)->only(['store']);
 
-    Route::get('vendedor-rutas', function () {
-        $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
-        //dd($com10s->firstWhere('cven', '090'));
-        if(auth()->user()->hasRole(['Super-Admin'])){
-            $cvens = auth()->user()->codVendedorAsignados->pluck('cven');
-            $com10s = $com10s->WhereIn('cven', $cvens);
-        }
-        //dd($com10s);
-        return view('vendedorRutas', compact('com10s'));
-    })->name('allVendedorRutas');
+    Route::get('vendedor-rutas', [DistribucionPedidosController::class, 'listaDistribucionRutas'])->name('allVendedorRutas');
 
     Route::controller(PedidosController::class)->group(function () {
         Route::get('pedidos', 'pedidosall')->name('allpedidos')->middleware(['role_or_permission:Super-Admin']);
