@@ -25,7 +25,7 @@ class PedidosController extends Controller
 
         if (Com36::latest('fmov')->exists()) {
             $fmov = Com36::latest('fmov')->first()->fmov;
-            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->get();
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->whereNot('femi', $fmov)->get();
             $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
@@ -49,7 +49,7 @@ class PedidosController extends Controller
         }
         if (Com36::latest('fmov')->where('cven', $cven)->exists()) {
             $fmov = Com36::latest('fmov')->where('cven', $cven)->first()->fmov;
-            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->where('cven', $cven)->get();
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->whereNot('femi', $fmov)->where('cven', $cven)->get();
             $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
@@ -69,7 +69,7 @@ class PedidosController extends Controller
 
         if (Com36::latest('fmov')->exists() && is_null($ccon)) {
             $fmov = Com36::latest('fmov')->first()->fmov;
-            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->get();
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->whereNot('femi', $fmov)->get();
             $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
@@ -78,7 +78,7 @@ class PedidosController extends Controller
 
         if (Com36::latest('fmov')->where('ccon', $ccon)->exists()) {
             $fmov = Com36::latest('fmov')->where('ccon', $ccon)->first()->fmov;
-            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->where('ccon', $ccon)->get();
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->whereNot('femi', $fmov)->where('ccon', $ccon)->get();
             $pedidosAgrupados = $com36s->sortBy(['cven', 'ccli'])->groupBy(['cven', 'tven', 'crut'], $preserveKeys = true);
             $fmov = Carbon::parse($fmov)->format('d-m-Y');
             $com37s = $this->sumarCantidades($com36s);
@@ -124,7 +124,7 @@ class PedidosController extends Controller
 
         if (Com36::latest('fmov')->exists()) {
             $fmov = Com36::latest('fmov')->first()->fmov;
-            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->get();
+            $com36s = Com36::with(['com37s', 'com30s'])->where('fmov', $fmov)->whereNot('femi', $fmov)->get();
             //dd($com36s->first());
             $pedidosAgrupados = $com36s->sortBy(['ccon', 'crut', 'cven', 'ccli'])->groupBy(['ccon', 'crut', 'com30s.tdes', 'cven', 'tven'], $preserveKeys = true);
             //dd($pedidosAgrupados);
