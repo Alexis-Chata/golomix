@@ -16,7 +16,7 @@ class DistribucionPedidosController extends Controller
     {
         $com10s = Com10::with(['com30sr1', 'com30sr2', 'com30sr3', 'com30sr4', 'com30sr5', 'com30sr6', 'com30sr7'])->get()->sortBy(['cven']);
         //dd($com10s->firstWhere('cven', '090'));
-        if(auth()->user()->hasRole(['Super-Admin'])){
+        if(!auth()->user()->hasRole(['Super-Admin'])){
             $cvens = auth()->user()->codVendedorAsignados->pluck('cven');
             $com10s = $com10s->WhereIn('cven', $cvens);
         }
