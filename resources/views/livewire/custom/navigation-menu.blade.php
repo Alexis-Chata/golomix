@@ -56,12 +56,12 @@
                         <x-nav-link href="{{ route('allpedidosXtransporte') }}" :active="request()->routeIs('allpedidosXtransporte')">
                             {{ __('Distrib. de Carga') }}
                         </x-nav-link>
-
-                        <x-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
-                            {{ __('Distrib. de Rutas') }}
-                        </x-nav-link>
-                        <x-custom.nav-dropdown :com05s="$com05s" titulo="Planilla de Carga" nameRoute="planillaCarga" allroute="planillaCarga" />
                     @endhasanyrole
+
+                    <x-nav-link href="{{ route('allVendedorRutas') }}" :active="request()->routeIs('allVendedorRutas')">
+                        {{ __('Distrib. de Rutas') }}
+                    </x-nav-link>
+                    <x-custom.nav-dropdown :com05s="$com05s" titulo="Planilla de Carga" nameRoute="planillaCarga" allroute="planillaCarga" />
                 </div>
             </div>
 
