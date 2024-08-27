@@ -91,4 +91,5 @@ Route::middleware([
     Route::get('tomador', [TomadorController::class, 'index'])->name('tomador.index');
     Route::get('tomador/{ccli}', [TomadorController::class, 'show'])->name('tomador.show');
 
+    Route::view('powerbi', 'powerbi.powerbi');
 });
