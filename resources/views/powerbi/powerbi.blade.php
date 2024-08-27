@@ -13,12 +13,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-1">
 
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                            <div class="bg-white shadow-xl sm:rounded-lg">
                                 <div id="pedidos" class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                                 <iframe class="m-auto" title="Dashboard Servicio al cliente" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNDYyMDQzN2UtZWM5NS00MzkyLTk5MTktMTIyMTc3NTdiNDc0IiwidCI6IjFiNDEyZTAzLTVmNmEtNGE2Zi1hNjk0LTM0M2I4NjYxNjRlZiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
                                 </div>
