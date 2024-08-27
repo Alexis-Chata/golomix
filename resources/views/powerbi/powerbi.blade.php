@@ -80,14 +80,6 @@
 
     @push('eventsubmit-js')
         <script>
-            document.body.addEventListener("keyup", function(event) {
-                // El parámetro del evento es del tipo KeyboardEvent
-                if (event.code === 'Escape' || event.keyCode === 27) {
-                    console.log(event.code);
-                    alert('Esc pulsado');
-                    window.location.href = "{{ route('dashboard') }}";
-                }
-            });
             document.body.addEventListener('submit', cargando);
 
             function cargando(event) {
