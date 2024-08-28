@@ -44,7 +44,7 @@ return new class extends Migration
             $table->string("clistpr")->default('001');
             $table->string("cuser")->default('-');
             $table->string("cidpr")->default('-');
-            $table->string("fupgr")->nullable();
+            $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable();
             $table->timestamps();
         });
