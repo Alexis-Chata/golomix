@@ -47,6 +47,8 @@ return new class extends Migration
             $table->date("fupgr")->nullable();
             $table->string("tupgr")->nullable();
             $table->timestamps();
+
+            $table->unique(['ccodart', 'cletd', 'nfac']);
         });
     }
 

@@ -64,7 +64,7 @@ class ScrHcom21sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
     public function uniqueBy()
     {
-        return ['cletd', 'nfac'];
+        return ['ccodart', 'cletd', 'nfac'];
     }
 
     public function chunkSize(): int
