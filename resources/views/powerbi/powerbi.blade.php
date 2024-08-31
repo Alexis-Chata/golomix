@@ -19,10 +19,9 @@
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white shadow-xl sm:rounded-lg">
-                                <div id="pedidos" class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
-                                <iframe class="m-auto" title="Dashboard Servicio al cliente" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiNDYyMDQzN2UtZWM5NS00MzkyLTk5MTktMTIyMTc3NTdiNDc0IiwidCI6IjFiNDEyZTAzLTVmNmEtNGE2Zi1hNjk0LTM0M2I4NjYxNjRlZiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
-                                <iframe class="m-auto" title="scrhcom21" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiZmUyMGE4ZTAtY2U1ZS00M2FjLWE4MzItYjRhNmExZDkzZmRjIiwidCI6IjFiNDEyZTAzLTVmNmEtNGE2Zi1hNjk0LTM0M2I4NjYxNjRlZiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
-                            </div>
+                                <div id="pedidos" class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg iframe-container">
+                                    <iframe class="m-auto" title="scrhcom21" src="https://app.powerbi.com/view?r=eyJrIjoiZmUyMGE4ZTAtY2U1ZS00M2FjLWE4MzItYjRhNmExZDkzZmRjIiwidCI6IjFiNDEyZTAzLTVmNmEtNGE2Zi1hNjk0LTM0M2I4NjYxNjRlZiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,6 +73,23 @@
                     transform: rotate(360deg);
                 }
             }
+            .iframe-container {
+                position: relative;
+                width: 100%;
+                padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+                height: 0;
+                overflow: hidden;
+            }
+
+            .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+
         </style>
         <!-- Loading CSS -->
         {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
