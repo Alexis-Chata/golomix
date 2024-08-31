@@ -33,6 +33,7 @@ class ScrHcom20sImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             'ccia'  =>  $row['ccia'],
             'ctip'  =>  $row['ctip'],
             'nfac'  =>  $row['nfac'],
+            'nfacfull' => ($row['cletd'] ?? "NP").$row['nfac'],
             'cven'  =>  $row['cven'],
             'csup'  =>  $row['csup'],
             'cjefv' =>  $row['cjefv'],

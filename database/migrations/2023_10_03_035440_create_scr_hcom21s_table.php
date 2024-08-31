@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string("ccia")->default('11');
             $table->string("ctip")->default('3');
             $table->string("nfac");
+            $table->string("nfacfull")->nullable()->default("-");
             $table->string("citem")->default('1');
             $table->string("qcanotr")->default('0');
             $table->string("ctipart")->default('1');
