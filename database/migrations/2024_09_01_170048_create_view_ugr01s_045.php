@@ -12,7 +12,7 @@ return new class extends Migration
     {
         DB::statement("
             CREATE VIEW view_ugr01s_045 AS
-            SELECT *
+            SELECT *, SUBSTRING(ccod, -3) AS ccodmarca
             FROM ugr01s
             WHERE cind = '045'
         ");
