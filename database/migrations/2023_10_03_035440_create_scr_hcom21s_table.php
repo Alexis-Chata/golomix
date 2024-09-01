@@ -50,6 +50,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unique(['ccodart', 'cletd', 'nfac']);
+            $table->index('nfacfull', 'idx_scr_hcom21s_nfacfull');
         });
     }
 

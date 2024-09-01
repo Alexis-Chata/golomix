@@ -91,6 +91,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->unique(['cletd', 'nfac']);
+            $table->index('nfacfull', 'idx_scr_hcom20s_nfacfull');
         });
     }
 

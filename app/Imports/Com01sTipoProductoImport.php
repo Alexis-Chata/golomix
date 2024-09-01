@@ -19,8 +19,8 @@ class Com01sTipoProductoImport implements ToModel, WithHeadingRow, WithBatchInse
     public function model(array $row)
     {
         $datos = [
-            'cequiv'       => $row["cequiv"],
-            'tipo_producto_id'      => $row["tipo_producto_id"]
+            'cequiv'            => $row["cequiv"],
+            'tipo_producto_id'  => $row["tipo_producto_id"]
         ];
 
         return new Com01($datos);
