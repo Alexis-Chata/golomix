@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string("clin")->nullable()->default("-");
             $table->string("qprecio")->nullable()->default("-");
             $table->string("qpordes")->nullable()->default("0");
-            $table->date("finipro")->nullable()->default("-");
-            $table->date("ffinpro")->nullable()->default("-");
+            $table->date("finipro")->nullable();
+            $table->date("ffinpro")->nullable();
             $table->string("ctipneg")->nullable()->default("-");
             $table->string("ctipro")->nullable()->default("02");
             $table->string("ccodart1")->nullable()->default("-");
