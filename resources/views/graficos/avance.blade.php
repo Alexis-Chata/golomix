@@ -193,7 +193,7 @@
                     const resultArray = Object.keys(totalesPorMarca).map(key => ({
                         ccodmarca: key,
                         tdesmarca: totalesPorMarca[key].tdesmarca,
-                        total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
+                        total_ventas: (totalesPorMarca[key].total_ventas.toFixed(2))
                     }));
 
                     // Ordenar el array por ccodmarca
