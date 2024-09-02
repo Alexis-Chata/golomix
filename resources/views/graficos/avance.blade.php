@@ -141,12 +141,12 @@
                     indexAxis: 'y', // Esto hace que el gráfico sea horizontal
                     plugins: {
                         datalabels: {
-                            color: 'red', // Color del texto
+                            color: 'black', // Color del texto
                             align: 'end', // Alineación del texto al final de la barra
                             anchor: 'end', // Ancla el texto al final de la barra
                             font: {
-                                weight: 'bold',
-                                size: 16 // Tamaño de la fuente
+                                weight: 'normal',
+                                size: 9 // Tamaño de la fuente
                             },
                             formatter: (value) => value, // Formatea el texto para mostrar el valor
                         }
