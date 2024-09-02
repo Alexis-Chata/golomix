@@ -158,14 +158,14 @@
 
             var mychart = new Chart(ctx, config);
 
-            //fetch('{{route('api.avancedata')}}', {
-            fetch('https://golomix.realpedidos.com/api/avancedata', {
+            fetch('{{route('api.avancedata')}}', {
+            //fetch('https://golomix.realpedidos.com/api/avancedata', {
                     method: 'POST', // Método de solicitud
                     headers: {
                         'Content-Type': 'application/json' // Tipo de contenido de los datos
                     },
                     body: JSON.stringify({
-                        cven: '{{auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
+                        cven: '{{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
                         //cven: '013',
                     }) // Datos a enviar en el cuerpo de la solicitud
                 })
