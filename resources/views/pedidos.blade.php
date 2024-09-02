@@ -30,6 +30,13 @@
                 {{-- @dd($com36s->sortBy('cven')->groupBy(['cven', 'tven', 'crut'])) --}}
                 {{-- @dd($pedidosAgrupados); --}}
                 <div class="p-2">
+                    <a href="{{route('graficos.avances')}}">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                            Avances
+                        </button>
+                    </a>
+                    </br>
+                    </br>
                     {{ 'Total de vendedores: ' . $pedidosAgrupados->count() . ' - Fecha: ' . $fmov }}
                     {{-- @if (request()->routeIs('planillaCarga')) --}}
                         <br />
