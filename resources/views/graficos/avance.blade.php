@@ -97,6 +97,7 @@
     @endpush
 
     @push('eventsubmit-js')
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
@@ -137,7 +138,20 @@
                         }
                     },
                     indexAxis: 'y',
-                }
+                    plugins: {
+                        datalabels: {
+                            color: 'red', // Color del texto
+                            align: 'end', // Alineación del texto al final de la barra
+                            anchor: 'end', // Ancla el texto al final de la barra
+                            font: {
+                                weight: 'bold',
+                                size: 16 // Tamaño de la fuente
+                            },
+                            formatter: (value) => value, // Formatea el texto para mostrar el valor
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
             };
 
             var mychart = new Chart(ctx, config);
