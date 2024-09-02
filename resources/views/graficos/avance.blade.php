@@ -165,7 +165,8 @@
                         'Content-Type': 'application/json' // Tipo de contenido de los datos
                     },
                     body: JSON.stringify({
-                        cven: '013',
+                        cven: '{{auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
+                        //cven: '013',
                     }) // Datos a enviar en el cuerpo de la solicitud
                 })
                 .then(response => {
