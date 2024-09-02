@@ -15,9 +15,35 @@ use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\ScrHcom21Controller;
 use App\Http\Controllers\Ugr01Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubirCsvController extends Controller
 {
+    public function avancedata(Request $request)
+    {
+        $datafull = DB::table('scr_hcom21s')
+            ->select(
+                'view_ugr01s_045.ccodmarca',
+                'view_ugr01s_045.tdes as tdesmarca',
+                'com10s.cven',
+                'com10s.tven',
+                'scr_hcom21s.*',
+                'scr_hcom20s.*'
+            )
+            ->join('scr_hcom20s', 'scr_hcom21s.nfacfull', '=', 'scr_hcom20s.nfacfull')
+            ->join('com10s', 'scr_hcom20s.cven', '=', 'com10s.cven')
+            ->join('com01s', 'scr_hcom21s.ccodart', '=', 'com01s.ccodud1')
+            ->join('view_ugr01s_045', 'com01s.cc04', '=', 'view_ugr01s_045.ccodmarca')
+            ->where('cesdoc', '04')
+            ->when($request->cven, function ($query) use ($request){
+                return $query->where('com10s.cven', $request->cven);
+            })
+            ->whereYear('femi', 2024)
+            ->whereMonth('femi', 8)
+            ->get();
+        return response()->json($datafull, 200);
+    }
+
     public function subircsv(Request $request)
     {
         $mensaje = match ($request->tipo) {

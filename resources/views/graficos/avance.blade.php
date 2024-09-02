@@ -18,13 +18,9 @@
 
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                            {{ $datafull->count() }}
                             <div class="bg-white shadow-xl sm:rounded-lg">
                                 <div class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg iframe-container">
                                     <canvas id="myChart"></canvas>
-                                </div>
-                                <div class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg iframe-container">
-                                    <canvas id="myChart2"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +103,8 @@
             const ctx = document.getElementById('myChart').getContext('2d');
 
             const data = {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [{
                     label: 'Venta Agosto',
-                    data: [65, 59, 80, 81, 56, 55, 40],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 159, 64, 0.2)',
@@ -146,30 +140,63 @@
                 }
             };
 
-            new Chart(ctx, config);
-        </script>
+            var mychart = new Chart(ctx, config);
 
-        <script>
-            const ctx2 = document.getElementById('myChart2').getContext('2d');
-
-            new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                    datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+            fetch('http://golomix.test/api/avancedata', {
+                    method: 'POST', // Método de solicitud
+                    headers: {
+                        'Content-Type': 'application/json' // Tipo de contenido de los datos
+                    },
+                    body: JSON.stringify({
+                        cven: '004',
+                    }) // Datos a enviar en el cuerpo de la solicitud
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
                     }
-                }
-            });
+                    return response.json(); // Parsear la respuesta como JSON
+                })
+                .then(data => {
+                    // Agrupar por marca y sumar ventas
+                    const totalesPorMarca = data.reduce((acc, item) => {
+                        if (!acc[item.ccodmarca]) {
+                            acc[item.ccodmarca] = {
+                                tdesmarca: item.tdesmarca,
+                                total_ventas: 0
+                            };
+                        }
+                        // Asegurarse de que total_ventas es un número antes de sumarlo
+                        acc[item.ccodmarca].total_ventas += parseFloat(item.qimp) || 0;
+                        return acc;
+                    }, {});
+
+                    // Convertir el objeto en un array si es necesario
+                    const resultArray = Object.keys(totalesPorMarca).map(key => ({
+                        ccodmarca: key,
+                        tdesmarca: totalesPorMarca[key].tdesmarca,
+                        total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
+                    }));
+
+                    // Ordenar el array por ccodmarca
+                    resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
+
+                    console.log(resultArray); // Maneja los datos agrupados y sumados aquí
+                    return resultArray;
+                })
+                .then(datos => mostrar(datos))
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+
+            const mostrar = (articulos) => {
+                console.log(mychart);
+                articulos.forEach(element => {
+                    mychart.data['labels'].push(element.tdesmarca)
+                    mychart.data['datasets'][0].data.push(element.total_ventas)
+                    mychart.update()
+                });
+            }
         </script>
 
         <script>

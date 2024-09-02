@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('subircsv', [SubirCsvController::class, 'subircsv']);
+Route::post('avancedata', [SubirCsvController::class, 'avancedata']);
