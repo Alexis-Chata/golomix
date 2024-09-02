@@ -150,7 +150,7 @@
                                 weight: 'normal',
                                 size: 10 // Tamaño de la fuente
                             },
-                            formatter: (value) => value.toLocaleString(), // Formatea el texto para mostrar el valor
+                            formatter: (value) => parseFloat(value).toLocaleString(), // Formatea el texto para mostrar el valor
                         }
                     }
                 }
