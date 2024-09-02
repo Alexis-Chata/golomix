@@ -19,7 +19,7 @@
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white shadow-xl sm:rounded-lg">
-                                <div class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg iframe-container">
+                                <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                                     <canvas id="myChart" height="600"></canvas>
                                 </div>
                             </div>
@@ -73,24 +73,6 @@
                     transform: rotate(360deg);
                 }
             }
-
-            .iframe-container {
-                position: relative;
-                width: 100%;
-                padding-bottom: 56.25%;
-                /* Aspect ratio 16:9 */
-                height: 0;
-                overflow: hidden;
-            }
-
-            .iframe-container canvas {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border: 0;
-            }
         </style>
         <!-- Loading CSS -->
         {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
@@ -133,9 +115,28 @@
                 data: data,
                 plugins: [ChartDataLabels],
                 options: {
+                    layout: {
+                        padding: {
+                            right: 40 // Añade padding en el lado derecho para evitar que el texto se corte
+                        }
+                    },
+                    responsive: true, // Hacer el gráfico responsivo
+                    maintainAspectRatio: false, // Opcional: Esto permite que el gráfico ocupe todo el espacio disponible en el contenedor
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                font: {
+                                    size: 10 // Reduce el tamaño de la fuente para el eje Y
+                                }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 10 // Reduce el tamaño de la fuente para el eje X
+                                }
+                            }
                         }
                     },
                     indexAxis: 'y', // Esto hace que el gráfico sea horizontal
@@ -144,11 +145,12 @@
                             color: 'black', // Color del texto
                             align: 'end', // Alineación del texto al final de la barra
                             anchor: 'end', // Ancla el texto al final de la barra
+                            //offset: -10,    // Mueve el texto 10px hacia adentro de la barra
                             font: {
                                 weight: 'normal',
-                                size: 9 // Tamaño de la fuente
+                                size: 10 // Tamaño de la fuente
                             },
-                            formatter: (value) => value, // Formatea el texto para mostrar el valor
+                            formatter: (value) => value.toLocaleString(), // Formatea el texto para mostrar el valor
                         }
                     }
                 }
@@ -156,13 +158,14 @@
 
             var mychart = new Chart(ctx, config);
 
-            fetch('{{route('api.avancedata')}}', {
+            //fetch('{{route('api.avancedata')}}', {
+            fetch('https://golomix.realpedidos.com/api/avancedata', {
                     method: 'POST', // Método de solicitud
                     headers: {
                         'Content-Type': 'application/json' // Tipo de contenido de los datos
                     },
                     body: JSON.stringify({
-                        cven: '004',
+                        cven: '013',
                     }) // Datos a enviar en el cuerpo de la solicitud
                 })
                 .then(response => {
