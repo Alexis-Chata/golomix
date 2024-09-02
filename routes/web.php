@@ -23,6 +23,8 @@ use App\Http\Controllers\ListaclienteController;
 use App\Http\Controllers\LiquidacionesController;
 use App\Http\Controllers\DistribucionPedidosController;
 use App\Http\Controllers\GraficosController;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,4 +96,31 @@ Route::middleware([
 
     Route::view('powerbi', 'powerbi.powerbi');
     Route::get('avance', [GraficosController::class, 'avances'])->name('graficos.avances');
+
+    Route::get('/test-query', function () {
+        try {
+            $results = DB::table('scr_hcom21s')
+            ->select(
+                'view_ugr01s_045.ccodmarca',
+                'view_ugr01s_045.tdes as tdesmarca',
+                'com10s.cven',
+                'com10s.tven',
+                'scr_hcom21s.*',
+                'scr_hcom20s.*'
+            )
+            ->join('scr_hcom20s', 'scr_hcom21s.nfacfull', '=', 'scr_hcom20s.nfacfull')
+            ->join('com10s', 'scr_hcom20s.cven', '=', 'com10s.cven')
+            ->join('com01s', 'scr_hcom21s.ccodart', '=', 'com01s.ccodud1')
+            ->join('view_ugr01s_045', 'com01s.cc04', '=', 'view_ugr01s_045.ccodmarca')
+            ->where('cesdoc', '04')
+            ->whereYear('femi', 2024)
+            ->whereMonth('femi', 8)
+            ->get();
+
+            return response()->json($results);
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    });
 });
