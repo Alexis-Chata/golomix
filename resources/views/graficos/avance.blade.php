@@ -97,8 +97,8 @@
     @endpush
 
     @push('eventsubmit-js')
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
         <script>
             const ctx = document.getElementById('myChart').getContext('2d');
@@ -131,13 +131,14 @@
             const config = {
                 type: 'bar',
                 data: data,
+                plugins: [ChartDataLabels],
                 options: {
                     scales: {
                         y: {
                             beginAtZero: true
                         }
                     },
-                    indexAxis: 'y',
+                    indexAxis: 'y', // Esto hace que el gráfico sea horizontal
                     plugins: {
                         datalabels: {
                             color: 'red', // Color del texto
@@ -150,8 +151,7 @@
                             formatter: (value) => value, // Formatea el texto para mostrar el valor
                         }
                     }
-                },
-                plugins: [ChartDataLabels]
+                }
             };
 
             var mychart = new Chart(ctx, config);
