@@ -20,7 +20,7 @@
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white shadow-xl sm:rounded-lg">
                                 <div class="p-2 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg iframe-container">
-                                    <canvas id="myChart"></canvas>
+                                    <canvas id="myChart" height="600"></canvas>
                                 </div>
                             </div>
                         </div>
