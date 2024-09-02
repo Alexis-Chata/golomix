@@ -22,6 +22,7 @@ use App\Http\Controllers\ScrHcom21Controller;
 use App\Http\Controllers\ListaclienteController;
 use App\Http\Controllers\LiquidacionesController;
 use App\Http\Controllers\DistribucionPedidosController;
+use App\Http\Controllers\GraficosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,5 +93,5 @@ Route::middleware([
     Route::get('tomador/{ccli}', [TomadorController::class, 'show'])->name('tomador.show');
 
     Route::view('powerbi', 'powerbi.powerbi');
-    Route::view('avance', 'graficos.avance');
+    Route::get('avance', [GraficosController::class, 'avances'])->name('graficos.avances');
 });
