@@ -150,7 +150,7 @@
                                 weight: 'normal',
                                 size: 10 // Tamaño de la fuente
                             },
-                            formatter: (value) => parseFloat(value).toLocaleString(), // Formatea el texto para mostrar el valor
+                            formatter: (value) => value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), // Formatea el texto para mostrar el valor
                         }
                     }
                 }
@@ -158,8 +158,8 @@
 
             var mychart = new Chart(ctx, config);
 
-            fetch('{{route('api.avancedata')}}', {
-            //fetch('https://golomix.realpedidos.com/api/avancedata', {
+            //fetch('{{route('api.avancedata')}}', {
+            fetch('https://golomix.realpedidos.com/api/avancedata', {
                     method: 'POST', // Método de solicitud
                     headers: {
                         'Content-Type': 'application/json' // Tipo de contenido de los datos
@@ -193,7 +193,7 @@
                     const resultArray = Object.keys(totalesPorMarca).map(key => ({
                         ccodmarca: key,
                         tdesmarca: totalesPorMarca[key].tdesmarca,
-                        total_ventas: (totalesPorMarca[key].total_ventas.toFixed(2))
+                        total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
                     }));
 
                     // Ordenar el array por ccodmarca
