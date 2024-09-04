@@ -158,15 +158,15 @@
 
             var mychart = new Chart(ctx, config);
 
-            //fetch('{{route('api.avancedata')}}', {
-            fetch('https://golomix.realpedidos.com/api/avancedata', {
+            fetch('{{route('api.avancedata')}}', {
+            //fetch('https://golomix.realpedidos.com/api/avancedata', {
                     method: 'POST', // Método de solicitud
                     headers: {
                         'Content-Type': 'application/json' // Tipo de contenido de los datos
                     },
                     body: JSON.stringify({
                         cven: '{{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
-                        //cven: '013',
+                        //cven: '007',
                     }) // Datos a enviar en el cuerpo de la solicitud
                 })
                 .then(response => {
@@ -176,6 +176,9 @@
                     return response.json(); // Parsear la respuesta como JSON
                 })
                 .then(data => {
+                    // Inicializar el total general
+                    let totalGeneral = 0;
+
                     // Agrupar por marca y sumar ventas
                     const totalesPorMarca = data.reduce((acc, item) => {
                         if (!acc[item.ccodmarca]) {
@@ -185,7 +188,11 @@
                             };
                         }
                         // Asegurarse de que total_ventas es un número antes de sumarlo
-                        acc[item.ccodmarca].total_ventas += parseFloat(item.qimp) || 0;
+                        const ventas = parseFloat(item.qimp) || 0;
+                        acc[item.ccodmarca].total_ventas += ventas;
+
+                        // Sumar al total general
+                        totalGeneral += ventas;
                         return acc;
                     }, {});
 
@@ -195,6 +202,13 @@
                         tdesmarca: totalesPorMarca[key].tdesmarca,
                         total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
                     }));
+
+                    // Agregar el total general al array
+                    resultArray.push({
+                        ccodmarca: '000',
+                        tdesmarca: 'TOTAL VENTA',
+                        total_ventas: parseFloat(totalGeneral.toFixed(2))
+                    });
 
                     // Ordenar el array por ccodmarca
                     resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
