@@ -87,7 +87,7 @@
 
             const data = {
                 datasets: [{
-                    label: 'Venta Agosto',
+                    label: 'Venta Septiembre',
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 159, 64, 0.2)',
