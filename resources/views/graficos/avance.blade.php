@@ -160,66 +160,66 @@
 
             fetch('{{route('api.avancedata')}}', {
             //fetch('https://golomix.realpedidos.com/api/avancedata', {
-                    method: 'POST', // Método de solicitud
-                    headers: {
-                        'Content-Type': 'application/json' // Tipo de contenido de los datos
-                    },
-                    body: JSON.stringify({
-                        cven: '{{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
-                        //cven: '007',
-                    }) // Datos a enviar en el cuerpo de la solicitud
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
+                method: 'POST', // Método de solicitud
+                headers: {
+                    'Content-Type': 'application/json' // Tipo de contenido de los datos
+                },
+                body: JSON.stringify({
+                    cven: '{{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
+                    //cven: '007',
+                }) // Datos a enviar en el cuerpo de la solicitud
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json(); // Parsear la respuesta como JSON
+            })
+            .then(data => {
+                // Inicializar el total general
+                let totalGeneral = 0;
+
+                // Agrupar por marca y sumar ventas
+                const totalesPorMarca = data.reduce((acc, item) => {
+                    if (!acc[item.ccodmarca]) {
+                        acc[item.ccodmarca] = {
+                            tdesmarca: item.tdesmarca,
+                            total_ventas: 0
+                        };
                     }
-                    return response.json(); // Parsear la respuesta como JSON
-                })
-                .then(data => {
-                    // Inicializar el total general
-                    let totalGeneral = 0;
+                    // Asegurarse de que total_ventas es un número antes de sumarlo
+                    const ventas = parseFloat(item.qimp) || 0;
+                    acc[item.ccodmarca].total_ventas += ventas;
 
-                    // Agrupar por marca y sumar ventas
-                    const totalesPorMarca = data.reduce((acc, item) => {
-                        if (!acc[item.ccodmarca]) {
-                            acc[item.ccodmarca] = {
-                                tdesmarca: item.tdesmarca,
-                                total_ventas: 0
-                            };
-                        }
-                        // Asegurarse de que total_ventas es un número antes de sumarlo
-                        const ventas = parseFloat(item.qimp) || 0;
-                        acc[item.ccodmarca].total_ventas += ventas;
+                    // Sumar al total general
+                    totalGeneral += ventas;
+                    return acc;
+                }, {});
 
-                        // Sumar al total general
-                        totalGeneral += ventas;
-                        return acc;
-                    }, {});
+                // Convertir el objeto en un array si es necesario
+                const resultArray = Object.keys(totalesPorMarca).map(key => ({
+                    ccodmarca: key,
+                    tdesmarca: totalesPorMarca[key].tdesmarca,
+                    total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
+                }));
 
-                    // Convertir el objeto en un array si es necesario
-                    const resultArray = Object.keys(totalesPorMarca).map(key => ({
-                        ccodmarca: key,
-                        tdesmarca: totalesPorMarca[key].tdesmarca,
-                        total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
-                    }));
-
-                    // Agregar el total general al array
-                    resultArray.push({
-                        ccodmarca: '000',
-                        tdesmarca: 'TOTAL VENTA',
-                        total_ventas: parseFloat(totalGeneral.toFixed(2))
-                    });
-
-                    // Ordenar el array por ccodmarca
-                    resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
-
-                    console.log(resultArray); // Maneja los datos agrupados y sumados aquí
-                    return resultArray;
-                })
-                .then(datos => mostrar(datos))
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
+                // Agregar el total general al array
+                resultArray.push({
+                    ccodmarca: '000',
+                    tdesmarca: 'TOTAL VENTA',
+                    total_ventas: parseFloat(totalGeneral.toFixed(2))
                 });
+
+                // Ordenar el array por ccodmarca
+                resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
+
+                console.log(resultArray); // Maneja los datos agrupados y sumados aquí
+                return resultArray;
+            })
+            .then(datos => mostrar(datos))
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
 
             const mostrar = (articulos) => {
                 console.log(mychart);
