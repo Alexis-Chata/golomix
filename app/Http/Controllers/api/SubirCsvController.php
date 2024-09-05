@@ -39,7 +39,7 @@ class SubirCsvController extends Controller
                 return $query->where('com10s.cven', $request->cven);
             })
             ->whereYear('femi', 2024)
-            ->whereMonth('femi', 8)
+            ->whereMonth('femi', 9)
             ->get();
         return response()->json($datafull, 200);
     }
