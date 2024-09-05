@@ -151,6 +151,10 @@
                                 size: 10 // Tamaño de la fuente
                             },
                             formatter: (value) => value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), // Formatea el texto para mostrar el valor
+                        },
+                        title: {
+                            display: true,
+                            text: 'Avance'
                         }
                     }
                 }
@@ -178,6 +182,8 @@
             .then(data => {
                 // Inicializar el total general
                 let totalGeneral = 0;
+                // Inicializar un array para almacenar las fechas
+                const fechas = [];
 
                 // Agrupar por marca y sumar ventas
                 const totalesPorMarca = data.reduce((acc, item) => {
@@ -193,6 +199,12 @@
 
                     // Sumar al total general
                     totalGeneral += ventas;
+
+                    // Agregar la fecha al array de fechas (asumiendo que femi es de formato 'YYYY-MM-DD')
+                    if (item.femi) {
+                        fechas.push(new Date(item.femi + 'T00:00:00')); // Añadir hora manual para evitar conversiones automáticas
+                    }
+
                     return acc;
                 }, {});
 
@@ -213,23 +225,42 @@
                 // Ordenar el array por ccodmarca
                 resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
 
-                const array_datosExtras = [ {{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }} ];
+                // Encontrar la fecha mínima y máxima
+                const minFecha = new Date(Math.min(...fechas));
+                const maxFecha = new Date(Math.max(...fechas));
+
+                // Guardar el rango de fechas en un array aparte y formatearlas
+                const rangoFechas = [
+                    formatearFecha(minFecha),
+                    formatearFecha(maxFecha)
+                ]
+
+                const array_datosExtras = {
+                    cven: {{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }},
+                    rangofecha: rangoFechas[0]+' al '+rangoFechas[1],
+                }
+
                 //console.log(resultArray); // Maneja los datos agrupados y sumados aquí
-                return [resultArray, array_datosExtras];
+                return {articulos:resultArray, info:array_datosExtras};
             })
             .then(datos => mostrar(datos))
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-            const mostrar = (articulos) => {
-                //console.log(mychart);
-                articulos[0].forEach(element => {
+            const mostrar = (data) => {
+                console.log(data);
+                data.articulos.forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)
                     mychart.data['datasets'][0].data.push(element.total_ventas)
-                    mychart.data['datasets'][0].label="Venta Septiembre";
+                    mychart.data['datasets'][0].label="Venta Setiembre "+data.info.rangofecha;
                     mychart.update()
                 });
+            }
+
+            // Función para convertir la fecha al formato "02 sep"
+            function formatearFecha(fecha) {
+                return fecha.toLocaleDateString('es-PE', { day: '2-digit', month: 'short' });
             }
         </script>
 
