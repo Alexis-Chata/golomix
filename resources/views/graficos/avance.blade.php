@@ -159,14 +159,14 @@
             var mychart = new Chart(ctx, config);
 
             fetch('{{route('api.avancedata')}}', {
-            //fetch('https://golomix.realpedidos.com/api/avancedata', {
+            // {{-- fetch('https://golomix.realpedidos.com/api/avancedata', { --}}
                 method: 'POST', // Método de solicitud
                 headers: {
                     'Content-Type': 'application/json' // Tipo de contenido de los datos
                 },
                 body: JSON.stringify({
                     cven: '{{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
-                    //cven: '007',
+                    // {{-- cven: '007', --}}
                 }) // Datos a enviar en el cuerpo de la solicitud
             })
             .then(response => {
@@ -213,8 +213,9 @@
                 // Ordenar el array por ccodmarca
                 resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
 
-                console.log(resultArray); // Maneja los datos agrupados y sumados aquí
-                return resultArray;
+                const array_datosExtras = [ {{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }} ];
+                //console.log(resultArray); // Maneja los datos agrupados y sumados aquí
+                return [resultArray, array_datosExtras];
             })
             .then(datos => mostrar(datos))
             .catch(error => {
@@ -222,8 +223,8 @@
             });
 
             const mostrar = (articulos) => {
-                console.log(mychart);
-                articulos.forEach(element => {
+                //console.log(mychart);
+                articulos[0].forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)
                     mychart.data['datasets'][0].data.push(element.total_ventas)
                     mychart.data['datasets'][0].label="Venta Septiembre";
