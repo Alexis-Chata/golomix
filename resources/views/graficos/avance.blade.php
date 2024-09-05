@@ -87,7 +87,7 @@
 
             const data = {
                 datasets: [{
-                    label: 'Venta Septiembre',
+                    label: 'Venta',
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 159, 64, 0.2)',
@@ -226,6 +226,7 @@
                 articulos.forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)
                     mychart.data['datasets'][0].data.push(element.total_ventas)
+                    mychart.data['datasets'][0].label="Venta Septiembre";
                     mychart.update()
                 });
             }

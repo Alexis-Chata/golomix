@@ -10,6 +10,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        DB::statement("DROP VIEW IF EXISTS view_ugr01s_045");
         DB::statement("
             CREATE VIEW view_ugr01s_045 AS
             SELECT *, SUBSTRING(ccod, -3) AS ccodmarca
