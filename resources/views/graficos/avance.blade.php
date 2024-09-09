@@ -169,7 +169,7 @@
                     'Content-Type': 'application/json' // Tipo de contenido de los datos
                 },
                 body: JSON.stringify({
-                    cven: '{{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }}',
+                    {{ $cven }}
                     // {{-- cven: '007', --}}
                 }) // Datos a enviar en el cuerpo de la solicitud
             })
@@ -236,7 +236,7 @@
                 ]
 
                 const array_datosExtras = {
-                    cven: {{ auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven }},
+                    {{ $cven }}
                     rangofecha: rangoFechas[0]+' al '+rangoFechas[1],
                 }
 
