@@ -26,7 +26,7 @@ class SubirCsvController extends Controller
                 'view_ugr01s_045.ccodmarca',
                 'view_ugr01s_045.tdes as tdesmarca',
                 'com10s.cven',
-                'com10s.tven',
+                'scr_hcom20s.tven',
                 'scr_hcom21s.*',
                 'scr_hcom20s.*'
             )
