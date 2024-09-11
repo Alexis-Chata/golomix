@@ -26,7 +26,7 @@ class SubirCsvController extends Controller
                 'view_ugr01s_045.ccodmarca',
                 'view_ugr01s_045.tdes as tdesmarca',
                 'com10s.cven',
-                'scr_hcom20s.tven',
+                'com10s.tven',
                 'scr_hcom21s.*',
                 'scr_hcom20s.*'
             )
@@ -36,7 +36,7 @@ class SubirCsvController extends Controller
             ->join('view_ugr01s_045', 'com01s.cc04', '=', 'view_ugr01s_045.ccodmarca')
             ->where('cesdoc', '04')
             ->when($request->cven, function ($query) use ($request){
-                return $query->where('com10s.cven', $request->cven);
+                return $query->where('scr_hcom20s.cven', $request->cven);
             })
             ->whereYear('femi', 2024)
             ->whereMonth('femi', 9)
