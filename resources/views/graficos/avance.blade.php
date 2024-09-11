@@ -117,7 +117,7 @@
                 options: {
                     layout: {
                         padding: {
-                            right: 40 // Añade padding en el lado derecho para evitar que el texto se corte
+                            right: 48 // Añade padding en el lado derecho para evitar que el texto se corte
                         }
                     },
                     responsive: true, // Hacer el gráfico responsivo
@@ -184,9 +184,13 @@
                 let totalGeneral = 0;
                 // Inicializar un array para almacenar las fechas
                 const fechas = [];
+                // Crear un Set para almacenar valores únicos de "cven"
+                const cvenSet = new Set();
 
                 // Agrupar por marca y sumar ventas
                 const totalesPorMarca = data.reduce((acc, item) => {
+                    // Añadir "cven" al Set, solo valores únicos serán almacenados
+                    cvenSet.add(item.cven);
                     if (!acc[item.ccodmarca]) {
                         acc[item.ccodmarca] = {
                             tdesmarca: item.tdesmarca,
@@ -225,6 +229,9 @@
                 // Ordenar el array por ccodmarca
                 resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
 
+                // Convertir el Set en un array de valores únicos de "cven"
+                const cvenArrayUnicos = [...cvenSet];
+
                 // Encontrar la fecha mínima y máxima
                 const minFecha = new Date(Math.min(...fechas));
                 const maxFecha = new Date(Math.max(...fechas));
@@ -236,7 +243,7 @@
                 ]
 
                 const array_datosExtras = {
-                    {{ $cven }}
+                    cvenArrayUnicos,
                     rangofecha: rangoFechas[0]+' al '+rangoFechas[1],
                 }
 

@@ -21,6 +21,9 @@ class SubirCsvController extends Controller
 {
     public function avancedata(Request $request)
     {
+        DB::enableQueryLog();
+        $cven = $request->cven;
+        //$cven = "010";
         $datafull = DB::table('scr_hcom21s')
             ->select(
                 'view_ugr01s_045.ccodmarca',
@@ -35,12 +38,14 @@ class SubirCsvController extends Controller
             ->join('com01s', 'scr_hcom21s.ccodart', '=', 'com01s.ccodud1')
             ->join('view_ugr01s_045', 'com01s.cc04', '=', 'view_ugr01s_045.ccodmarca')
             ->where('cesdoc', '04')
-            ->when($request->cven, function ($query) use ($request){
-                return $query->where('scr_hcom20s.cven', $request->cven);
+            ->when($cven, function ($query) use ($cven) {
+                return $query->where('scr_hcom20s.cven', $cven);
             })
             ->whereYear('femi', 2024)
             ->whereMonth('femi', 9)
             ->get();
+        $queries = DB::getQueryLog();
+        //dd($queries);
         return response()->json($datafull, 200);
     }
 
@@ -63,68 +68,79 @@ class SubirCsvController extends Controller
         return response()->json(['mensaje' => $mensaje], 200);
     }
 
-    private function subirCom36(Request $request){
-        $objetCom36= new Com36Controller();
+    private function subirCom36(Request $request)
+    {
+        $objetCom36 = new Com36Controller();
         $mensaje = $objetCom36->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom37(Request $request){
-        $objetCom37= new Com37Controller();
+    private function subirCom37(Request $request)
+    {
+        $objetCom37 = new Com37Controller();
         $mensaje = $objetCom37->procesando($request);
         return $mensaje;
     }
 
-    private function subirUgr01(Request $request){
-        $objetUgr01= new Ugr01Controller();
+    private function subirUgr01(Request $request)
+    {
+        $objetUgr01 = new Ugr01Controller();
         $mensaje = $objetUgr01->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom01(Request $request){
-        $objetCom01= new Com01Controller();
+    private function subirCom01(Request $request)
+    {
+        $objetCom01 = new Com01Controller();
         $mensaje = $objetCom01->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom30(Request $request){
-        $objetCom30= new Com30Controller();
+    private function subirCom30(Request $request)
+    {
+        $objetCom30 = new Com30Controller();
         $mensaje = $objetCom30->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom10(Request $request){
-        $objetCom10= new Com10Controller();
+    private function subirCom10(Request $request)
+    {
+        $objetCom10 = new Com10Controller();
         $mensaje = $objetCom10->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom05(Request $request){
-        $objetCom05= new Com05Controller();
+    private function subirCom05(Request $request)
+    {
+        $objetCom05 = new Com05Controller();
         $mensaje = $objetCom05->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom07(Request $request){
-        $objetCom07= new Com07Controller();
+    private function subirCom07(Request $request)
+    {
+        $objetCom07 = new Com07Controller();
         $mensaje = $objetCom07->procesando($request);
         return $mensaje;
     }
 
-    private function subirCom31(Request $request){
-        $objetCom31= new Com31Controller();
+    private function subirCom31(Request $request)
+    {
+        $objetCom31 = new Com31Controller();
         $mensaje = $objetCom31->procesando($request);
         return $mensaje;
     }
 
-    private function subirScrHcom20(Request $request){
-        $objetScrHcom20= new ScrHcom20Controller();
+    private function subirScrHcom20(Request $request)
+    {
+        $objetScrHcom20 = new ScrHcom20Controller();
         $mensaje = $objetScrHcom20->procesando($request);
         return $mensaje;
     }
 
-    private function subirScrHcom21(Request $request){
-        $objetScrHcom21= new ScrHcom21Controller();
+    private function subirScrHcom21(Request $request)
+    {
+        $objetScrHcom21 = new ScrHcom21Controller();
         $mensaje = $objetScrHcom21->procesando($request);
         return $mensaje;
     }
