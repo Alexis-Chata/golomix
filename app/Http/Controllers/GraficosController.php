@@ -13,12 +13,13 @@ class GraficosController extends Controller
     public function avances()
     {
         $cven = auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven;
-        $cven = "cven: ".$cven.",";
-        if($cven == 'cven: 163,'){
+        $cvenString = "cven: ".$cven.",";
+        if($cven == '163'){
             $cven = null;
+            $cvenString = null;
         }
         $descripcion = "Avance ".auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven;
         $this->bitacora($descripcion, __METHOD__);
-        return view('graficos.avance', compact("cven"));
+        return view('graficos.avance', compact("cven", "cvenString"));
     }
 }

@@ -169,7 +169,7 @@
                     'Content-Type': 'application/json' // Tipo de contenido de los datos
                 },
                 body: JSON.stringify({
-                    {{ $cven }}
+                    {{ $cvenString }}
                     // {{-- cven: '007', --}}
                 }) // Datos a enviar en el cuerpo de la solicitud
             })
@@ -257,6 +257,11 @@
 
             const mostrar = (data) => {
                 console.log(data);
+                console.log(data.info.cvenArrayUnicos[0]);
+                var title = "Avance "+data.info.cvenArrayUnicos[0];
+                if(data.info.cvenArrayUnicos.length>1){
+                    title = "Avance";
+                }
                 if(mychart){
                     mychart.data.labels = [];  // Limpiar etiquetas
                     mychart.data.datasets[0].label = 'Venta';  // Limpiar datasets
@@ -264,6 +269,7 @@
                     mychart.update();
                     mychart.destroy();
                     mychart = new Chart(ctx, config);
+                    mychart.config.options.plugins.title.text = title;
                 }
                 data.articulos.forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)

@@ -30,8 +30,8 @@ class SubirCsvController extends Controller
                 'view_ugr01s_045.tdes as tdesmarca',
                 'com10s.cven',
                 'com10s.tven',
-                'scr_hcom21s.*',
-                'scr_hcom20s.*'
+                'scr_hcom21s.qimp',
+                'scr_hcom20s.femi'
             )
             ->join('scr_hcom20s', 'scr_hcom21s.nfacfull', '=', 'scr_hcom20s.nfacfull')
             ->join('com10s', 'scr_hcom20s.cven', '=', 'com10s.cven')
