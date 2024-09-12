@@ -14,7 +14,7 @@ class GraficosController extends Controller
     {
         $cven = auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven;
         $cvenString = "cven: ".$cven.",";
-        if($cven == '163'){
+        if(auth()->user()->hasAnyRole('Super-Admin')){
             $cven = null;
             $cvenString = null;
         }

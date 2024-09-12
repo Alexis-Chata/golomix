@@ -79,8 +79,8 @@
     @endpush
 
     @push('eventsubmit-js')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
         <script>
             const ctx = document.getElementById('myChart').getContext('2d');
@@ -150,7 +150,10 @@
                                 weight: 'normal',
                                 size: 10 // Tamaño de la fuente
                             },
-                            formatter: (value) => value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), // Formatea el texto para mostrar el valor
+                            formatter: (value) => value.toLocaleString('en-US', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }), // Formatea el texto para mostrar el valor
                         },
                         title: {
                             display: true,
@@ -162,110 +165,122 @@
 
             var mychart = new Chart(ctx, config);
 
-            var datafecth = fetch('{{route('api.avancedata')}}', {
-            // {{-- fetch('https://golomix.realpedidos.com/api/avancedata', { --}}
-                method: 'POST', // Método de solicitud
-                headers: {
-                    'Content-Type': 'application/json' // Tipo de contenido de los datos
-                },
-                body: JSON.stringify({
-                    {{ $cvenString }}
-                    // {{-- cven: '007', --}}
-                }) // Datos a enviar en el cuerpo de la solicitud
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json(); // Parsear la respuesta como JSON
-            })
-            .then(data => {
-                // Inicializar el total general
-                let totalGeneral = 0;
-                // Inicializar un array para almacenar las fechas
-                const fechas = [];
-                // Crear un Set para almacenar valores únicos de "cven"
-                const cvenSet = new Set();
+            var datafecth = (cven) => {
+                var cvenstringify = cven ? { cven: cven } : {}; // Si 'cven' tiene valor, lo asignas, de lo contrario, dejas un objeto vacío
+                console.log(cven);
+                console.log(cvenstringify);
+                fetch('{{ route('api.avancedata') }}', {
+                        // {{-- fetch('https://golomix.realpedidos.com/api/avancedata', { --}}
+                        method: 'POST', // Método de solicitud
+                        headers: {
+                            'Content-Type': 'application/json' // Tipo de contenido de los datos
+                        },
+                        body: JSON.stringify({
+                            ...cvenstringify // Aquí extiendes el objeto solo si cven tiene valor
+                            // {{-- cven: '007', --}}
+                        }) // Datos a enviar en el cuerpo de la solicitud
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json(); // Parsear la respuesta como JSON
+                    })
+                    .then(data => {
+                        // Inicializar el total general
+                        let totalGeneral = 0;
+                        // Inicializar un array para almacenar las fechas
+                        const fechas = [];
+                        // Crear un Set para almacenar valores únicos de "cven"
+                        const cvenSet = new Set();
 
-                // Agrupar por marca y sumar ventas
-                const totalesPorMarca = data.reduce((acc, item) => {
-                    // Añadir "cven" al Set, solo valores únicos serán almacenados
-                    cvenSet.add(item.cven);
-                    if (!acc[item.ccodmarca]) {
-                        acc[item.ccodmarca] = {
-                            tdesmarca: item.tdesmarca,
-                            total_ventas: 0
+                        // Agrupar por marca y sumar ventas
+                        const totalesPorMarca = data.reduce((acc, item) => {
+                            // Añadir "cven" al Set, solo valores únicos serán almacenados
+                            cvenSet.add(item.cven);
+                            if (!acc[item.ccodmarca]) {
+                                acc[item.ccodmarca] = {
+                                    tdesmarca: item.tdesmarca,
+                                    total_ventas: 0
+                                };
+                            }
+                            // Asegurarse de que total_ventas es un número antes de sumarlo
+                            const ventas = parseFloat(item.qimp) || 0;
+                            acc[item.ccodmarca].total_ventas += ventas;
+
+                            // Sumar al total general
+                            totalGeneral += ventas;
+
+                            // Agregar la fecha al array de fechas (asumiendo que femi es de formato 'YYYY-MM-DD')
+                            if (item.femi) {
+                                fechas.push(new Date(item.femi +
+                                'T00:00:00')); // Añadir hora manual para evitar conversiones automáticas
+                            }
+
+                            return acc;
+                        }, {});
+
+                        // Convertir el objeto en un array si es necesario
+                        const resultArray = Object.keys(totalesPorMarca).map(key => ({
+                            ccodmarca: key,
+                            tdesmarca: totalesPorMarca[key].tdesmarca,
+                            total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
+                        }));
+
+                        // Agregar el total general al array
+                        resultArray.push({
+                            ccodmarca: '000',
+                            tdesmarca: 'TOTAL VENTA',
+                            total_ventas: parseFloat(totalGeneral.toFixed(2))
+                        });
+
+                        // Ordenar el array por ccodmarca
+                        resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
+
+                        // Convertir el Set en un array de valores únicos de "cven"
+                        const cvenArrayUnicos = [...cvenSet];
+
+                        // Encontrar la fecha mínima y máxima
+                        const minFecha = new Date(Math.min(...fechas));
+                        const maxFecha = new Date(Math.max(...fechas));
+
+                        // Guardar el rango de fechas en un array aparte y formatearlas
+                        const rangoFechas = [
+                            formatearFecha(minFecha),
+                            formatearFecha(maxFecha)
+                        ]
+
+                        const array_datosExtras = {
+                            cvenArrayUnicos,
+                            rangofecha: rangoFechas[0] + ' al ' + rangoFechas[1],
+                        }
+
+                        //console.log(resultArray); // Maneja los datos agrupados y sumados aquí
+                        return {
+                            articulos: resultArray,
+                            info: array_datosExtras
                         };
-                    }
-                    // Asegurarse de que total_ventas es un número antes de sumarlo
-                    const ventas = parseFloat(item.qimp) || 0;
-                    acc[item.ccodmarca].total_ventas += ventas;
-
-                    // Sumar al total general
-                    totalGeneral += ventas;
-
-                    // Agregar la fecha al array de fechas (asumiendo que femi es de formato 'YYYY-MM-DD')
-                    if (item.femi) {
-                        fechas.push(new Date(item.femi + 'T00:00:00')); // Añadir hora manual para evitar conversiones automáticas
-                    }
-
-                    return acc;
-                }, {});
-
-                // Convertir el objeto en un array si es necesario
-                const resultArray = Object.keys(totalesPorMarca).map(key => ({
-                    ccodmarca: key,
-                    tdesmarca: totalesPorMarca[key].tdesmarca,
-                    total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
-                }));
-
-                // Agregar el total general al array
-                resultArray.push({
-                    ccodmarca: '000',
-                    tdesmarca: 'TOTAL VENTA',
-                    total_ventas: parseFloat(totalGeneral.toFixed(2))
-                });
-
-                // Ordenar el array por ccodmarca
-                resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
-
-                // Convertir el Set en un array de valores únicos de "cven"
-                const cvenArrayUnicos = [...cvenSet];
-
-                // Encontrar la fecha mínima y máxima
-                const minFecha = new Date(Math.min(...fechas));
-                const maxFecha = new Date(Math.max(...fechas));
-
-                // Guardar el rango de fechas en un array aparte y formatearlas
-                const rangoFechas = [
-                    formatearFecha(minFecha),
-                    formatearFecha(maxFecha)
-                ]
-
-                const array_datosExtras = {
-                    cvenArrayUnicos,
-                    rangofecha: rangoFechas[0]+' al '+rangoFechas[1],
-                }
-
-                //console.log(resultArray); // Maneja los datos agrupados y sumados aquí
-                return {articulos:resultArray, info:array_datosExtras};
-            })
-            .then(datos => {return mostrar(datos)})
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
+                    })
+                    .then(datos => {
+                        return mostrar(datos)
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            }
+            datafecth("{{ $cven }}");
 
             const mostrar = (data) => {
                 console.log(data);
-                console.log(data.info.cvenArrayUnicos[0]);
-                var title = "Avance "+data.info.cvenArrayUnicos[0];
-                if(data.info.cvenArrayUnicos.length>1){
+                console.log(data.info.cvenArrayUnicos);
+                var title = "Avance " + data.info.cvenArrayUnicos[0];
+                if (data.info.cvenArrayUnicos.length > 1) {
                     title = "Avance";
                 }
-                if(mychart){
-                    mychart.data.labels = [];  // Limpiar etiquetas
-                    mychart.data.datasets[0].label = 'Venta';  // Limpiar datasets
-                    mychart.data.datasets[0].data = [];  // Limpiar datasets
+                if (mychart) {
+                    mychart.data.labels = []; // Limpiar etiquetas
+                    mychart.data.datasets[0].label = 'Venta'; // Limpiar datasets
+                    mychart.data.datasets[0].data = []; // Limpiar datasets
                     mychart.update();
                     mychart.destroy();
                     mychart = new Chart(ctx, config);
@@ -274,7 +289,7 @@
                 data.articulos.forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)
                     mychart.data['datasets'][0].data.push(element.total_ventas)
-                    mychart.data['datasets'][0].label="Venta Setiembre "+data.info.rangofecha;
+                    mychart.data['datasets'][0].label = "Venta Setiembre " + data.info.rangofecha;
                     mychart.update()
                 });
                 return data;
@@ -282,7 +297,10 @@
 
             // Función para convertir la fecha al formato "02 sep"
             function formatearFecha(fecha) {
-                return fecha.toLocaleDateString('es-PE', { day: '2-digit', month: 'short' });
+                return fecha.toLocaleDateString('es-PE', {
+                    day: '2-digit',
+                    month: 'short'
+                });
             }
         </script>
 
