@@ -162,7 +162,7 @@
 
             var mychart = new Chart(ctx, config);
 
-            fetch('{{route('api.avancedata')}}', {
+            var datafecth = fetch('{{route('api.avancedata')}}', {
             // {{-- fetch('https://golomix.realpedidos.com/api/avancedata', { --}}
                 method: 'POST', // Método de solicitud
                 headers: {
@@ -250,7 +250,7 @@
                 //console.log(resultArray); // Maneja los datos agrupados y sumados aquí
                 return {articulos:resultArray, info:array_datosExtras};
             })
-            .then(datos => mostrar(datos))
+            .then(datos => {return mostrar(datos)})
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
@@ -277,6 +277,7 @@
                     mychart.data['datasets'][0].label="Venta Setiembre "+data.info.rangofecha;
                     mychart.update()
                 });
+                return data;
             }
 
             // Función para convertir la fecha al formato "02 sep"
