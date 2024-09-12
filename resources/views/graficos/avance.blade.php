@@ -257,6 +257,14 @@
 
             const mostrar = (data) => {
                 console.log(data);
+                if(mychart){
+                    mychart.data.labels = [];  // Limpiar etiquetas
+                    mychart.data.datasets[0].label = 'Venta';  // Limpiar datasets
+                    mychart.data.datasets[0].data = [];  // Limpiar datasets
+                    mychart.update();
+                    mychart.destroy();
+                    mychart = new Chart(ctx, config);
+                }
                 data.articulos.forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)
                     mychart.data['datasets'][0].data.push(element.total_ventas)
