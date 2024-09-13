@@ -83,12 +83,14 @@
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
         <script>
+            @hasanyrole('Super-Admin')
             const btn = document.getElementById('consultar');
             var cven = document.getElementById('slctcven');
             btn.addEventListener("click",function(){
                 console.log(cven.value);
                 datafecth(cven.value)
             })
+            @endhasanyrole
             const ctx = document.getElementById('myChart').getContext('2d');
 
             const data = {
