@@ -1,3 +1,5 @@
+@props(['com10s'])
+
 <div>
     <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
     @hasanyrole('Super-Admin')
@@ -5,11 +7,15 @@
             <label for="slctcven" class="flex items-center">Vendedor: </label>
             <select id="slctcven"
                 class="bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
-                <option>Opción 1</option>
-                <option>Opción 2</option>
-                <option>Opción 3</option>
+                <option>--- Seleccionar ---</option>
+                <option value="">TODOS</option>
+                @forelse ($com10s as $com10)
+                    <option value="{{ $com10->cven }}">{{ $com10->cven ." - ". $com10->tven }}</option>
+                @empty
+
+                @endforelse
             </select>
-            <button id="aplicar"
+            <button id="consultar"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded form-control">Consultar</button>
         </div>
     @endhasanyrole

@@ -15,7 +15,7 @@
 
             <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-1">
-                    <x-filtrochart />
+                    <x-filtrochart :com10s="$com10s"/>
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white shadow-xl sm:rounded-lg">
@@ -83,6 +83,12 @@
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
         <script>
+            const btn = document.getElementById('consultar');
+            var cven = document.getElementById('slctcven');
+            btn.addEventListener("click",function(){
+                console.log(cven.value);
+                datafecth(cven.value)
+            })
             const ctx = document.getElementById('myChart').getContext('2d');
 
             const data = {
