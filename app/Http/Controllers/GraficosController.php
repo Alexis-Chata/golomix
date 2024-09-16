@@ -18,8 +18,8 @@ class GraficosController extends Controller
         if(auth()->user()->hasAnyRole('Super-Admin')){
             $cven = null;
         }
-        $descripcion = "Avance ".auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven;
-        $this->bitacora($descripcion, __METHOD__);
+        // $descripcion = "Avance ".auth()->user()->codVendedorAsignados->firstWhere('tipo', 'main')->cven;
+        // $this->bitacora($descripcion, __METHOD__);
         return view('graficos.avance', compact("cven", "com10s"));
     }
 }

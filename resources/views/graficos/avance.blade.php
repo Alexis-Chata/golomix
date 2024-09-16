@@ -15,7 +15,7 @@
 
             <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-1">
-                    <x-filtrochart :com10s="$com10s"/>
+                    <x-filtrochart :com10s="$com10s" />
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white shadow-xl sm:rounded-lg">
@@ -84,13 +84,35 @@
 
         <script>
             @hasanyrole('Super-Admin')
-            const btn = document.getElementById('consultar');
-            var cven = document.getElementById('slctcven');
-            btn.addEventListener("click",function(){
-                console.log(cven.value);
-                datafecth(cven.value)
-            })
+                const btn = document.getElementById('consultar');
+                var cven = document.getElementById('slctcven');
+                btn.addEventListener("click", function() {
+                    console.log(cven.value);
+                    datafecth(cven.value)
+                })
             @endhasanyrole
+
+            const btnaplicar = document.getElementById('aplicar');
+            btnaplicar.addEventListener("click", function() {
+                    datafecthfiltrada()
+                })
+            // Obtén la fecha actual
+            const hoy = new Date();
+
+            // Formatea la fecha en formato compatible con input date (YYYY-MM-DD)
+            const fechaFormateada = hoy.toISOString().split('T')[0];
+
+            // Establece el día al 1 para obtener el primer día del mes
+            const primerDiaMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+
+            // Formatea la fecha en formato compatible con input date (YYYY-MM-DD)
+            const primerDiaMesfechaFormateada = primerDiaMes.toISOString().split('T')[0];
+
+            // Asigna la fecha formateada al input de tipo date
+            document.getElementById('to').value = fechaFormateada;
+            document.getElementById('from').value = primerDiaMesfechaFormateada;
+        </script>
+        <script>
             const ctx = document.getElementById('myChart').getContext('2d');
 
             const data = {
@@ -172,110 +194,143 @@
             };
 
             var mychart = new Chart(ctx, config);
+            //const response = await fetch('{{ route('api.avancedata') }}', {
 
-            var datafecth = (cven) => {
-                var cvenstringify = cven ? { cven: cven } : {}; // Si 'cven' tiene valor, lo asignas, de lo contrario, dejas un objeto vacío
-                console.log(cven);
-                console.log(cvenstringify);
-                fetch('{{ route('api.avancedata') }}', {
-                        // {{-- fetch('https://golomix.realpedidos.com/api/avancedata', { --}}
-                        method: 'POST', // Método de solicitud
+            // Función para obtener datos de la API
+            const obtenerDatosAPI = async (cven) => {
+                try {
+                    const response = await fetch('http://golomix.test/api/avancedata', {
+                        method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json' // Tipo de contenido de los datos
+                            'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({
-                            ...cvenstringify // Aquí extiendes el objeto solo si cven tiene valor
-                            // {{-- cven: '007', --}}
-                        }) // Datos a enviar en el cuerpo de la solicitud
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json(); // Parsear la respuesta como JSON
-                    })
-                    .then(data => {
-                        // Inicializar el total general
-                        let totalGeneral = 0;
-                        // Inicializar un array para almacenar las fechas
-                        const fechas = [];
-                        // Crear un Set para almacenar valores únicos de "cven"
-                        const cvenSet = new Set();
-
-                        // Agrupar por marca y sumar ventas
-                        const totalesPorMarca = data.reduce((acc, item) => {
-                            // Añadir "cven" al Set, solo valores únicos serán almacenados
-                            cvenSet.add(item.cven);
-                            if (!acc[item.ccodmarca]) {
-                                acc[item.ccodmarca] = {
-                                    tdesmarca: item.tdesmarca,
-                                    total_ventas: 0
-                                };
-                            }
-                            // Asegurarse de que total_ventas es un número antes de sumarlo
-                            const ventas = parseFloat(item.qimp) || 0;
-                            acc[item.ccodmarca].total_ventas += ventas;
-
-                            // Sumar al total general
-                            totalGeneral += ventas;
-
-                            // Agregar la fecha al array de fechas (asumiendo que femi es de formato 'YYYY-MM-DD')
-                            if (item.femi) {
-                                fechas.push(new Date(item.femi +
-                                'T00:00:00')); // Añadir hora manual para evitar conversiones automáticas
-                            }
-
-                            return acc;
-                        }, {});
-
-                        // Convertir el objeto en un array si es necesario
-                        const resultArray = Object.keys(totalesPorMarca).map(key => ({
-                            ccodmarca: key,
-                            tdesmarca: totalesPorMarca[key].tdesmarca,
-                            total_ventas: parseFloat(totalesPorMarca[key].total_ventas.toFixed(2))
-                        }));
-
-                        // Agregar el total general al array
-                        resultArray.push({
-                            ccodmarca: '000',
-                            tdesmarca: 'TOTAL VENTA',
-                            total_ventas: parseFloat(totalGeneral.toFixed(2))
-                        });
-
-                        // Ordenar el array por ccodmarca
-                        resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
-
-                        // Convertir el Set en un array de valores únicos de "cven"
-                        const cvenArrayUnicos = [...cvenSet];
-
-                        // Encontrar la fecha mínima y máxima
-                        const minFecha = new Date(Math.min(...fechas));
-                        const maxFecha = new Date(Math.max(...fechas));
-
-                        // Guardar el rango de fechas en un array aparte y formatearlas
-                        const rangoFechas = [
-                            formatearFecha(minFecha),
-                            formatearFecha(maxFecha)
-                        ]
-
-                        const array_datosExtras = {
-                            cvenArrayUnicos,
-                            rangofecha: rangoFechas[0] + ' al ' + rangoFechas[1],
-                        }
-
-                        //console.log(resultArray); // Maneja los datos agrupados y sumados aquí
-                        return {
-                            articulos: resultArray,
-                            info: array_datosExtras
-                        };
-                    })
-                    .then(datos => {
-                        return mostrar(datos)
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
+                        body: JSON.stringify(cven ? {
+                            cven
+                        } : {})
                     });
-            }
+
+                    if (!response.ok) {
+                        throw new Error('La respuesta de la red no fue correcta ' + response.statusText);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('Hubo un problema al obtener los datos de la API:', error);
+                    throw error;
+                }
+            };
+
+            // Función para procesar los datos
+            const procesarDatos = (data) => {
+                let totalGeneral = 0;
+                const fechas = [];
+                const cvenSet = new Set();
+
+                const totalesPorMarca = data.reduce((acc, {
+                    ccodmarca,
+                    tdesmarca,
+                    qimp,
+                    cven,
+                    femi
+                }) => {
+                    cvenSet.add(cven);
+
+                    if (!acc[ccodmarca]) {
+                        acc[ccodmarca] = {
+                            tdesmarca,
+                            total_ventas: 0
+                        };
+                    }
+
+                    const ventas = parseFloat(qimp) || 0;
+                    acc[ccodmarca].total_ventas += ventas;
+                    totalGeneral += ventas;
+
+                    if (femi) {
+                        fechas.push(new Date(`${femi}T00:00:00`));
+                    }
+
+                    return acc;
+                }, {});
+
+                const resultArray = Object.keys(totalesPorMarca).map(ccodmarca => ({
+                    ccodmarca,
+                    tdesmarca: totalesPorMarca[ccodmarca].tdesmarca,
+                    total_ventas: parseFloat(totalesPorMarca[ccodmarca].total_ventas.toFixed(2))
+                }));
+
+                resultArray.push({
+                    ccodmarca: '000',
+                    tdesmarca: 'TOTAL VENTA',
+                    total_ventas: parseFloat(totalGeneral.toFixed(2))
+                });
+
+                resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
+
+                const cvenArrayUnicos = [...cvenSet];
+                const minFecha = new Date(Math.min(...fechas));
+                const maxFecha = new Date(Math.max(...fechas));
+
+                const rangoFechas = [
+                    formatearFecha(minFecha),
+                    formatearFecha(maxFecha)
+                ];
+
+                const array_datosExtras = {
+                    cvenArrayUnicos,
+                    rangofecha: `${rangoFechas[0]} al ${rangoFechas[1]}`
+                };
+
+                return {
+                    articulos: resultArray,
+                    info: array_datosExtras
+                };
+            };
+
+            // Función principal que coordina la obtención y procesamiento de datos
+            const datafecth = async (cven) => {
+                try {
+                    const datos = await obtenerDatosAPI(cven);
+
+                    // Aquí podrías filtrar por fechas, por ejemplo:
+                    const datosFiltrados = filtrarPorFechas(datos, from.value, to.value);
+                    console.log(datosFiltrados); // Mostrar los datos filtrados por el rango de fechas
+
+                    const datosProcesados = procesarDatos(datosFiltrados);
+                    mostrar(datosProcesados);
+
+                    return datosfecth = {
+                        datos: datos,
+                        datosProcesados: datosProcesados,
+                        datosFiltrados: datosFiltrados // También puedes retornar los datos filtrados si es necesario
+                    };
+                } catch (error) {
+                    console.error('Hubo un problema con la operación de búsqueda:', error);
+                }
+            };
+
+            const datafecthfiltrada = async () => {
+                try {
+                    //const datos = await obtenerDatosAPI(cven);
+
+                    // Aquí podrías filtrar por fechas, por ejemplo:
+                    const datosFiltrados = filtrarPorFechas(datosfecth.datos, from.value, to.value);
+                    console.log(datosFiltrados); // Mostrar los datos filtrados por el rango de fechas
+
+                    const datosProcesados = procesarDatos(datosFiltrados);
+                    mostrar(datosProcesados);
+
+                    return datosfecthfiltrada = {
+                        datos: datosfecth.datos,
+                        datosProcesados: datosProcesados,
+                        datosFiltrados: datosFiltrados // También puedes retornar los datos filtrados si es necesario
+                    };
+                } catch (error) {
+                    console.error('Hubo un problema con la operación de búsqueda:', error);
+                }
+            };
+
+
             datafecth("{{ $cven }}");
 
             const mostrar = (data) => {
@@ -310,6 +365,17 @@
                     month: 'short'
                 });
             }
+
+            // Función para filtrar los datos por un rango de fechas
+            const filtrarPorFechas = (datos, fechaInicio, fechaFin) => {
+                const fechaInicioObj = new Date(fechaInicio + 'T00:00:00');
+                const fechaFinObj = new Date(fechaFin + 'T00:00:00');
+                return datos.filter(item => {
+                    const fechaItem = new Date(item.femi +
+                        'T00:00:00'); // Asegurar que la fecha esté en formato correcto
+                    return fechaItem >= fechaInicioObj && fechaItem <= fechaFinObj;
+                });
+            };
         </script>
 
         <script>
