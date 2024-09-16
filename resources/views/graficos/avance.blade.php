@@ -92,6 +92,8 @@
                 })
             @endhasanyrole
 
+            const dateto = document.getElementById('to');
+            const datefrom = document.getElementById('from');
             const btnaplicar = document.getElementById('aplicar');
             btnaplicar.addEventListener("click", function() {
                     datafecthfiltrada()
@@ -109,8 +111,8 @@
             const primerDiaMesfechaFormateada = primerDiaMes.toISOString().split('T')[0];
 
             // Asigna la fecha formateada al input de tipo date
-            document.getElementById('to').value = fechaFormateada;
-            document.getElementById('from').value = primerDiaMesfechaFormateada;
+            dateto.value = fechaFormateada;
+            datefrom.value = primerDiaMesfechaFormateada;
         </script>
         <script>
             const ctx = document.getElementById('myChart').getContext('2d');
@@ -314,7 +316,7 @@
                     //const datos = await obtenerDatosAPI(cven);
 
                     // Aquí podrías filtrar por fechas, por ejemplo:
-                    const datosFiltrados = filtrarPorFechas(datosfecth.datos, from.value, to.value);
+                    const datosFiltrados = filtrarPorFechas(datosfecth.datos, datefrom.value, dateto.value);
                     console.log(datosFiltrados); // Mostrar los datos filtrados por el rango de fechas
 
                     const datosProcesados = procesarDatos(datosFiltrados);
