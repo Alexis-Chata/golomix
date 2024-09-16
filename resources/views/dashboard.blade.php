@@ -265,6 +265,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="py-6">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                <div class="row px-6" title="Actualiza el Tipo Producto">
+                                    <form action="{{ route('scrhcom21.store') }}" class="py-6" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <label for="arch_scr_hcom21" class="cursor-pointer">Subir archivo ScrHcom21
+                                        </label>
+                                        <input type="file" name="arch_scr_hcom21" id="arch_scr_hcom21" required
+                                            class="mt-4 cursor-pointer block w-full mb-4 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                                        <button type="submit"
+                                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition mt-4 justify-center w-full">Subir
+                                            Archivo</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
