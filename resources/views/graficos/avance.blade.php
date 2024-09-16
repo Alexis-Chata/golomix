@@ -196,12 +196,12 @@
             };
 
             var mychart = new Chart(ctx, config);
-            //const response = await fetch('{{ route('api.avancedata') }}', {
 
             // Función para obtener datos de la API
             const obtenerDatosAPI = async (cven) => {
                 try {
-                    const response = await fetch('http://golomix.test/api/avancedata', {
+                    const response = await fetch('{{ route('api.avancedata') }}', {
+                    //const response = await fetch('http://golomix.test/api/avancedata', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
