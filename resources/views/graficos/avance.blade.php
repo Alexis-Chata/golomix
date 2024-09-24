@@ -288,8 +288,8 @@
                 resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
 
                 // Procesar fechas
-                const ccliArrayUnicos = [...ccliSet]; // Lista de clientes únicos
-                const cvenArrayUnicos = [...cvenSet]; // Lista de vendedores únicos
+                const ccliArrayUnicos = [...ccliSet].sort(); // Lista de clientes únicos
+                const cvenArrayUnicos = [...cvenSet].sort(); // Lista de vendedores únicos
                 const minFecha = new Date(Math.min(...fechas));
                 const maxFecha = new Date(Math.max(...fechas));
 
