@@ -31,7 +31,8 @@ class SubirCsvController extends Controller
                 'com10s.cven',
                 'com10s.tven',
                 'scr_hcom21s.qimp',
-                'scr_hcom20s.femi'
+                'scr_hcom20s.femi',
+                'scr_hcom20s.ccli'
             )
             ->join('scr_hcom20s', 'scr_hcom21s.nfacfull', '=', 'scr_hcom20s.nfacfull')
             ->join('com10s', 'scr_hcom20s.cven', '=', 'com10s.cven')

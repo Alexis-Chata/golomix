@@ -96,8 +96,8 @@
             const datefrom = document.getElementById('from');
             const btnaplicar = document.getElementById('aplicar');
             btnaplicar.addEventListener("click", function() {
-                    datafecthfiltrada()
-                })
+                datafecthfiltrada()
+            })
             // Obtén la fecha actual
             const hoy = new Date();
 
@@ -201,7 +201,7 @@
             const obtenerDatosAPI = async (cven) => {
                 try {
                     const response = await fetch('{{ route('api.avancedata') }}', {
-                    //const response = await fetch('http://golomix.test/api/avancedata', {
+                        //const response = await fetch('http://golomix.test/api/avancedata', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -226,23 +226,34 @@
             const procesarDatos = (data) => {
                 let totalGeneral = 0;
                 const fechas = [];
-                const cvenSet = new Set();
+                const ccliSet = new Set(); // Clientes únicos
+                const cvenSet = new Set(); // Vendedores únicos
 
+                // Agregar un conjunto de clientes únicos por marca
                 const totalesPorMarca = data.reduce((acc, {
                     ccodmarca,
                     tdesmarca,
                     qimp,
-                    cven,
+                    ccli, // Clientes
+                    cven, // Vendedores
                     femi
                 }) => {
-                    cvenSet.add(cven);
+                    ccliSet.add(ccli); // Agregamos cliente al conjunto general
+                    cvenSet.add(cven); // Agregamos vendedor al conjunto general
 
+                    // Inicializar el objeto de la marca si no existe
                     if (!acc[ccodmarca]) {
                         acc[ccodmarca] = {
                             tdesmarca,
-                            total_ventas: 0
+                            total_ventas: 0,
+                            clientesUnicos: new Set(), // Aquí guardamos los clientes únicos por marca
+                            vendedoresUnicos: new Set() // Aquí guardamos los vendedores únicos por marca
                         };
                     }
+
+                    // Agregar cliente y vendedor al conjunto de la marca
+                    acc[ccodmarca].clientesUnicos.add(ccli);
+                    acc[ccodmarca].vendedoresUnicos.add(cven);
 
                     const ventas = parseFloat(qimp) || 0;
                     acc[ccodmarca].total_ventas += ventas;
@@ -255,21 +266,30 @@
                     return acc;
                 }, {});
 
+                // Convertir el resultado en un array y calcular la cantidad de clientes y vendedores únicos
                 const resultArray = Object.keys(totalesPorMarca).map(ccodmarca => ({
                     ccodmarca,
                     tdesmarca: totalesPorMarca[ccodmarca].tdesmarca,
-                    total_ventas: parseFloat(totalesPorMarca[ccodmarca].total_ventas.toFixed(2))
+                    total_ventas: parseFloat(totalesPorMarca[ccodmarca].total_ventas.toFixed(2)),
+                    clientes_unicos: totalesPorMarca[ccodmarca].clientesUnicos.size, // Contar clientes únicos
+                    vendedores_unicos: totalesPorMarca[ccodmarca].vendedoresUnicos.size // Contar vendedores únicos
                 }));
 
+                // Agregar el total general al final del array
                 resultArray.push({
                     ccodmarca: '000',
                     tdesmarca: 'TOTAL VENTA',
-                    total_ventas: parseFloat(totalGeneral.toFixed(2))
+                    total_ventas: parseFloat(totalGeneral.toFixed(2)),
+                    clientes_unicos: ccliSet.size, // Total de clientes únicos en general
+                    vendedores_unicos: cvenSet.size // Total de vendedores únicos en general
                 });
 
+                // Ordenar el resultado por código de marca
                 resultArray.sort((a, b) => a.ccodmarca.localeCompare(b.ccodmarca));
 
-                const cvenArrayUnicos = [...cvenSet];
+                // Procesar fechas
+                const ccliArrayUnicos = [...ccliSet]; // Lista de clientes únicos
+                const cvenArrayUnicos = [...cvenSet]; // Lista de vendedores únicos
                 const minFecha = new Date(Math.min(...fechas));
                 const maxFecha = new Date(Math.max(...fechas));
 
@@ -279,10 +299,12 @@
                 ];
 
                 const array_datosExtras = {
-                    cvenArrayUnicos,
+                    ccliArrayUnicos, // Clientes únicos
+                    cvenArrayUnicos, // Vendedores únicos
                     rangofecha: `${rangoFechas[0]} al ${rangoFechas[1]}`
                 };
 
+                // Devolver el resultado
                 return {
                     articulos: resultArray,
                     info: array_datosExtras
