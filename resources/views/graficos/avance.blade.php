@@ -101,19 +101,20 @@
         <script>
             @hasanyrole('Super-Admin')
                 const btn = document.getElementById('consultar');
-                var cven = document.getElementById('slctcven');
-                btn.addEventListener("click", function() {
-                    console.log(cven.value);
-                    datafecth(cven.value)
-                })
+                var cven_slct = document.getElementById('slctcven');
+
+                // btn.addEventListener("click", function() {
+                //     console.log(cven_slct.value);
+                //     datafecth(cven_slct.value)
+                // })
             @endhasanyrole
 
             const dateto = document.getElementById('to');
             const datefrom = document.getElementById('from');
             const btnaplicar = document.getElementById('aplicar');
-            btnaplicar.addEventListener("click", function() {
-                datafecthfiltrada()
-            })
+            // btnaplicar.addEventListener("click", function() {
+            //     datafecthfiltrada()
+            // })
             // Obtén la fecha actual
             const hoy = new Date();
 
@@ -330,6 +331,7 @@
             // Función principal que coordina la obtención y procesamiento de datos
             const datafecth = async (cven, setDatosProcesados) => {
                 try {
+                    console.log("datafecth", cven, "datafecthfin");
                     const datos = await obtenerDatosAPI(cven);
 
                     // Aquí podrías filtrar por fechas, por ejemplo:
@@ -340,7 +342,6 @@
                     mostrar(datosProcesados);
 
                     // Aquí actualizas el estado de React con los datos procesados
-                    console.log("setDatosProcesados", datosProcesados.articulos);
                     setDatosProcesados(datosProcesados.articulos);
 
                     return datosfecth = {
@@ -356,7 +357,7 @@
             var codVendedor = "{{ $cven }}";
             //datafecth("{{ $cven }}");
 
-            const datafecthfiltrada = async () => {
+            const datafecthfiltrada = async (setDatosProcesados) => {
                 try {
                     //const datos = await obtenerDatosAPI(cven);
 
