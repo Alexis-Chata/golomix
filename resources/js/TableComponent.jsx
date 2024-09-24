@@ -5,19 +5,19 @@ const TablaDatos = ({ data }) => {
         <table border="1">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Ciudad</th>
+                    <th>Cod.Marca</th>
+                    <th>Marca</th>
+                    <th>Cobertura</th>
+                    <th>Importe Venta</th>
                 </tr>
             </thead>
             <tbody>
                 {data.map((item, index) => (
                     <tr key={index}>
-                        <td>{item.id}</td>
-                        <td>{item.nombre}</td>
-                        <td>{item.edad}</td>
-                        <td>{item.ciudad}</td>
+                        <td>{item.ccodmarca}</td>
+                        <td>{item.tdesmarca}</td>
+                        <td>{item.clientes_unicos}</td>
+                        <td>{item.total_ventas}</td>
                     </tr>
                 ))}
             </tbody>
@@ -26,11 +26,18 @@ const TablaDatos = ({ data }) => {
 };
 
 const App = () => {
-    const [datosProcesados, setDatosProcesados] = useState([]);
+    const [datosProcesados, setDatosProcesados] = useState([]); // Estado para almacenar los datos procesados
 
+    // Llamar a la función datafetch cuando el componente se monte
     useEffect(() => {
-        // Llamar a la función de búsqueda de datos cuando el componente se monta
-        datafecth('cven_value', setDatosProcesados);
+        const cargarDatos = async () => {
+            console.log("Llamando a datafecth...");
+            await datafecth(codVendedor, setDatosProcesados);  // Llamar a datafecth y pasar la función setDatosProcesados
+            console.log("finaliza a datafecth...");
+            console.log(datosProcesados);
+        };
+
+        cargarDatos();  // Ejecutar la función asíncrona
     }, []);
 
     return (

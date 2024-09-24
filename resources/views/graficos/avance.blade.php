@@ -328,7 +328,7 @@
             };
 
             // Función principal que coordina la obtención y procesamiento de datos
-            const datafecth = async (cven) => {
+            const datafecth = async (cven, setDatosProcesados) => {
                 try {
                     const datos = await obtenerDatosAPI(cven);
 
@@ -338,6 +338,10 @@
 
                     const datosProcesados = procesarDatos(datosFiltrados);
                     mostrar(datosProcesados);
+
+                    // Aquí actualizas el estado de React con los datos procesados
+                    console.log("setDatosProcesados", datosProcesados.articulos);
+                    setDatosProcesados(datosProcesados.articulos);
 
                     return datosfecth = {
                         datos: datos,
@@ -349,7 +353,8 @@
                 }
             };
 
-            datafecth("{{ $cven }}");
+            var codVendedor = "{{ $cven }}";
+            //datafecth("{{ $cven }}");
 
             const datafecthfiltrada = async () => {
                 try {
@@ -362,6 +367,9 @@
                     const datosProcesados = procesarDatos(datosFiltrados);
                     mostrar(datosProcesados);
 
+                    // Aquí actualizas el estado de React con los datos procesados
+                    setDatosProcesados(datosProcesados.articulos);
+
                     return datosfecthfiltrada = {
                         datos: datosfecth.datos,
                         datosFiltrados: datosFiltrados, // También puedes retornar los datos filtrados si es necesario
@@ -371,8 +379,6 @@
                     console.error('Hubo un problema con la operación de búsqueda:', error);
                 }
             };
-
-            datafecth("{{ $cven }}");
 
             const mostrar = (data) => {
                 console.log(data);
