@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\ScrHcom21Controller;
 use App\Http\Controllers\Ugr01Controller;
+use App\Models\ScrHcom20;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,14 @@ class SubirCsvController extends Controller
         DB::enableQueryLog();
         $cven = $request->cven;
         //$cven = "010";
+
+        $results = ScrHcom20::selectRaw('femi, YEAR(femi) AS anio, MONTH(femi) AS mes, DAY(femi) AS dia') // Seleccionar solo la columna femi
+            ->orderBy('femi', 'desc') // Ordenar por la fecha más reciente
+            ->distinct() // Obtener fechas únicas
+            ->limit(3) // Obtener solo las 3 últimas fechas distintas
+            ->get();
+        //dd($results->last()->mes, $results->last()->anio);
+
         $datafull = DB::table('scr_hcom21s')
             ->select(
                 'view_ugr01s_045.ccodmarca',
@@ -42,8 +51,8 @@ class SubirCsvController extends Controller
             ->when($cven, function ($query) use ($cven) {
                 return $query->where('scr_hcom20s.cven', $cven);
             })
-            ->whereYear('femi', 2024)
-            ->whereMonth('femi', 9)
+            ->whereYear('femi', $results->last()->anio)
+            ->whereMonth('femi', $results->last()->mes)
             ->get();
         $queries = DB::getQueryLog();
         //dd($queries);
