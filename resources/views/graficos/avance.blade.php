@@ -94,7 +94,7 @@
         {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
     @endpush
 
-    @push('eventsubmit-js')
+    @push('javascriptjs')
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
@@ -349,6 +349,8 @@
                 }
             };
 
+            datafecth("{{ $cven }}");
+
             const datafecthfiltrada = async () => {
                 try {
                     //const datos = await obtenerDatosAPI(cven);
@@ -369,7 +371,6 @@
                     console.error('Hubo un problema con la operación de búsqueda:', error);
                 }
             };
-
 
             datafecth("{{ $cven }}");
 
@@ -417,7 +418,8 @@
                 });
             };
         </script>
-
+    @endpush
+    @push('eventsubmit-js')
         <script>
             document.body.addEventListener('submit', cargando);
 
