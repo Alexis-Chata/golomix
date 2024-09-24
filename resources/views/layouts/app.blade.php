@@ -77,6 +77,7 @@
         </div>
 
         @stack('modals')
+        @stack("jsxjs")
 
         @livewireScripts
 

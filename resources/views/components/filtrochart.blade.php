@@ -6,7 +6,7 @@
         <div class="flex flex-wrap justify-start col-md-3 p-2.5 gap-2 sm:gap-4">
             <label for="slctcven" class="flex items-center">Vendedor: </label>
             <select id="slctcven"
-                class="bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
+                class="w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500">
                 <option>--- Seleccionar ---</option>
                 <option value="">TODOS</option>
                 @forelse ($com10s as $com10)

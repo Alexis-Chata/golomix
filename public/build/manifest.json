@@ -8,5 +8,10 @@
     "file": "assets/app-396f970b.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/component.jsx": {
+    "file": "assets/component-0f07b9e5.js",
+    "isEntry": true,
+    "src": "resources/js/component.jsx"
   }
 }

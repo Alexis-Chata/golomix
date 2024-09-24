@@ -15,7 +15,15 @@
 
             <div class="bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
                 <div class="grid grid-cols-1">
-                    <x-filtrochart :com10s="$com10s" />
+                    <div class="py-6">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white shadow-xl sm:rounded-lg">
+                                <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
+                                    <x-filtrochart :com10s="$com10s" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="py-6">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                             <div class="bg-white shadow-xl sm:rounded-lg">
@@ -25,7 +33,15 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div class="py-6">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white shadow-xl sm:rounded-lg">
+                            <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
+                                <div id="react-root"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -317,7 +333,7 @@
                     const datos = await obtenerDatosAPI(cven);
 
                     // Aquí podrías filtrar por fechas, por ejemplo:
-                    const datosFiltrados = filtrarPorFechas(datos, from.value, to.value);
+                    const datosFiltrados = filtrarPorFechas(datos, datefrom.value, dateto.value);
                     console.log(datosFiltrados); // Mostrar los datos filtrados por el rango de fechas
 
                     const datosProcesados = procesarDatos(datosFiltrados);
@@ -325,8 +341,8 @@
 
                     return datosfecth = {
                         datos: datos,
+                        datosFiltrados: datosFiltrados, // También puedes retornar los datos filtrados si es necesario
                         datosProcesados: datosProcesados,
-                        datosFiltrados: datosFiltrados // También puedes retornar los datos filtrados si es necesario
                     };
                 } catch (error) {
                     console.error('Hubo un problema con la operación de búsqueda:', error);
@@ -346,8 +362,8 @@
 
                     return datosfecthfiltrada = {
                         datos: datosfecth.datos,
+                        datosFiltrados: datosFiltrados, // También puedes retornar los datos filtrados si es necesario
                         datosProcesados: datosProcesados,
-                        datosFiltrados: datosFiltrados // También puedes retornar los datos filtrados si es necesario
                     };
                 } catch (error) {
                     console.error('Hubo un problema con la operación de búsqueda:', error);
@@ -441,5 +457,8 @@
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
     @endpush
 
+    @push('jsxjs')
+        @vite(['resources/js/component.jsx'])
+    @endpush
 
 </x-app-layout>
