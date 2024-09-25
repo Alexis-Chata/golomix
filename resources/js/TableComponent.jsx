@@ -7,19 +7,19 @@ const TablaDatos = ({ data }) => {
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th className="px-2 py-3">Cod.Marca</th>
-                        <th className="px-2 py-3">Marca</th>
-                        <th className="px-2 py-3">Cobertura</th>
-                        <th className="px-2 py-3">Importe Venta</th>
+                        <th className="px-2 py-2">Cod.Marca</th>
+                        <th className="px-2 py-2">Marca</th>
+                        <th className="px-2 py-2">Cobertura</th>
+                        <th className="px-2 py-2">Importe Venta</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((item, index) => (
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-300" key={index}>
-                            <td className="px-2 py-2">{item.ccodmarca}</td>
-                            <td className="px-2 py-2">{item.tdesmarca}</td>
-                            <td className="px-2 py-2">{item.clientes_unicos}</td>
-                            <td className="px-2 py-2">{item.total_ventas}</td>
+                            <td className="px-2 py-1">{item.ccodmarca}</td>
+                            <td className="px-2 py-1">{item.tdesmarca}</td>
+                            <td className="px-2 py-1">{item.clientes_unicos}</td>
+                            <td className="px-2 py-1">{item.total_ventas}</td>
                         </tr>
                     ))}
                 </tbody>
