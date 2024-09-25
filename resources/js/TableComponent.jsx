@@ -3,26 +3,28 @@ import React, { useState, useEffect } from "react";
 // Componente para mostrar la tabla de datos
 const TablaDatos = ({ data }) => {
     return (
-        <table className={"w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"}>
-            <thead className={"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"}>
-                <tr>
-                    <th>Cod.Marca</th>
-                    <th>Marca</th>
-                    <th>Cobertura</th>
-                    <th>Importe Venta</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((item, index) => (
-                    <tr className={"odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"} key={index}>
-                        <td>{item.ccodmarca}</td>
-                        <td>{item.tdesmarca}</td>
-                        <td>{item.clientes_unicos}</td>
-                        <td>{item.total_ventas}</td>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th className="px-6 py-3">Cod.Marca</th>
+                        <th className="px-6 py-3">Marca</th>
+                        <th className="px-6 py-3">Cobertura</th>
+                        <th className="px-6 py-3">Importe Venta</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {data.map((item, index) => (
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" key={index}>
+                            <td className="px-6 py-2">{item.ccodmarca}</td>
+                            <td className="px-6 py-2">{item.tdesmarca}</td>
+                            <td className="px-6 py-2">{item.clientes_unicos}</td>
+                            <td className="px-6 py-2">{item.total_ventas}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
