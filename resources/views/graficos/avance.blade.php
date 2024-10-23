@@ -43,6 +43,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="py-6">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white shadow-xl sm:rounded-lg">
+                            <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
+                                <label>Cod.Producto: <input type="text" id="avance_input_buscar"
+                                        class="form-control bg-white border border-gray-300 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500" /></label>
+                                <button id="avance_btn_buscar"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded form-control">Buscar</button>
+                            </div>
+                            <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
+                                <div id="react-cod-vendido"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -289,7 +304,8 @@
                     tdesmarca: totalesPorMarca[ccodmarca].tdesmarca,
                     total_ventas: parseFloat(totalesPorMarca[ccodmarca].total_ventas.toFixed(2)),
                     clientes_unicos: totalesPorMarca[ccodmarca].clientesUnicos.size, // Contar clientes únicos
-                    vendedores_unicos: totalesPorMarca[ccodmarca].vendedoresUnicos.size // Contar vendedores únicos
+                    vendedores_unicos: totalesPorMarca[ccodmarca].vendedoresUnicos
+                        .size // Contar vendedores únicos
                 }));
 
                 // Agregar el total general al final del array
@@ -400,7 +416,7 @@
                 data.articulos.forEach(element => {
                     mychart.data['labels'].push(element.tdesmarca)
                     mychart.data['datasets'][0].data.push(element.total_ventas)
-                    mychart.data['datasets'][0].label = "Venta Setiembre " + data.info.rangofecha;
+                    mychart.data['datasets'][0].label = "Venta " + data.info.rangofecha;
                     mychart.update()
                 });
                 return data;
