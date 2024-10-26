@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ScrHcom20Controller;
 use App\Http\Controllers\ScrHcom21Controller;
 use App\Http\Controllers\Ugr01Controller;
+use App\Models\Com01;
 use App\Models\ScrHcom20;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,10 @@ class SubirCsvController extends Controller
                 'com10s.cven',
                 'com10s.tven',
                 'scr_hcom21s.qimp',
+                'scr_hcom21s.qcanped',
+                DB::raw('SUBSTRING_INDEX(scr_hcom21s.qcanped, ".", 1) as qcanped_bulto'),
+                DB::raw('SUBSTRING_INDEX(scr_hcom21s.qcanped, ".", -1) as qcanped_frac1'),
+                'scr_hcom21s.ccodart',
                 'scr_hcom20s.femi',
                 'scr_hcom20s.ccli'
             )
@@ -47,16 +52,25 @@ class SubirCsvController extends Controller
             ->join('com10s', 'scr_hcom20s.cven', '=', 'com10s.cven')
             ->join('com01s', 'scr_hcom21s.ccodart', '=', 'com01s.ccodud1')
             ->join('view_ugr01s_045', 'com01s.cc04', '=', 'view_ugr01s_045.ccodmarca')
-            ->where('cesdoc', '04')
+            ->where('scr_hcom20s.cesdoc', '04')
             ->when($cven, function ($query) use ($cven) {
                 return $query->where('scr_hcom20s.cven', $cven);
             })
-            ->whereYear('femi', $results->last()->anio)
-            ->whereMonth('femi', $results->last()->mes)
+            ->whereYear('scr_hcom20s.femi', $results->last()->anio)
+            ->whereMonth('scr_hcom20s.femi', $results->last()->mes)
             ->get();
+
         $queries = DB::getQueryLog();
         //dd($queries);
         return response()->json($datafull, 200);
+    }
+
+    public function com01()
+    {
+        DB::enableQueryLog();
+        $com01s = Com01::all()->keyBy('ccodud1');
+        $queries = DB::getQueryLog();
+        return response()->json($com01s, 200);
     }
 
     public function subircsv(Request $request)

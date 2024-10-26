@@ -5,12 +5,12 @@
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-396f970b.js",
+    "file": "assets/app-2cf21707.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/component.jsx": {
-    "file": "assets/component-88288ae1.js",
+    "file": "assets/component-0a3bf144.js",
     "isEntry": true,
     "src": "resources/js/component.jsx"
   }

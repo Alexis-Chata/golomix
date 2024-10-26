@@ -34,30 +34,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white shadow-xl sm:rounded-lg">
-                            <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
-                                <div id="react-root"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-6">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div class="bg-white shadow-xl sm:rounded-lg">
-                            <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
-                                <label>Cod.Producto: <input type="text" id="avance_input_buscar"
-                                        class="form-control bg-white border border-gray-300 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-blue-500" /></label>
-                                <button id="avance_btn_buscar"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded form-control">Buscar</button>
-                            </div>
-                            <div class="p-2 pb-5 bg-white dark:bg-gray-800 shadow-xl sm:rounded-lg">
-                                <div id="react-cod-vendido"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div id="app2"></div>
             </div>
         </div>
     </div>
@@ -114,23 +91,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
         <script>
-            @hasanyrole('Super-Admin')
-                const btn = document.getElementById('consultar');
-                var cven_slct = document.getElementById('slctcven');
-
-                // btn.addEventListener("click", function() {
-                //     console.log(cven_slct.value);
-                //     datafecth(cven_slct.value)
-                // })
-            @endhasanyrole
-
             const dateto = document.getElementById('to');
             const datefrom = document.getElementById('from');
-            const btnaplicar = document.getElementById('aplicar');
-            // btnaplicar.addEventListener("click", function() {
-            //     datafecthfiltrada()
-            // })
-            // Obtén la fecha actual
             const hoy = new Date();
 
             // Formatea la fecha en formato compatible con input date (YYYY-MM-DD)
@@ -254,6 +216,27 @@
                 }
             };
 
+            // Función para obtener datos de la API
+            const obtenerCom01sAPI = async () => {
+                try {
+                    const response = await fetch('{{ route('api.com01') }}', {
+                        method: 'get',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('La respuesta de la red no fue correcta ' + response.statusText);
+                    }
+
+                    return await response.json();
+                } catch (error) {
+                    console.error('Hubo un problema al obtener los datos de la API:', error);
+                    throw error;
+                }
+            };
+
             // Función para procesar los datos
             const procesarDatos = (data) => {
                 let totalGeneral = 0;
@@ -344,62 +327,41 @@
                 };
             };
 
+            var codVendedor = "{{ $cven }}";
+
             // Función principal que coordina la obtención y procesamiento de datos
-            const datafecth = async (cven, setDatosProcesados) => {
+            const datafecth = async (cven, setProvider) => {
                 try {
-                    console.log("datafecth", cven, "datafecthfin");
-                    const datos = await obtenerDatosAPI(cven);
+                    const com01s = await obtenerCom01sAPI();
+                    const datas = await obtenerDatosAPI(cven);
 
-                    // Aquí podrías filtrar por fechas, por ejemplo:
-                    const datosFiltrados = filtrarPorFechas(datos, datefrom.value, dateto.value);
-                    console.log(datosFiltrados); // Mostrar los datos filtrados por el rango de fechas
+                    datafecthfiltrada(datas, com01s, setProvider);
 
-                    const datosProcesados = procesarDatos(datosFiltrados);
-                    mostrar(datosProcesados);
-
-                    // Aquí actualizas el estado de React con los datos procesados
-                    setDatosProcesados(datosProcesados.articulos);
-
-                    return datosfecth = {
-                        datos: datos,
-                        datosFiltrados: datosFiltrados, // También puedes retornar los datos filtrados si es necesario
-                        datosProcesados: datosProcesados,
-                    };
                 } catch (error) {
                     console.error('Hubo un problema con la operación de búsqueda:', error);
                 }
             };
 
-            var codVendedor = "{{ $cven }}";
-            //datafecth("{{ $cven }}");
+            const datafecthfiltrada = async (data, com01s, setProvider) => {
+                const datosFecthFiltrados = filtrarPorFechas(data, datefrom.value, dateto.value);
+                const datosProcesados = procesarDatos(datosFecthFiltrados);
+                const datosProcesadosCodVendido = obtenerSumaPorCodart(datosFecthFiltrados, com01s);
+                mostrar(datosProcesados);
 
-            const datafecthfiltrada = async (setDatosProcesados) => {
-                try {
-                    //const datos = await obtenerDatosAPI(cven);
-
-                    // Aquí podrías filtrar por fechas, por ejemplo:
-                    const datosFiltrados = filtrarPorFechas(datosfecth.datos, datefrom.value, dateto.value);
-                    console.log(datosFiltrados); // Mostrar los datos filtrados por el rango de fechas
-
-                    const datosProcesados = procesarDatos(datosFiltrados);
-                    mostrar(datosProcesados);
-
-                    // Aquí actualizas el estado de React con los datos procesados
-                    setDatosProcesados(datosProcesados.articulos);
-
-                    return datosfecthfiltrada = {
-                        datos: datosfecth.datos,
-                        datosFiltrados: datosFiltrados, // También puedes retornar los datos filtrados si es necesario
-                        datosProcesados: datosProcesados,
-                    };
-                } catch (error) {
-                    console.error('Hubo un problema con la operación de búsqueda:', error);
+                datos = {
+                    datosFecth: data,
+                    datosFecthCom01s: com01s,
+                    datosFecthFiltrados: datosFecthFiltrados,
+                    datosProcesados: datosProcesados,
+                    datosProcesadosCodVendido: datosProcesadosCodVendido,
                 }
+                // Aquí actualizas el estado de React con los datos procesados
+                setProvider(datos);
+
+                return datos;
             };
 
             const mostrar = (data) => {
-                console.log(data);
-                console.log(data.info.cvenArrayUnicos);
                 var title = "Avance " + data.info.cvenArrayUnicos[0];
                 if (data.info.cvenArrayUnicos.length > 1) {
                     title = "Avance";
@@ -431,15 +393,63 @@
             }
 
             // Función para filtrar los datos por un rango de fechas
-            const filtrarPorFechas = (datos, fechaInicio, fechaFin) => {
+            const filtrarPorFechas = (data, fechaInicio, fechaFin) => {
                 const fechaInicioObj = new Date(fechaInicio + 'T00:00:00');
                 const fechaFinObj = new Date(fechaFin + 'T00:00:00');
-                return datos.filter(item => {
+                return data.filter(item => {
                     const fechaItem = new Date(item.femi +
                         'T00:00:00'); // Asegurar que la fecha esté en formato correcto
                     return fechaItem >= fechaInicioObj && fechaItem <= fechaFinObj;
                 });
             };
+
+            const obtenerSumaPorCodart = (datas, com01s) => {
+                // Objeto para almacenar los resultados agrupados por ccodart
+                const sumaPorCodart = {};
+
+                // Iterar sobre los datos
+                datas.forEach(item => {
+                    const cequiv = com01s[item.ccodart].cequiv;
+                    const tcor = com01s[item.ccodart].tcor;
+
+                    // Si ccodart no existe en el objeto, inicializar con 0
+                    if (!sumaPorCodart[cequiv]) {
+                        sumaPorCodart[cequiv] = {
+                            cequiv: cequiv,
+                            tcor: tcor,
+                            bulto: 0,
+                            fraccion: 0,
+                            cantfrac: Number(com01s[item.ccodart].qfaccon || 0),
+                            importe: 0,
+                        };
+                    }
+
+                    // Sumar las partes (asegurándonos de que son números)
+                    sumaPorCodart[cequiv].bulto += Number(item.qcanped_bulto || 0);
+                    sumaPorCodart[cequiv].fraccion += Number(item.qcanped_frac1 || 0);
+                    sumaPorCodart[cequiv].importe += Number(item.qimp || 0);
+                });
+
+                // Si la parte fraccion supera 100, convertirla en bulto
+                for (let codart in sumaPorCodart) {
+                    const sum = sumaPorCodart[codart];
+
+                    sum.bulto += Math.floor(sum.fraccion / sum.cantfrac);
+                    sum.fraccion = sum.fraccion % sum.cantfrac;
+                }
+
+                return sumaPorCodart;
+            }
+        </script>
+        <script>
+            var variableGlobal = {};
+            var rutaApiUsuarios = "{{ route('api.com01') }}";
+
+            function formatearNumero(num) {
+                return num
+                    .toFixed(2) // Convierte a dos decimales
+                    .replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Agrega comas como separador de miles
+            }
         </script>
     @endpush
     @push('eventsubmit-js')
