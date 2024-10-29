@@ -43,10 +43,11 @@ class SubirCsvController extends Controller
                 'scr_hcom21s.qimp',
                 'scr_hcom21s.qcanped',
                 DB::raw('SUBSTRING_INDEX(scr_hcom21s.qcanped, ".", 1) as qcanped_bulto'),
-                DB::raw('SUBSTRING_INDEX(scr_hcom21s.qcanped, ".", -1) as qcanped_frac1'),
+                DB::raw('IF(LOCATE(".", scr_hcom21s.qcanped) > 0, SUBSTRING_INDEX(scr_hcom21s.qcanped, ".", -1), "0") as qcanped_frac1'),
                 'scr_hcom21s.ccodart',
                 'scr_hcom20s.femi',
-                'scr_hcom20s.ccli'
+                'scr_hcom20s.ccli',
+                'scr_hcom20s.cesdoc',
             )
             ->join('scr_hcom20s', 'scr_hcom21s.nfacfull', '=', 'scr_hcom20s.nfacfull')
             ->join('com10s', 'scr_hcom20s.cven', '=', 'com10s.cven')
