@@ -64,7 +64,7 @@
                                     @foreach ($pedidos as $key => $pedido)
                                         <details>
                                             <summary>
-                                                {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . ' )' . ' ' }}
+                                                {{ $pedido->ccli . ' ' }}<strong>{{ $pedido->tnomrep }}</strong>{{ ' - Total: S/. ' . number_format($pedido->qimpvta, 2, '.', ',') . ' ( ' . $pedido->ctip . $pedido->nfac . ' )' . ' ' }}
                                                 @if ($pedido->ccon)
                                                     <i class="fa-sharp fa-solid fa-circle-check"></i><strong>( {{ $pedido->ccon }} )</strong>
                                                 @else
